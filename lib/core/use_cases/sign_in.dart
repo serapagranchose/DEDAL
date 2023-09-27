@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dedal/core/datasources/login_datasource.dart';
+import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';

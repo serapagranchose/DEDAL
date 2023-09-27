@@ -22,17 +22,27 @@ class _MainTextFieldsState extends State<MainTextFields> {
   Widget build(BuildContext context) => Column(
         children: [
           widget.title != null ? Text(widget.title!) : const SizedBox.shrink(),
-          TextFormField(
-            textAlign: TextAlign.center,
-            controller: _controller,
-            onChanged: (_) => widget.onChanged.call(_controller.text.trim()),
-            autocorrect: false,
-            cursorColor: Colors.black,
-            cursorWidth: 1,
-            decoration: InputDecoration(
-              isDense: true,
-              border: InputBorder.none,
-              hintText: widget.placeholder,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: Colors.black12,
+              ),
+              child: TextFormField(
+                textAlign: TextAlign.center,
+                controller: _controller,
+                onChanged: (_) =>
+                    widget.onChanged.call(_controller.text.trim()),
+                autocorrect: false,
+                cursorColor: Colors.black,
+                cursorWidth: 1,
+                decoration: InputDecoration(
+                  isDense: true,
+                  hintText: widget.placeholder,
+                ),
+              ),
             ),
           ),
         ],

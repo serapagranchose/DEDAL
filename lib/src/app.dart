@@ -1,6 +1,13 @@
+import 'package:dedal/constants/enum/authentification_enum.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/pages/apiOfflinePage.dart';
+import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
+import 'package:dedal/core/pages/authentification/authentification_state.dart';
+import 'package:dedal/core/pages/home/home_screen.dart';
+import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -55,6 +62,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
+          builder: (context, child) => AppViewContent(_navigatorKey, child),
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -62,4 +70,54 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+class AppViewContent extends StatefulWidget {
+  const AppViewContent(this._navigatorKey, this.child, {super.key});
+  final GlobalKey<NavigatorState> _navigatorKey;
+  NavigatorState get _navigator => _navigatorKey.currentState!;
+  final Widget? child;
+
+  @override
+  State<AppViewContent> createState() => _AppViewContentState();
+}
+
+class _AppViewContentState extends State<AppViewContent> {
+  @override
+  Widget build(BuildContext context) => AppSafeContent(widget);
+}
+
+// ignore: must_be_immutable
+class AppSafeContent extends StatelessWidget {
+  AppSafeContent(this.widget, {super.key});
+  AppViewContent widget;
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          switch (state.status) {
+            case AuthenticationStatus.authenticated:
+              widget._navigator.context.goNamed(HomeScreen.name);
+
+              break;
+            case AuthenticationStatus.unauthenticated:
+              widget._navigator.context.goNamed(Main.routeName);
+              break;
+            case AuthenticationStatus.apiOffline:
+              showDialog<void>(
+                context: widget._navigator.context,
+                builder: (_) => const APIOfflinePage(),
+              );
+              break;
+
+            case AuthenticationStatus.unknown:
+              widget._navigator.context.goNamed(Main.routeName);
+              break;
+            case AuthenticationStatus.loggingIn:
+              break;
+          }
+        },
+        child: widget.child,
+      );
 }

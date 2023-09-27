@@ -5,7 +5,7 @@ import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/components/text_fields/main_text_field.dart';
 import 'package:dedal/core/datasources/local_storage_datasource.dart';
-import 'package:dedal/core/datasources/login_datasource.dart';
+import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
