@@ -1,0 +1,73 @@
+name: dedal
+description: A new Flutter project.
+
+# Prevent accidental publishing to pub.dev.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  wyatt_bloc_helper:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub/
+    version: 2.0.1
+  wyatt_architecture:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub/
+    version: 0.2.0+1
+  wyatt_type_utils:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub/
+    version: 0.0.5
+  wyatt_component_copy_with_extension:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: 2.0.1
+  wyatt_ui_components:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: 0.3.0+2
+  wyatt_ui_layout:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: 0.1.2+3
+  wyatt_bloc_layout:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: 0.1.2+3
+  wyatt_crud_bloc:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: 0.1.1+1
+  flutter_localizations:
+    sdk: flutter
+  gap: ^3.0.1
+  go_router: ^10.1.2
+  google_fonts: ^4.0.4
+  flutter_bloc: ^8.1.3
+  get_it: ^7.6.4
+  get_storage: ^2.1.1
+
+dev_dependencies:
+  wyatt_analysis:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
+  dart_code_metrics: ^5.7.0
+  melos: ^3.1.0
+  dependency_validator: ^3.0.0
+  flutter_test: { sdk: flutter }
+  build_runner: ^2.3.3
+  wyatt_component_copy_with_gen:
+    hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub
+    version: ^2.0.1
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  assets:
+    # Add assets from the images directory to the application.
+    - assets/logo/
+    - assets/images/
