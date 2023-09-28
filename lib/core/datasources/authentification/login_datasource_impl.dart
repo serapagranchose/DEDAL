@@ -17,13 +17,13 @@ class LoginDataSourceImpl extends LoginDataSource {
     String? userToken;
 
     userToken = await GetStorage().read('token');
+    print('userToken => $userToken');
 
     http.Response response;
     try {
       response = await http.get(
-        Uri.parse('https://app-api.mypet.fit'),
+        Uri.parse('http://52.166.128.133/ping'),
       );
-
       if (response.statusCode != 200) {
         yield AuthenticationStatus.apiOffline;
         yield* _controller.stream;
@@ -69,4 +69,38 @@ class LoginDataSourceImpl extends LoginDataSource {
         }
         return null;
       });
+
+  @override
+  Future<bool> signUp(String email, String password) async {
+    print('$email / $password');
+    return await http.post(
+      Uri.parse('http://52.166.128.133/signup'),
+      body: jsonEncode({'email': email, 'password': password}),
+      headers: {'Content-type': 'application/json', 'Accept': '*/*'},
+    ).then((result) {
+      print('signUP ===+> ${result.statusCode}');
+      print('signUP ===+> ${result.body}');
+      if (result.statusCode == 201) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  @override
+  Future<bool> signUpCode(String email, String code) async {
+    print('$email / $code');
+    return await http.post(
+      Uri.parse('http://52.166.128.133/signup_code'),
+      body: jsonEncode({'email': email, 'password': code}),
+      headers: {'Content-type': 'application/json', 'Accept': '*/*'},
+    ).then((result) {
+      print('CODE ===+> ${result.statusCode}');
+      print('CODE ===+> ${result.body}');
+      if (result.statusCode == 202) {
+        return true;
+      }
+      return false;
+    });
+  }
 }

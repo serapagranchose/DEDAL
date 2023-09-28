@@ -3,6 +3,7 @@ import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/locations/location_screen.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/login/signin/signin_screen.dart';
+import 'package:dedal/core/pages/login/signup/signup_screen.dart';
 import 'package:dedal/core/pages/profil/profil_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,11 @@ class AppRouter {
             name: Main.routeName,
             path: '/main',
             builder: (BuildContext context, GoRouterState state) {
-              return const Main();
+              print(state);
+              print(state.uri);
+              print(state.pathParameters);
+              print(state.uri.queryParameters);
+              return Main();
             },
           ),
           GoRoute(
@@ -31,6 +36,13 @@ class AppRouter {
             path: '/signin',
             builder: (BuildContext context, GoRouterState state) {
               return SignInScreen();
+            },
+          ),
+          GoRoute(
+            name: SignUpScreen.routeName,
+            path: '/signup',
+            builder: (BuildContext context, GoRouterState state) {
+              return SignUpScreen();
             },
           ),
           GoRoute(

@@ -6,4 +6,6 @@ abstract class LoginDataSource extends BaseDataSource {
   Stream<AuthenticationStatus> get status;
 
   Future<User?> signIn(String email, String password);
+  Future<bool> signUp(String email, String password);
+  Future<bool> signUpCode(String email, String code);
 }
