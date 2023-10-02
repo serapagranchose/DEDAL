@@ -45,10 +45,10 @@ class RegisterLayout extends StatelessWidget {
         bottomNavigationBar: navBar.isNotNull
             ? BottomNavigationBar(
                 onTap: (value) => switch (value) {
-                  0 => context.pushNamed(FilterScreen.name),
-                  1 => context.pushNamed(HomeScreen.name),
-                  2 => context.pushNamed(LocationScreen.name),
-                  _ => context.pushNamed(ProfilScreen.name),
+                  0 => context.goNamed(FilterScreen.name),
+                  1 => context.goNamed(HomeScreen.name),
+                  2 => context.goNamed(LocationScreen.name),
+                  _ => context.goNamed(ProfilScreen.name),
                 },
                 items: [
                   BottomNavigationBarItem(

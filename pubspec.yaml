@@ -46,7 +46,13 @@ dependencies:
   get_storage: ^2.1.1
   equatable: ^2.0.5
   meta: ^1.9.1
-
+  hive: ^2.2.3
+  hive_generator: ^2.0.1
+  path_provider: ^2.1.1
+  google_maps_flutter: ^2.5.0
+  google_maps_flutter_android: ^2.5.1
+  geolocator: ^9.0.2
+  
 dev_dependencies:
   wyatt_analysis:
     hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub

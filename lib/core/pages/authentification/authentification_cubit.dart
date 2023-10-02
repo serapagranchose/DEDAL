@@ -7,6 +7,7 @@ import 'package:dedal/core/pages/authentification/authentification_event.dart';
 import 'package:dedal/core/pages/authentification/authentification_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
@@ -20,12 +21,17 @@ class AuthenticationBloc
       add(AuthenticationStatusChanged(status));
     });
   }
-
+  late Box<User> _user;
   final LoginDataSource _loginDataSource;
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 
   // UserDatasource get userDatasource => _userDatasource;
+
+  Future<void> init() async {
+    Hive.registerAdapter(UserAdapter());
+    _user = await Hive.openBox<User>('user');
+  }
 
   @override
   Future<void> close() {
@@ -67,5 +73,10 @@ class AuthenticationBloc
       if (kDebugMode) {}
       return null;
     }
+    return null;
   }
+
+  void setUser(User value) => _user.put('user', value);
+
+  User? getUser() => _user.get('user');
 }

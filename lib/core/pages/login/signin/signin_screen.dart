@@ -8,6 +8,8 @@ import 'package:dedal/core/datasources/local_storage_datasource.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/extensions/get_it.dart';
+import 'package:dedal/core/models/user.dart';
+import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
@@ -18,23 +20,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
+import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   SignInScreen({super.key});
 
   @override
   SignInCubit create(BuildContext context) => SignInCubit(
-      signIn: SignIn(loginDataSource: getIt<LoginDataSource>()),
-      updateToken:
-          UpdateToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
-      updateUser:
-          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()));
-
+        signIn: SignIn(loginDataSource: getIt<LoginDataSource>()),
+      );
   static const routeName = '/signin';
 
-  String? email;
-  String? password;
-  
+  String? email = 'eliot.martin@epitech.eu';
+  String? password = 'Passw0rd!';
+
+  @override
+  Future<void> onListen(BuildContext context, CrudState state) async {
+    super.onListen(context, state);
+
+    if (state is CrudLoaded<User> && state.data.isNotNull) {
+      context.read<AuthenticationBloc>().setUser(state.data!);
+      context.pushNamed(HomeScreen.name);
+    }
+  }
+
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
         appBar: true,
@@ -54,13 +63,8 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
                     onChanged: (String value) => password = value,
                   ),
                   GlobalButton(
-                    onTap: () async {
-                      final res = await context.read<SignInCubit>().userSignIn(
-                          SigninDto(email: email, password: password));
-                      if (res != null && res) {
-                        context.pushNamed(HomeScreen.name);
-                      }
-                    },
+                    onTap: () async => context.read<SignInCubit>().userSignIn(
+                        SigninDto(email: email, password: password)),
                     text: 'Connection',
                   ),
                 ],
