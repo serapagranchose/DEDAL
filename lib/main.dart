@@ -41,7 +41,7 @@ void main() async {
         BlocProvider<AuthenticationBloc>(
             create: (_) => AuthenticationBloc(
                   loginDataSource: getIt<LoginDataSource>(),
-                )..init())
+                )..init()),
       ],
       child: SafeArea(child: MyApp(settingsController: settingsController)),
     ),

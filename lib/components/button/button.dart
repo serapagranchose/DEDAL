@@ -2,14 +2,11 @@ import 'package:dedal/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class GlobalButton extends StatelessWidget {
-  const GlobalButton({
-    super.key,
-    this.onTap,
-    this.text,
-  });
+  const GlobalButton({super.key, this.onTap, this.text, this.color});
 
   final VoidCallback? onTap;
   final String? text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -20,7 +17,7 @@ class GlobalButton extends StatelessWidget {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-                color: SharedColorPalette().main,
+                color: color ?? SharedColorPalette().main,
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,

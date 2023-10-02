@@ -1,3 +1,4 @@
+import 'package:dedal/core/models/filter.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class Info {
