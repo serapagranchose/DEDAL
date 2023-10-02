@@ -16,8 +16,12 @@ class ProfilScreen extends CubitScreen<HomeCubit, CrudState> {
 
   static const name = 'profil';
 
-  create(BuildContext context) => HomeCubit()..load(context);
-
+  @override
+  create(BuildContext context) => HomeCubit(
+      getToken:
+          GetToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
+      getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
+    ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       navBar: true,
@@ -29,7 +33,7 @@ class ProfilScreen extends CubitScreen<HomeCubit, CrudState> {
               Text(message ?? 'une erreur est subvenu'),
               GlobalButton(
                 text: 'reload',
-                onTap: () => context.read<HomeCubit>().load(context),
+                onTap: () => context.read<HomeCubit>().load(),
               )
             ],
           ),

@@ -28,6 +28,10 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   @override
   SignInCubit create(BuildContext context) => SignInCubit(
         signIn: SignIn(loginDataSource: getIt<LoginDataSource>()),
+        updateToken: UpdateToken(
+            localStorageDataSource: getIt<LocalStorageDataSource>()),
+        updateUser:
+            UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       );
   static const routeName = '/signin';
 

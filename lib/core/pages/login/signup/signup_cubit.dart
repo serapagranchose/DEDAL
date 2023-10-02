@@ -41,6 +41,6 @@ class SignUpCubit extends Cubit<CrudState> {
 
   FutureOr<void> setValue(User? user) async {
     _updateToken.call(user?.token);
-    _updateUser.call(user?.id);
+    _updateUser.call(user);
   }
 }

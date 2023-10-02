@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_token.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class LocationCubit extends Cubit<CrudState> {
     emit(const CrudLoading());
     await _getUser.call(const NoParam()).fold((value) {
       if (value.isNotNull) {
-        emit(CrudLoaded<String?>(value));
+        emit(CrudLoaded<User?>(value));
       } else {
         emit(const CrudError('User not found'));
       }

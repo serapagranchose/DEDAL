@@ -21,16 +21,9 @@ class AppRouter {
         routes: [
           // Public
           GoRoute(
-            name: Main.routeName,
-            path: '/main',
-            builder: (BuildContext context, GoRouterState state) {
-              print(state);
-              print(state.uri);
-              print(state.pathParameters);
-              print(state.uri.queryParameters);
-              return Main();
-            },
-          ),
+              name: Main.routeName,
+              path: '/main',
+              builder: (BuildContext context, GoRouterState state) => Main()),
           GoRoute(
             name: SignInScreen.routeName,
             path: '/signin',

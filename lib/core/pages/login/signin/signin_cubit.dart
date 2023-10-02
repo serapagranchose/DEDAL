@@ -12,15 +12,22 @@ import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 class SignInCubit extends Cubit<CrudState> {
   SignInCubit({
     required SignIn signIn,
+    required UpdateToken updateToken,
+    required UpdateUser updateUser,
   })  : _signIn = signIn,
+        _updateToken = updateToken,
+        _updateUser = updateUser,
         super(const CrudInitial());
 
   final SignIn _signIn;
+  final UpdateToken _updateToken;
+  final UpdateUser _updateUser;
 
   FutureOr<void> userSignIn(SigninDto? params) async {
     emit(const CrudLoading());
     return _signIn.call(params).fold((value) {
       if (value.isNotNull) {
+        setValue(value);
         emit(CrudLoaded<User>(value));
       } else {
         emit(const CrudError(''));
@@ -28,5 +35,10 @@ class SignInCubit extends Cubit<CrudState> {
     }, (error) {
       emit(const CrudError(''));
     });
+  }
+
+  FutureOr<void> setValue(User? user) async {
+    _updateToken.call(user?.token);
+    _updateUser.call(user);
   }
 }
