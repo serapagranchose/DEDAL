@@ -36,7 +36,10 @@ class FilterDisplayState extends State<FilterDisplay> {
   Widget build(BuildContext context) => GridView.count(
       shrinkWrap: true,
       crossAxisCount: 2,
-      physics: const NeverScrollableScrollPhysics(),
+      childAspectRatio: 1.5,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      physics: const BouncingScrollPhysics(),
       children: widget.filters
           .map((e) => FilterContainer(
                 filter: e,
