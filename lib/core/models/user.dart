@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dedal/core/models/info.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive/hive.dart';
@@ -25,14 +27,21 @@ class User {
 
   factory User.fromJson(Map<String, Object?> json) {
     print('user => $json');
-    var user = User(
-        id: json['id'].isNotNull ? json['id'].toString() : null,
-        name: json['Username'].isNotNull ? json['Username'].toString() : null,
-        email: json['Email'].isNotNull ? json['Email'].toString() : null,
-        info: json['lastInfo'].isNotNull
-            ? Info.toJson(json['lastInfo'] as Map<String, Object?>)
-            : null,
-        token: json['token'].isNotNull ? json['token'].toString() : null);
+    User user = User();
+    try {
+      user = User(
+          id: json['id'].isNotNull ? json['id'].toString() : null,
+          name: json['username'].isNotNull ? json['username'].toString() : null,
+          email: json['email'].isNotNull ? json['email'].toString() : null,
+          info: json['lastInfo'].isNotNull
+              ? Info.toJson(jsonDecode(json['lastInfo'].toString())
+                  as Map<String, Object?>)
+              : null,
+          token: json['token'].isNotNull ? json['token'].toString() : null);
+    } catch (e) {
+      print('error 2=> $e');
+    }
+
     return user;
   }
 

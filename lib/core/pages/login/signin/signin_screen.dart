@@ -11,6 +11,7 @@ import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
+import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/update_token.dart';
@@ -35,8 +36,8 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
       );
   static const routeName = '/signin';
 
-  String? email = 'eliot.martin@epitech.eu';
-  String? password = 'Passw0rd!';
+  String? email;
+  String? password;
 
   @override
   Future<void> onListen(BuildContext context, CrudState state) async {
@@ -52,33 +53,16 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   Widget onBuild(BuildContext context, CrudState state) {
     print('state => $state');
     var myVariable = RegisterLayout(
-      appBar: true,
-      title: 'Connection',
-      child: state is CrudLoading
-          ? const MainLoader()
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MainTextFields(
-                  title: 'Votre E-mail',
-                  placeholder: 'exemple@test.idk',
-                  onChanged: (String value) => email = value,
-                  border: state is CrudError ? Colors.red : null,
-                ),
-                MainTextFields(
-                  title: 'Votre mot de passe',
-                  onChanged: (String value) => password = value,
-                  border: state is CrudError ? Colors.red : null,
-                ),
-                GlobalButton(
-                  onTap: () async => context
-                      .read<SignInCubit>()
-                      .userSignIn(SigninDto(email: email, password: password)),
-                  text: 'Connection',
-                ),
-              ],
-            ),
-    );
+        appBar: true,
+        title: 'Connection',
+        child: state is CrudLoading
+            ? const MainLoader()
+            : SigninContent(
+                validate: (email, password) async => context
+                    .read<SignInCubit>()
+                    .userSignIn(SigninDto(email: email, password: password)),
+                isError: state is CrudState,
+              ));
     return myVariable;
   }
 }

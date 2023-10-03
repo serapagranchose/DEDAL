@@ -12,13 +12,23 @@ class Info {
   int? budget;
   List<String>? filter;
 
-  factory Info.toJson(Map<String, Object?> json) => Info(
-      time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
-      budget:
-          json['budget'].isNotNull ? int.parse(json['budget'].toString()) : 0,
-      filter: json['filter'].isNotNull
-          ? (json['filter'] as List<Object?>).map((e) => e.toString()).toList()
-          : []);
+  factory Info.toJson(Map<String, Object?> json) {
+    try {
+      return Info(
+          time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
+          budget: json['budget'].isNotNull
+              ? int.parse(json['budget'].toString())
+              : 0,
+          filter: json['filter'].isNotNull
+              ? (json['filter'] as List<Object?>)
+                  .map((e) => e.toString())
+                  .toList()
+              : []);
+    } catch (e) {
+      print('error => $e');
+    }
+    return Info();
+  }
 
   @override
   String toString() => '$filter, $time + $budget';

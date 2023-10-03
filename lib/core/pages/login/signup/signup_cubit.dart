@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/dtos/sign_up_dto.dart';
 import 'package:dedal/core/models/user.dart';
+import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/sign_up.dart';
 import 'package:dedal/core/use_cases/sign_up_code.dart';
 import 'package:dedal/core/use_cases/update_token.dart';
@@ -16,27 +18,58 @@ class SignUpCubit extends Cubit<CrudState> {
     required SignUpCode signUpCode,
     required UpdateToken updateToken,
     required UpdateUser updateUser,
+    required SignIn signIn,
   })  : _signUp = signUp,
+        _signIn = signIn,
         _signUpCode = signUpCode,
         _updateToken = updateToken,
         _updateUser = updateUser,
         super(const CrudInitial());
 
   final SignUp _signUp;
+  final SignIn _signIn;
   final SignUpCode _signUpCode;
   final UpdateToken _updateToken;
   final UpdateUser _updateUser;
 
+  SignUpDto? info;
+
   FutureOr<void> userSignUp(SignUpDto? params) async {
+    info = params;
     final signUpResult =
-        await _signUp.call(params).fold((value) => value, (error) => false);
-    print(signUpResult);
+        await _signUp.call(info).fold((value) => value, (error) => false);
     if (await signUpResult) emit(const CrudOkReturn());
   }
 
-  FutureOr<bool> userSignUpCode(SignUpDto? params) async {
+  FutureOr<SignUpDto?> userSignUpCode(String? code) async {
+    info?.code = code;
     emit(const CrudLoading());
-    return _signUpCode.call(params).fold((value) => value, (error) => false);
+    return _signUpCode.call(info).fold((value) {
+      if (value) {
+        userSignIn();
+      }
+      emit(const CrudError(''));
+      return null;
+    }, (error) {
+      emit(const CrudError(''));
+      return null;
+    });
+  }
+
+  FutureOr<void> userSignIn() async {
+    emit(const CrudLoading());
+    return _signIn
+        .call(SigninDto(email: info?.email, password: info?.password))
+        .fold((value) {
+      if (value.isNotNull) {
+        setValue(value);
+        emit(CrudLoaded<User>(value));
+      } else {
+        emit(const CrudError(''));
+      }
+    }, (error) {
+      emit(CrudError(error.message));
+    });
   }
 
   FutureOr<void> setValue(User? user) async {

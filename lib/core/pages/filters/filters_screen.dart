@@ -37,18 +37,6 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
         CrudLoaded<(User, List<Filter>?)>(data: final data) => Column(
             children: [
               Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    GlobalButton(
-                      text: 'Filtres',
-                      onTap: () => print(data?.$1.info?.filter),
-                    ),
-                    
-                  ],
-                ),
-              ),
-              Expanded(
                 flex: 9,
                 child: data?.$1 != null && data?.$2 != null
                     ? FilterDisplay(
