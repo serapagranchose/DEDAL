@@ -49,29 +49,36 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   }
 
   @override
-  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
-        appBar: true,
-        title: 'Connection',
-        child: state is CrudLoading
-            ? const MainLoader()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MainTextFields(
-                    title: 'Votre E-mail',
-                    placeholder: 'exemple@test.idk',
-                    onChanged: (String value) => email = value,
-                  ),
-                  MainTextFields(
-                    title: 'Votre mot de passe',
-                    onChanged: (String value) => password = value,
-                  ),
-                  GlobalButton(
-                    onTap: () async => context.read<SignInCubit>().userSignIn(
-                        SigninDto(email: email, password: password)),
-                    text: 'Connection',
-                  ),
-                ],
-              ),
-      );
+  Widget onBuild(BuildContext context, CrudState state) {
+    print('state => $state');
+    var myVariable = RegisterLayout(
+      appBar: true,
+      title: 'Connection',
+      child: state is CrudLoading
+          ? const MainLoader()
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MainTextFields(
+                  title: 'Votre E-mail',
+                  placeholder: 'exemple@test.idk',
+                  onChanged: (String value) => email = value,
+                  border: state is CrudError ? Colors.red : null,
+                ),
+                MainTextFields(
+                  title: 'Votre mot de passe',
+                  onChanged: (String value) => password = value,
+                  border: state is CrudError ? Colors.red : null,
+                ),
+                GlobalButton(
+                  onTap: () async => context
+                      .read<SignInCubit>()
+                      .userSignIn(SigninDto(email: email, password: password)),
+                  text: 'Connection',
+                ),
+              ],
+            ),
+    );
+    return myVariable;
+  }
 }

@@ -33,7 +33,7 @@ class SignInCubit extends Cubit<CrudState> {
         emit(const CrudError(''));
       }
     }, (error) {
-      emit(const CrudError(''));
+      emit(CrudError(error.message));
     });
   }
 
