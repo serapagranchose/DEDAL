@@ -62,6 +62,8 @@ class LoginDataSourceImpl extends LoginDataSource {
         body: jsonEncode({'email': email, 'password': password}),
         headers: {'Content-type': 'application/json', 'Accept': '*/*'},
       ).then((result) {
+        print('res => ${result.body} $email');
+        print('res => ${result.statusCode}');
         if (result.statusCode == 202) {
           final user = User.fromJson(jsonDecode(result.body));
 
@@ -92,12 +94,12 @@ class LoginDataSourceImpl extends LoginDataSource {
     print('$email / $code');
     return await http.post(
       Uri.parse('http://52.166.128.133/signup_code'),
-      body: jsonEncode({'email': email, 'password': code}),
+      body: jsonEncode({'email': email, 'code': code}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
       print('CODE ===+> ${result.statusCode}');
       print('CODE ===+> ${result.body}');
-      if (result.statusCode == 202) {
+      if (result.statusCode == 201) {
         return true;
       }
       return false;
