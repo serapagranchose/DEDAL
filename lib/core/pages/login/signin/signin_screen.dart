@@ -50,19 +50,15 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   }
 
   @override
-  Widget onBuild(BuildContext context, CrudState state) {
-    print('state => $state');
-    var myVariable = RegisterLayout(
-        appBar: true,
-        title: 'Connection',
-        child: state is CrudLoading
-            ? const MainLoader()
-            : SigninContent(
-                validate: (email, password) async => context
-                    .read<SignInCubit>()
-                    .userSignIn(SigninDto(email: email, password: password)),
-                isError: state is CrudState,
-              ));
-    return myVariable;
-  }
+  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+      appBar: true,
+      title: 'Connection',
+      child: state is CrudLoading
+          ? const MainLoader()
+          : SigninContent(
+              validate: (email, password) async => context
+                  .read<SignInCubit>()
+                  .userSignIn(SigninDto(email: email, password: password)),
+              isError: state is CrudState,
+            ));
 }
