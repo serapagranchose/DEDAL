@@ -19,6 +19,7 @@ class FiltersCubit extends Cubit<CrudState> {
 
   final GetUser _getUser;
   final GetFilters _getFilters;
+  User? user;
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
@@ -28,6 +29,7 @@ class FiltersCubit extends Cubit<CrudState> {
         );
 
     if (getUserResult.isNotNull) {
+      user = getUserResult;
       _getFilters.call(getUserResult!.token).fold(
             (value) =>
                 emit(CrudLoaded<(User, List<Filter>?)>((getUserResult, value))),
@@ -35,4 +37,5 @@ class FiltersCubit extends Cubit<CrudState> {
           );
     }
   }
+
 }

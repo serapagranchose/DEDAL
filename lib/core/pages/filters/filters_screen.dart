@@ -34,32 +34,12 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
-        CrudLoaded<(User, List<Filter>?)>(data: final data) => Column(
-            children: [
-              Expanded(
-                flex: 9,
-                child: data?.$1 != null && data?.$2 != null
+        CrudLoaded<(User, List<Filter>?)>(data: final data) => data?.$1 != null && data?.$2 != null
                     ? FilterDisplay(
                         filters: data!.$2!, selected: data.$1.info?.filter)
                     : const SizedBox.shrink(),
-              ),
-              Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      GlobalButton(
-                        text: 'Valider',
-                        onTap: () => print(data?.$1.info?.filter),
-                      ),
-                      GlobalButton(
-                        text: 'Réinitialisé',
-                        onTap: () => data?.$1.info?.filter = [],
-                      ),
-                    ],
-                  )),
-              const Gap(20),
-            ],
-          ),
+                    
+                
         CrudError(message: final message) => Column(
             children: [
               Text(message ?? 'une erreur est subvenu'),
