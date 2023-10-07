@@ -7,7 +7,7 @@ import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/filters/filters_cubit.dart';
-import 'package:dedal/core/pages/filters/filters_display.dart';
+import 'package:dedal/core/pages/filters/filters_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/use_cases/get_filters.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
@@ -34,12 +34,10 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
-        CrudLoaded<(User, List<Filter>?)>(data: final data) => data?.$1 != null && data?.$2 != null
-                    ? FilterDisplay(
-                        filters: data!.$2!, selected: data.$1.info?.filter)
-                    : const SizedBox.shrink(),
-                    
-                
+        CrudLoaded<(User, List<Filter>?)>(data: final data) =>
+          data?.$1 != null && data?.$2 != null
+              ? FilterContent(filters: data!.$2!, info: data.$1.info)
+              : const SizedBox.shrink(),
         CrudError(message: final message) => Column(
             children: [
               Text(message ?? 'une erreur est subvenu'),
