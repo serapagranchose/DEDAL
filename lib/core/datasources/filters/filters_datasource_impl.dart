@@ -21,15 +21,15 @@ class FilterDataSourceImpl extends FilterDataSource {
         return null;
       });
 
-  // @override
-  // Future<Info?> getInfoUser(String token, String userId) {
-  //   // TODO: implement getInfoUser
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // Future<bool> setinfoUser(User user) {
-  //   // TODO: implement setinfoUser
-  //   throw UnimplementedError();
-  // }
+  @override
+  Future<void> setinfoUser(User user) async {
+    print('user => $user');
+    print('http://52.166.128.133/user/?id=${user.id}');
+    print(user.info?.toJson());
+    http.patch(
+      Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
+      body: jsonEncode(user.info!.toJson()),
+      headers: {'x-access-token': user.token!, 'Accept': '*/*'},
+    ).then((value) => print('value => ${value.body} / ${value.statusCode}'));
+  }
 }

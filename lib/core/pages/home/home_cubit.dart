@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dedal/core/models/user.dart';
-import 'package:dedal/core/use_cases/get_token.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +11,6 @@ import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class HomeCubit extends Cubit<CrudState> {
   HomeCubit({
-    required GetToken getToken,
     required GetUserGeolocation getUserGeolocation,
     required GetUser getUser,
   })  : _getUserGeolocation = getUserGeolocation,

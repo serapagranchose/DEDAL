@@ -10,13 +10,14 @@ import 'package:gap/gap.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class FilterContent extends StatefulWidget {
-  const FilterContent({
-    super.key,
-    required this.filters,
-    required this.info,
-  });
+  const FilterContent(
+      {super.key,
+      required this.filters,
+      required this.info,
+      required this.submit});
 
   final List<Filter> filters;
+  final void Function(Info info) submit;
   final Info? info;
   @override
   FilterContentState createState() => FilterContentState();
@@ -75,14 +76,12 @@ class FilterContentState extends State<FilterContent> {
                 FilterPageEnum.cost => FiltersCostDisplay(
                     cost: cost,
                     onChange: (value) => setState(() {
-                      print(value);
                       cost = value;
                     }),
                   ),
                 FilterPageEnum.time => FiltersTimeDisplay(
                     time: time,
                     onChange: (value) => setState(() {
-                      print(value);
                       time = value;
                     }),
                   ),
@@ -100,12 +99,17 @@ class FilterContentState extends State<FilterContent> {
                   GlobalButton(
                     text: 'Réinitialisé',
                     onTap: () => setState(() {
+                      cost = 0;
+                      time = 0;
                       currentSelected = [];
                     }),
                   ),
                   GlobalButton(
                     text: 'Valider',
-                    onTap: () => print('currentSelected => $currentSelected'),
+                    onTap: () => widget.submit.call(Info(
+                        filter: currentSelected,
+                        budget: cost.round(),
+                        time: time.round())),
                   ),
                 ],
               )),

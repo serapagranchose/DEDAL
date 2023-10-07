@@ -6,7 +6,6 @@ import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/sign_up.dart';
 import 'package:dedal/core/use_cases/sign_up_code.dart';
-import 'package:dedal/core/use_cases/update_token.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
@@ -16,20 +15,17 @@ class SignUpCubit extends Cubit<CrudState> {
   SignUpCubit({
     required SignUp signUp,
     required SignUpCode signUpCode,
-    required UpdateToken updateToken,
     required UpdateUser updateUser,
     required SignIn signIn,
   })  : _signUp = signUp,
         _signIn = signIn,
         _signUpCode = signUpCode,
-        _updateToken = updateToken,
         _updateUser = updateUser,
         super(const CrudInitial());
 
   final SignUp _signUp;
   final SignIn _signIn;
   final SignUpCode _signUpCode;
-  final UpdateToken _updateToken;
   final UpdateUser _updateUser;
 
   SignUpDto? info;
@@ -73,7 +69,6 @@ class SignUpCubit extends Cubit<CrudState> {
   }
 
   FutureOr<void> setValue(User? user) async {
-    _updateToken.call(user?.token);
     _updateUser.call(user);
   }
 }

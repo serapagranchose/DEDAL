@@ -51,5 +51,5 @@ class User {
       };
 
   @override
-  String toString() => '$name, $email + $info, $id';
+  String toString() => '$name, $email + $info, $id, $token';
 }

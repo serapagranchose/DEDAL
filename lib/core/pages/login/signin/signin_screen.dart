@@ -14,7 +14,6 @@ import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
-import 'package:dedal/core/use_cases/update_token.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +28,6 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   @override
   SignInCubit create(BuildContext context) => SignInCubit(
         signIn: SignIn(loginDataSource: getIt<LoginDataSource>()),
-        updateToken: UpdateToken(
-            localStorageDataSource: getIt<LocalStorageDataSource>()),
         updateUser:
             UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       );

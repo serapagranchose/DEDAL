@@ -5,7 +5,6 @@ import 'package:dedal/core/datasources/local_storage_datasource.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/pages/locations/location_cubit.dart';
-import 'package:dedal/core/use_cases/get_token.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +18,6 @@ class ProfilScreen extends CubitScreen<LocationCubit, CrudState> {
 
   @override
   create(BuildContext context) => LocationCubit(
-      getToken:
-          GetToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
       getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
   @override

@@ -6,7 +6,6 @@ import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
-import 'package:dedal/core/use_cases/get_token.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
 import 'package:flutter/widgets.dart';
@@ -21,8 +20,6 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
 
   @override
   create(BuildContext context) => HomeCubit(
-      getToken:
-          GetToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
       getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       getUserGeolocation: GetUserGeolocation())
     ..load();

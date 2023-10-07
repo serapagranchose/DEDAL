@@ -17,7 +17,6 @@ import 'package:dedal/core/pages/login/stateless/code_dialog.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/sign_up.dart';
 import 'package:dedal/core/use_cases/sign_up_code.dart';
-import 'package:dedal/core/use_cases/update_token.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,8 +32,6 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   SignUpCubit create(BuildContext context) => SignUpCubit(
       signUp: SignUp(loginDataSource: getIt<LoginDataSource>()),
       signUpCode: SignUpCode(loginDataSource: getIt<LoginDataSource>()),
-      updateToken:
-          UpdateToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       signIn: SignIn(loginDataSource: getIt<LoginDataSource>()));
