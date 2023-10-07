@@ -20,19 +20,13 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   Widget build(BuildContext context) => GoogleMap(
-        // on below line setting camera position
         initialCameraPosition: CameraPosition(
           target: widget.userPosition,
           zoom: 14.4746,
         ),
-        // on below line we are setting markers on the map
-        // on below line specifying map type.
         mapType: MapType.normal,
-        // on below line setting user location enabled.
         myLocationEnabled: true,
-        // on below line setting compass enabled.
         compassEnabled: true,
-        // on below line specifying controller on map complete.
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },

@@ -22,14 +22,15 @@ class FiltersCubit extends Cubit<CrudState> {
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
-    final _user = await _getUser.call(const NoParam()).fold(
+    final getUserResult = await _getUser.call(const NoParam()).fold(
           (value) => value,
           (error) => null,
         );
 
-    if (_user.isNotNull) {
-      _getFilters.call(_user!.token).fold(
-            (value) => emit(CrudLoaded<(User, List<Filter>?)>((_user, value))),
+    if (getUserResult.isNotNull) {
+      _getFilters.call(getUserResult!.token).fold(
+            (value) =>
+                emit(CrudLoaded<(User, List<Filter>?)>((getUserResult, value))),
             (error) => emit(CrudError(error.message)),
           );
     }

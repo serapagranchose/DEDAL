@@ -28,10 +28,12 @@ class RegisterLayout extends StatelessWidget {
         appBar: appBar.isNotNull
             ? AppBar(
                 backgroundColor: SharedColorPalette().main,
-                leading: InkWell(
-                  onTap: () => context.pop(),
-                  child: const Icon(Icons.arrow_back_ios_new),
-                ),
+                leading: context.canPop()
+                    ? InkWell(
+                        onTap: () => context.pop(),
+                        child: const Icon(Icons.arrow_back_ios_new),
+                      )
+                    : null,
                 title: title.isNotNull ? Text(title!) : const SizedBox.shrink(),
                 actions:
                     actions.isNotNull ? actions! : [const SizedBox.shrink()],
