@@ -27,14 +27,18 @@ class User {
 
   factory User.fromJson(Map<String, Object?> json) {
     User user = User();
+    print(json['lastInfo']);
     try {
       user = User(
           id: json['id'].isNotNull ? json['id'].toString() : null,
           name: json['username'].isNotNull ? json['username'].toString() : null,
           email: json['email'].isNotNull ? json['email'].toString() : null,
           info: json['lastInfo'].isNotNull
-              ? Info.toJson(jsonDecode(json['lastInfo'].toString())
-                  as Map<String, Object?>)
+              ? Info.toJson(
+                  Map<String, Object?>.from(
+                    json['lastInfo'] as Map<Object, Object?>,
+                  ),
+                )
               : null,
           token: json['token'].isNotNull ? json['token'].toString() : null);
     } catch (e) {
@@ -51,5 +55,5 @@ class User {
       };
 
   @override
-  String toString() => '$name, $email + $info, $id, $token';
+  String toString() => '$name, $email + $info, $id,\n $token,\n $id';
 }

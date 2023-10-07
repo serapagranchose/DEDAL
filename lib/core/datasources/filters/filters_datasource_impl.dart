@@ -23,13 +23,22 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<void> setinfoUser(User user) async {
-    print('user => $user');
-    print('http://52.166.128.133/user/?id=${user.id}');
-    print(user.info?.toJson());
-    http.patch(
-      Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
-      body: jsonEncode(user.info!.toJson()),
-      headers: {'x-access-token': user.token!, 'Accept': '*/*'},
-    ).then((value) => print('value => ${value.body} / ${value.statusCode}'));
+    try {
+      print('user => $user');
+      print('user => ${user.token}');
+      print('http://52.166.128.133/user/?id=${user.id}');
+      print(user.info?.toJson());
+      await http.patch(
+        Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
+        body: jsonEncode(user.info!.toJson()),
+        headers: {
+          'x-access-token': user.token!,
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      ).then((value) => print('value => ${value.body} / ${value.statusCode}'));
+    } catch (e) {
+      print('error ==> $e');
+    }
   }
 }

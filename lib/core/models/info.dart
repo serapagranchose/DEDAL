@@ -33,6 +33,11 @@ class Info {
   @override
   String toString() => '$filter, $time + $budget';
 
-  Map<String, Object?> toJson() =>
-      <String, Object?>{'time': time, 'budget': budget, 'filter': filter};
+  Map<String, Object?> toJson() => <String, Object?>{
+        'time': time,
+        'budget': budget,
+        'filters': filter,
+        'nbPeople': 4,
+        'map': 'map'
+      };
 }

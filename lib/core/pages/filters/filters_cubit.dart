@@ -34,6 +34,8 @@ class FiltersCubit extends Cubit<CrudState> {
         );
 
     if (getUserResult.isNotNull) {
+      print('lalalala');
+      print(getUserResult);
       user = getUserResult;
       _getFilters.call(getUserResult!.token).fold(
             (value) =>
