@@ -17,7 +17,6 @@ class LoginDataSourceImpl extends LoginDataSource {
     String? userToken;
 
     userToken = await GetStorage().read('token');
-    print('userToken => $userToken');
 
     http.Response response;
     try {
@@ -62,8 +61,6 @@ class LoginDataSourceImpl extends LoginDataSource {
         body: jsonEncode({'email': email, 'password': password}),
         headers: {'Content-type': 'application/json', 'Accept': '*/*'},
       ).then((result) {
-        print('res => ${result.body} $email');
-        print('res => ${result.statusCode}');
         if (result.statusCode == 202) {
           final user = User.fromJson(jsonDecode(result.body));
 
@@ -74,14 +71,11 @@ class LoginDataSourceImpl extends LoginDataSource {
 
   @override
   Future<bool> signUp(String email, String password) async {
-    print('$email / $password');
     return await http.post(
       Uri.parse('http://52.166.128.133/signup'),
       body: jsonEncode({'email': email, 'password': password}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
-      print('signUP ===+> ${result.statusCode}');
-      print('signUP ===+> ${result.body}');
       if (result.statusCode == 201) {
         return true;
       }
@@ -91,14 +85,11 @@ class LoginDataSourceImpl extends LoginDataSource {
 
   @override
   Future<bool> signUpCode(String email, String code) async {
-    print('$email / $code');
     return await http.post(
       Uri.parse('http://52.166.128.133/signup_code'),
       body: jsonEncode({'email': email, 'code': code}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
-      print('CODE ===+> ${result.statusCode}');
-      print('CODE ===+> ${result.body}');
       if (result.statusCode == 201) {
         return true;
       }

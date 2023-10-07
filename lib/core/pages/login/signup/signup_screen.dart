@@ -46,7 +46,6 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   @override
   Future<void> onListen(BuildContext context, CrudState state) async {
     super.onListen(context, state);
-    print('state => $state');
     if (state is CrudOkReturn) {
       await showDialog(
           context: context,

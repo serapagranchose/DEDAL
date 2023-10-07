@@ -13,7 +13,6 @@ class FilterDataSourceImpl extends FilterDataSource {
         headers: {'x-access-token': token, 'Accept': '*/*'},
       ).then((result) {
         if (result.statusCode == 200) {
-          print('result ==> ${result.body}');
           final filters = (jsonDecode(result.body) as List<Object?>)
               .map((e) => Filter.fromJson(e as Map<String, Object?>))
               .toList();

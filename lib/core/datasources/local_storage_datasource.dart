@@ -9,7 +9,6 @@ class LocalStorageDataSource extends BaseDataSource {
   Future<String> getToken() async => GetStorage().read('token');
   Future<User?> getUser() async {
     final res = GetStorage().read('id');
-    print('res => ${res.runtimeType}');
     return res;
   }
 }

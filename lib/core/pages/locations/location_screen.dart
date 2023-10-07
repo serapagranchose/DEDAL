@@ -4,6 +4,7 @@ import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/local_storage_datasource.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
+import 'package:dedal/core/pages/locations/location_cubit.dart';
 import 'package:dedal/core/use_cases/get_token.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:flutter/widgets.dart';
@@ -11,13 +12,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
-class LocationScreen extends CubitScreen<HomeCubit, CrudState> {
+class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
   const LocationScreen({super.key});
 
   static const name = 'location';
 
   @override
-  create(BuildContext context) => HomeCubit(
+  create(BuildContext context) => LocationCubit(
       getToken:
           GetToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
       getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
@@ -34,7 +35,7 @@ class LocationScreen extends CubitScreen<HomeCubit, CrudState> {
               Text(message ?? 'une erreur est subvenu'),
               GlobalButton(
                 text: 'reload',
-                onTap: () => context.read<HomeCubit>().load(),
+                onTap: () => context.read<LocationCubit>().load(),
               )
             ],
           ),

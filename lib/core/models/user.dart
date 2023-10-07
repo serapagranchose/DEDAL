@@ -26,7 +26,6 @@ class User {
   LatLng? pos;
 
   factory User.fromJson(Map<String, Object?> json) {
-    print('user => $json');
     User user = User();
     try {
       user = User(

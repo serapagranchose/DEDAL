@@ -8,6 +8,7 @@ import 'package:dedal/core/pages/home/home_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/use_cases/get_token.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/get_user_geolocation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
@@ -22,14 +23,19 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
   create(BuildContext context) => HomeCubit(
       getToken:
           GetToken(localStorageDataSource: getIt<LocalStorageDataSource>()),
-      getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
+      getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
+      getUserGeolocation: GetUserGeolocation())
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
-        CrudLoaded<User?>(data: final data) => Text(data?.email ?? ''),
+        CrudLoaded<User?>(data: final data) => data?.pos != null
+            ? HomeContent(
+                userPosition: data!.pos!,
+              )
+            : const MainLoader(),
         CrudError(message: final message) => Column(
             children: [
               Text(message ?? 'une erreur est subvenu'),
