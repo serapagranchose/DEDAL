@@ -12,6 +12,7 @@ import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/use_cases/get_filters.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/set_user_info.dart';
+import 'package:dedal/core/use_cases/user_generat_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
@@ -26,7 +27,9 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
   create(BuildContext context) => FiltersCubit(
       getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       getFilters: GetFilters(filterDataSource: getIt<FilterDataSource>()),
-      setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()))
+      setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()),
+      userGenerateRoute:
+          UserGenerateRoute(filterDataSource: getIt<FilterDataSource>()))
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(

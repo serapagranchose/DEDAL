@@ -6,6 +6,7 @@ import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_filters.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/set_user_info.dart';
+import 'package:dedal/core/use_cases/user_generat_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
@@ -16,14 +17,17 @@ class FiltersCubit extends Cubit<CrudState> {
     required GetUser getUser,
     required GetFilters getFilters,
     required SetInfoUser setInfoUser,
+    required UserGenerateRoute userGenerateRoute,
   })  : _getUser = getUser,
         _getFilters = getFilters,
         _setInfoUser = setInfoUser,
+        _userGenerateRoute = userGenerateRoute,
         super(const CrudInitial());
 
   final GetUser _getUser;
   final GetFilters _getFilters;
   final SetInfoUser _setInfoUser;
+  final UserGenerateRoute _userGenerateRoute;
   User? user;
 
   FutureOr<void> load() async {
@@ -34,8 +38,6 @@ class FiltersCubit extends Cubit<CrudState> {
         );
 
     if (getUserResult.isNotNull) {
-      print('lalalala');
-      print(getUserResult);
       user = getUserResult;
       _getFilters.call(getUserResult!.token).fold(
             (value) =>
@@ -46,13 +48,11 @@ class FiltersCubit extends Cubit<CrudState> {
   }
 
   FutureOr<void> setInfo(Info info) {
-    print('info => $info');
     user?.info = info;
-    print('info => ${user?.info}');
 
     final setInfoUserResult = _setInfoUser.call(user);
     setInfoUserResult.fold(
-      (value) => print('value'),
+      (value) => _userGenerateRoute.call(user),
       (error) => print('error.message => ${error.message}'),
     );
   }
