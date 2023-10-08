@@ -47,13 +47,16 @@ class FiltersCubit extends Cubit<CrudState> {
     }
   }
 
-  FutureOr<void> setInfo(Info info) {
+  FutureOr<bool> setInfo(Info info) async {
+    emit(const CrudLoading());
     user?.info = info;
-
-    final setInfoUserResult = _setInfoUser.call(user);
-    setInfoUserResult.fold(
-      (value) => _userGenerateRoute.call(user),
-      (error) => print('error.message => ${error.message}'),
+    await _setInfoUser.call(user);
+    return await _userGenerateRoute.call(user).fold(
+      (value) => value,
+      (error) {
+        emit(const CrudError('erreur'));
+        return false;
+      },
     );
   }
 }

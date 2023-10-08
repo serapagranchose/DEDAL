@@ -1,4 +1,3 @@
-import 'package:dedal/core/models/filter.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class Info {
@@ -7,12 +6,14 @@ class Info {
     this.time,
     this.budget,
     this.map,
+    this.mapName,
   });
 
   int? time;
   int? budget;
   List<String>? filter;
-  String? map;
+  String? mapName;
+  Map<String, Object>? map;
 
   factory Info.toJson(Map<String, Object?> json) {
     return Info(
@@ -24,7 +25,7 @@ class Info {
                 .map((e) => e.toString())
                 .toList()
             : [],
-        map: json['map']?.toString());
+        mapName: json['map']?.toString());
   }
 
   @override

@@ -81,20 +81,17 @@ class FilterDataSourceImpl extends FilterDataSource {
       });
 
   @override
-  Future<void> getMap(User user) async {
-    await http.get(
-      Uri.parse('http://52.166.128.133/map/?id=${user.id}'),
-      headers: {
-        'x-access-token': user.token!,
-        'Accept': '*/*',
-        'Content-type': 'application/json',
-      },
-    ).then((value) {
-      if (value.statusCode == 200) {
-        final keys =
-            (jsonDecode(value.body) as Map<String, dynamic>)['Buildings'];
-      }
-      return null;
-    });
-  }
+  Future<Map<String, Object>?> getMap(User user) async => await http.get(
+        Uri.parse('http://52.166.128.133/map/?id=${user.id}'),
+        headers: {
+          'x-access-token': user.token!,
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      ).then((value) {
+        if (value.statusCode == 200) {
+          return jsonDecode(value.body);
+        }
+        return null;
+      });
 }

@@ -8,5 +8,5 @@ abstract class FilterDataSource extends BaseDataSource {
   Future<void> setinfoUser(User user);
   Future<List<Place>?> getPlaces(User user);
   Future<String?> getPath(User user);
-  Future<void> getMap(User user);
+  Future<Map<String, Object>?> getMap(User user);
 }
