@@ -45,7 +45,7 @@ class FiltersCubit extends Cubit<CrudState> {
     }
   }
 
-  FutureOr<void> SetInfo(Info info) {
+  FutureOr<void> setInfo(Info info) {
     print('info => $info');
     user?.info = info;
     print('info => ${user?.info}');
@@ -53,7 +53,7 @@ class FiltersCubit extends Cubit<CrudState> {
     final setInfoUserResult = _setInfoUser.call(user);
     setInfoUserResult.fold(
       (value) => print('value'),
-      (error) => print(error.message),
+      (error) => print('error.message => ${error.message}'),
     );
   }
 }

@@ -34,10 +34,12 @@ class Info {
   String toString() => '$filter, $time + $budget';
 
   Map<String, Object?> toJson() => <String, Object?>{
-        'time': time,
-        'budget': budget,
-        'filters': filter,
-        'nbPeople': 4,
-        'map': 'map'
+        'lastInfo': {
+          "budget": budget,
+          "filter": filter,
+          "nbPeople": 4,
+          "time": time,
+          "map": "test"
+        }
       };
 }

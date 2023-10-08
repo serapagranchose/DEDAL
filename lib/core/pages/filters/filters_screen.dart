@@ -40,7 +40,7 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
               ? FilterContent(
                   filters: data!.$2!,
                   info: data.$1.info,
-                  submit: (info) => context.read<FiltersCubit>().SetInfo(info),
+                  submit: (info) => context.read<FiltersCubit>().setInfo(info),
                 )
               : const SizedBox.shrink(),
         CrudError(message: final message) => Column(
