@@ -89,8 +89,9 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Content-type': 'application/json',
         },
       ).then((value) {
+        print('map => ${value.body}');
         if (value.statusCode == 200) {
-          return jsonDecode(value.body);
+          return Map<String, Object>.from(jsonDecode(value.body));
         }
         return null;
       });

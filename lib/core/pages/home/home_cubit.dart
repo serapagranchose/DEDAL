@@ -39,6 +39,7 @@ class HomeCubit extends Cubit<CrudState> {
               (value) => value,
               (error) => null,
             );
+        print('userGetMapResult => $userGetMapResult');
         user!.info?.map = userGetMapResult;
         emit(CrudLoaded<User?>(user));
       } else {
