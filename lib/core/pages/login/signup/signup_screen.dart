@@ -2,7 +2,8 @@
 
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
-import 'package:dedal/core/datasources/local_storage_datasource.dart';
+import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
+import 'package:dedal/core/datasources/localStorage/local_storage_datasource_impl.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/dtos/sign_up_dto.dart';
@@ -57,7 +58,7 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
     }
     if (state is CrudLoaded<User> && state.data.isNotNull) {
       context.pop();
-      context.read<AuthenticationBloc>().setUser(state.data!);
+      context.read<SignUpCubit>().setValue(state.data!);
       context.pushNamed(HomeScreen.name);
     }
     if (state is CrudError) {

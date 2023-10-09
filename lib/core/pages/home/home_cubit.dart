@@ -27,6 +27,7 @@ class HomeCubit extends Cubit<CrudState> {
   FutureOr<void> load() async {
     emit(const CrudLoading());
     await _getUser.call(const NoParam()).fold((user) async {
+      print('user => $user');
       if (user.isNotNull) {
         final loc = await _getUserGeolocation
             .call(const NoParam())
@@ -48,14 +49,3 @@ class HomeCubit extends Cubit<CrudState> {
     }, (error) => emit(CrudError(error.toString())));
   }
 }
-
-//  if (_user?.pos == null) {
-//       await Geolocator.requestPermission()
-//           .then((value) {})
-//           .onError((error, stackTrace) async {
-//         await Geolocator.requestPermission();
-//       });
-//     }
-//     emit(CrudLoaded<User?>(_user));
-//   }
-// }

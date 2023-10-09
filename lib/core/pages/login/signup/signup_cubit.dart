@@ -34,7 +34,7 @@ class SignUpCubit extends Cubit<CrudState> {
     info = params;
     final signUpResult =
         await _signUp.call(info).fold((value) => value, (error) => false);
-    if (await signUpResult) emit(const CrudOkReturn());
+    if (signUpResult) emit(const CrudOkReturn());
   }
 
   FutureOr<SignUpDto?> userSignUpCode(String? code) async {

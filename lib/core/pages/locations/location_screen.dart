@@ -1,7 +1,8 @@
 import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
-import 'package:dedal/core/datasources/local_storage_datasource.dart';
+import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
+import 'package:dedal/core/datasources/localStorage/local_storage_datasource_impl.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/pages/locations/location_cubit.dart';
