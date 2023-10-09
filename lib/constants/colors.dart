@@ -9,3 +9,13 @@ class SharedColorPalette {
   Color mainDisable = const Color(0xFF70819c);
   Color validate = const Color(0xFF03C923);
 }
+
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: const Color(0xFF294F87)
+);
+
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: const Color(0xFF294F87)
+);

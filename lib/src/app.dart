@@ -1,4 +1,5 @@
 import 'package:dedal/constants/enum/authentification_enum.dart';
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/pages/apiOfflinePage.dart';
 import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 import 'settings/settings_controller.dart';
 
@@ -26,48 +28,55 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Glue the SettingsController to the MaterialApp.
-    //
-    // The ListenableBuilder Widget listens to the SettingsController for changes.
-    // Whenever the user updates their settings, the MaterialApp is rebuilt.
-    return ListenableBuilder(
-      listenable: settingsController,
-      builder: (BuildContext context, Widget? child) {
-        return MaterialApp.router(
-          routerConfig: _router,
-          // Providing a restorationScopeId allows the Navigator built by the
-          // MaterialApp to restore the navigation stack when a user leaves and
-          // returns to the app after it has been killed while running in the
-          // background.
-          restorationScopeId: 'app',
+    return AdaptiveTheme(
+      light: lightTheme,
+      dark: darkTheme,
+      initial: AdaptiveThemeMode.light, // Set the initial theme mode
+      builder: (theme, darkTheme) {
+        // Glue the SettingsController to the MaterialApp.
+        //
+        // The ListenableBuilder Widget listens to the SettingsController for changes.
+        // Whenever the user updates their settings, the MaterialApp is rebuilt.
+        return ListenableBuilder(
+          listenable: settingsController,
+          builder: (BuildContext context, Widget? child) {
+            return MaterialApp.router(
+              routerConfig: _router,
+              // Providing a restorationScopeId allows the Navigator built by the
+              // MaterialApp to restore the navigation stack when a user leaves and
+              // returns to the app after it has been killed while running in the
+              // background.
+              restorationScopeId: 'app',
 
-          // Provide the generated AppLocalizations to the MaterialApp. This
-          // allows descendant Widgets to display the correct translations
-          // depending on the user's locale.
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''),
-            Locale('fr', ''),
-          ],
-          onGenerateTitle: (BuildContext context) => context.l18n!.appTitle,
+              // Provide the generated AppLocalizations to the MaterialApp. This
+              // allows descendant Widgets to display the correct translations
+              // depending on the user's locale.
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en', ''),
+                Locale('fr', ''),
+              ],
+              onGenerateTitle: (BuildContext context) => context.l18n!.appTitle,
 
-          // Define a light and dark color theme. Then, read the user's
-          // preferred ThemeMode (light, dark, or system default) from the
-          // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          themeMode: settingsController.themeMode,
-          builder: (context, child) => AppViewContent(_navigatorKey, child),
+              // Define a light and dark color theme. Then, read the user's
+              // preferred ThemeMode (light, dark, or system default) from the
+              // SettingsController to display the correct theme.
+              theme: theme,
+              darkTheme: darkTheme,
+              themeMode: settingsController.themeMode,
+              builder: (context, child) => AppViewContent(_navigatorKey, child),
 
-          // Define a function to handle named routes in order to support
-          // Flutter web url navigation and deep linking.
+              // Define a function to handle named routes in order to support
+              // Flutter web url navigation and deep linking.
+            );
+          },
         );
-      },
+      }
     );
   }
 }

@@ -53,6 +53,7 @@ dependencies:
   google_maps_flutter_android: ^2.5.1
   geolocator: ^9.0.2
   sleek_circular_slider: ^2.0.1
+  adaptive_theme: ^2.0.0
   
 dev_dependencies:
   wyatt_analysis:
