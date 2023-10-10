@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     return AdaptiveTheme(
       light: lightTheme,
       dark: darkTheme,
-      initial: AdaptiveThemeMode.light, // Set the initial theme mode
+      initial: AdaptiveThemeMode.system, // Set the initial theme mode
       builder: (theme, darkTheme) {
         // Glue the SettingsController to the MaterialApp.
         //
