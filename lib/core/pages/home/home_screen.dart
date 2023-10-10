@@ -35,6 +35,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
             ? HomeContent(
                 userPosition: data!.pos!,
                 map: data.info?.map,
+                places: data.places,
               )
             : const MainLoader(),
         CrudError(message: final message) => Column(
