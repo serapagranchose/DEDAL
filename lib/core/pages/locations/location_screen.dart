@@ -2,9 +2,7 @@ import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
-import 'package:dedal/core/datasources/localStorage/local_storage_datasource_impl.dart';
 import 'package:dedal/core/extensions/get_it.dart';
-import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/pages/locations/location_cubit.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:flutter/widgets.dart';
@@ -26,8 +24,7 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
-        CrudLoaded<String?>(data: final data) =>
-          const Text('NOUS SOMMES SUR LOCATION'),
+        CrudLoaded<String?>() => const Text('NOUS SOMMES SUR LOCATION'),
         CrudError(message: final message) => Column(
             children: [
               Text(message ?? 'une erreur est subvenu'),

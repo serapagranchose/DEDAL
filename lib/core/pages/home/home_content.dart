@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
@@ -15,10 +14,10 @@ class HomeContent extends StatefulWidget {
   final Map<String, Object>? map;
 
   @override
-  _HomeContentState createState() => _HomeContentState();
+  HomeContentState createState() => HomeContentState();
 }
 
-class _HomeContentState extends State<HomeContent> {
+class HomeContentState extends State<HomeContent> {
   final Completer<GoogleMapController> _controller = Completer();
   Polyline polyline = const Polyline(
     points: [],
@@ -29,7 +28,6 @@ class _HomeContentState extends State<HomeContent> {
   Set<Marker> markers = {};
   @override
   Widget build(BuildContext context) {
-    print('widget.map => ${widget.map}');
     var map = GoogleMap(
       initialCameraPosition: CameraPosition(
         target: widget.userPosition,
@@ -49,13 +47,10 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   void initState() {
-    print('init');
     super.initState();
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
-      print(widget.map!.keys);
       final building = widget.map!['Buildings'] as List;
-      print(building);
       for (var element in lines) {
         final value = Map.from(element);
         polyline = polyline.copyWith(
@@ -86,8 +81,6 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ));
       }
-
-      print(polyline.points);
     }
   }
 }

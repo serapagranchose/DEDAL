@@ -4,7 +4,6 @@ import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
-import 'package:dedal/core/pages/locations/location_cubit.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/profil/profil_cubit.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';

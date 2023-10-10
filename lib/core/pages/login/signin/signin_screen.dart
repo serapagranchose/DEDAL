@@ -1,16 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
-import 'package:dedal/components/text_fields/main_text_field.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
-import 'package:dedal/core/datasources/localStorage/local_storage_datasource_impl.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
-import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
@@ -57,6 +53,6 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
               validate: (email, password) async => context
                   .read<SignInCubit>()
                   .userSignIn(SigninDto(email: email, password: password)),
-              isError: state is CrudState,
+              isError: state is CrudError,
             ));
 }

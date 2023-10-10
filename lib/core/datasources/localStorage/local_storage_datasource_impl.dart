@@ -9,14 +9,12 @@ class LocalStorageDataSourceImpl extends LocalStorageDataSource {
   Future<User?> getUser() async {
     final box = await Hive.openBox<User>(_userBoxName);
     final user = box.get('user');
-    print('user1 => $user');
     return user;
   }
 
   @override
   Future<void> saveUser(User user) async {
     final box = await Hive.openBox<User>(_userBoxName);
-    print('in => $user');
     await box.put('user', user);
   }
 

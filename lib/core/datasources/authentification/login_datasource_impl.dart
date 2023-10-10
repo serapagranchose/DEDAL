@@ -16,8 +16,7 @@ class LoginDataSourceImpl extends LoginDataSource {
     yield AuthenticationStatus.unknown;
     String? userToken;
 
-    userToken = await GetStorage().read('token');
-    print('here');
+    userToken = GetStorage().read('token');
     http.Response response;
     try {
       response = await http.get(

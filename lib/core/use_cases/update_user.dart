@@ -14,7 +14,6 @@ class UpdateUser extends AsyncUseCase<User?, NoParam> {
 
   @override
   FutureOr<void> onStart(User? params) {
-    print('params => $params');
     if (params == null) {
       throw const ClientException('params not valid');
     }

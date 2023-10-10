@@ -29,9 +29,7 @@ class AuthenticationBloc
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 
-  Future<void> init() async {
-    print("_loginDataSource.status => ${_loginDataSource.status}");
-  }
+  Future<void> init() async {}
 
   @override
   Future<void> close() {
@@ -44,7 +42,6 @@ class AuthenticationBloc
     AuthenticationStatusChanged event,
     Emitter<AuthenticationState> emit,
   ) async {
-    print('ici battard ${AuthenticationStatus.unauthenticated}');
     switch (event.status) {
       // case AuthenticationStatus.unauthenticated:
       //   return emit(const AuthenticationState.unauthenticated());
@@ -54,7 +51,6 @@ class AuthenticationBloc
         final User? user = await _getUser
             .call(const NoParam())
             .fold((value) => value, (error) => null);
-        print('user => $user');
         return emit(
           user != null
               ? AuthenticationState.authenticated(user)
@@ -69,7 +65,6 @@ class AuthenticationBloc
         final User? user = await _getUser
             .call(const NoParam())
             .fold((value) => value, (error) => null);
-        print('user => $user');
         return emit(
           user != null
               ? AuthenticationState.authenticated(user)

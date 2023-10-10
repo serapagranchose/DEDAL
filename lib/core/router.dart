@@ -33,7 +33,7 @@ class AppRouter {
             name: Main.routeName,
             path: '/main',
             pageBuilder: (context, state) =>
-                noTransition(context, state, Main()),
+                noTransition(context, state, const Main()),
           ),
           GoRoute(
             name: SignInScreen.routeName,

@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Main extends StatelessWidget {
-  Main({
+  const Main({
     super.key,
   });
 

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dedal/core/models/info.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

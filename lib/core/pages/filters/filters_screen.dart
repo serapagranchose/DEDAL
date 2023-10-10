@@ -3,7 +3,6 @@
 import 'package:dedal/core/pages/filters/route_generate/route_generate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
@@ -18,11 +17,9 @@ import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/filters/filters_content.dart';
 import 'package:dedal/core/pages/filters/filters_cubit.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
-import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/use_cases/get_filters.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/set_user_info.dart';
-import 'package:dedal/core/use_cases/user_generat_route.dart';
 
 class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
   const FilterScreen({super.key});

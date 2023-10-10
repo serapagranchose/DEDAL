@@ -8,7 +8,7 @@ class Filter {
   String? name;
 
   factory Filter.fromJson(Map<String, Object?> json) => Filter(
-        id: json['id'] != null ? json['id'].toString() : null,
-        name: json['name'] != null ? json['name'].toString() : null,
+        id: json['id']?.toString(),
+        name: json['name']?.toString(),
       );
 }
