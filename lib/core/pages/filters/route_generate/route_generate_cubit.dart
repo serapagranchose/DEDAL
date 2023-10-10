@@ -59,7 +59,6 @@ class RouteGenerateCubit extends Cubit<CrudState> {
           emit(const CrudError('no place'));
           return;
         }
-        print('value ===> $value ${value?.isEmpty}');
         user?.places = value;
         await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPlace));
