@@ -77,10 +77,17 @@ class HomeContentState extends State<HomeContent> {
       }
       for (var element in building) {
         final value = Map.from(element);
-        final place =
-            widget.places?.firstWhere((element) => element?.id == value['id']);
-        if (place?.coordinates != null) {
-          print(place?.name);
+        if (widget.places?.isEmpty ?? false) {
+          return;
+        }
+        Place? place;
+        try {
+          place = widget.places?.firstWhere(
+            (element) => element?.id == value['id'],
+          );
+        } catch (_) {}
+
+        if (place.isNotNull && place?.coordinates != null) {
           markers.add(Marker(
             markerId: MarkerId(place!.id!),
             position: place.coordinates!,

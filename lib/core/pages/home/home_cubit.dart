@@ -31,8 +31,6 @@ class HomeCubit extends Cubit<CrudState> {
             .fold((value) => value, (error) => null);
         if (loc != null) {
           user!.pos = LatLng(loc.latitude, loc.longitude);
-          print(user.places);
-          print(user.info?.map);
           emit(CrudLoaded<User?>(user));
         }
       }

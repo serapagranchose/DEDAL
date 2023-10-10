@@ -34,33 +34,36 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
         setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()),
       )..load();
   @override
-  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
-      appBar: true,
-      title: 'Filtre',
-      navBar: true,
-      child: switch (state) {
-        CrudLoading() => const MainLoader(),
-        CrudLoaded<(User, List<Filter>?)>(data: final data) =>
-          data?.$1 != null && data?.$2 != null
-              ? FilterContent(
-                  filters: data!.$2!,
-                  info: data.$1.info,
-                  submit: (info) async {
-                    await context.read<FiltersCubit>().setInfo(info);
-                    showDialog(
-                        context: context,
-                        builder: (context) => const RouteGenerateScreen());
-                  })
-              : const SizedBox.shrink(),
-        CrudError(message: final message) => Column(
-            children: [
-              Text(message ?? 'une erreur est subvenu'),
-              GlobalButton(
-                text: 'reload',
-                onTap: () => context.read<HomeCubit>().load(),
-              )
-            ],
-          ),
-        _ => const Text('error'),
-      });
+  Widget onBuild(BuildContext context, CrudState state) {
+    var tmp = RegisterLayout(
+        appBar: true,
+        title: 'Filtre',
+        navBar: true,
+        child: switch (state) {
+          CrudLoading() => const MainLoader(),
+          CrudLoaded<(User, List<Filter>?)>(data: final data) =>
+            data?.$1 != null && data?.$2 != null
+                ? FilterContent(
+                    filters: data!.$2!,
+                    info: data.$1.info,
+                    submit: (info) async {
+                      await context.read<FiltersCubit>().setInfo(info);
+                      showDialog(
+                          context: context,
+                          builder: (context) => const RouteGenerateScreen());
+                    })
+                : const SizedBox.shrink(),
+          CrudError(message: final message) => Column(
+              children: [
+                Text(message ?? 'une erreur est subvenu'),
+                GlobalButton(
+                  text: 'reload',
+                  onTap: () => context.read<HomeCubit>().load(),
+                )
+              ],
+            ),
+          _ => const Text('error'),
+        });
+    return tmp;
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:dedal/components/button/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -89,7 +90,15 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
                       _ => 'null',
                     },
                     textAlign: TextAlign.center,
-                  ),
+                  )
+                else if (state is CrudError) ...[
+                  const Text('user erreur est subvenu'),
+                  Text(state.message ?? ''),
+                  GlobalButton(
+                    text: ('fermer'),
+                    onTap: () => context.pop(),
+                  )
+                ]
               ],
             ),
           ),

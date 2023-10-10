@@ -5,7 +5,7 @@ import 'package:dedal/core/models/user.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
-class SetInfoUser extends AsyncUseCase<User, void> {
+class SetInfoUser extends AsyncUseCase<User, bool> {
   SetInfoUser({
     required this.filterDataSource,
   });
@@ -21,7 +21,7 @@ class SetInfoUser extends AsyncUseCase<User, void> {
 
   @override
   @override
-  FutureOrResult<void> execute(User? params) async => Result.tryCatchAsync(
+  FutureOrResult<bool> execute(User? params) async => Result.tryCatchAsync(
       () => filterDataSource.setinfoUser(params!),
       (error) =>
           error is AppException ? error : ServerException(error.toString()));

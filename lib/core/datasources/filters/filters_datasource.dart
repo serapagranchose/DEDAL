@@ -5,7 +5,7 @@ import 'package:wyatt_architecture/wyatt_architecture.dart';
 
 abstract class FilterDataSource extends BaseDataSource {
   Future<List<Filter>?> getAll(String token);
-  Future<void> setinfoUser(User user);
+  Future<bool> setinfoUser(User user);
   Future<List<Place>?> getPlaces(User user);
   Future<String?> getPath(User user);
   Future<Map<String, Object>?> getMap(User user);

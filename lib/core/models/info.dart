@@ -31,13 +31,14 @@ class Info {
   @override
   String toString() => '$filter, $time + $budget + $map';
 
-  Map<String, Object?> toJson() => <String, Object?>{
+  Map<String, Object?> toJson(String token) => <String, Object?>{
         'lastInfo': {
           "budget": budget,
           "filter": filter,
           "nbPeople": 4,
           "time": time,
           "map": "test"
-        }
+        },
+        'token': token,
       };
 }

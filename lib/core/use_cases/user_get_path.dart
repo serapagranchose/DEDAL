@@ -24,23 +24,4 @@ class UserGetPath extends AsyncUseCase<User, String?> {
       () => filterDataSource.getPath(params!),
       (error) =>
           error is AppException ? error : ServerException(error.toString()));
-
-
-  //     if (getPathResult.isNotNull) {
-  //       print('4');
-
-  //       params?.info?.mapName = getPathResult;
-  //       await Result.tryCatchAsync(
-  //         () => filterDataSource.getMap(params!),
-  //         (error) =>
-  //             error is AppException ? error : ServerException(error.toString()),
-  //       ).fold((value) => value, (error) => null);
-  //       print('true');
-
-  //       return const Ok(true);
-  //     }
-  //   }
-  //   print('false');
-  //   return const Ok(false);
-  // }
 }

@@ -44,7 +44,7 @@ class User {
   Map<String, Object?> toJson() => <String, Object?>{
         'Username': name,
         'Email': email,
-        'lastInfo': info?.toJson()
+        'lastInfo': info?.toJson('')
       };
 
   Map<String, Object?> posToJson() => <String, Object?>{
