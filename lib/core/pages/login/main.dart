@@ -15,9 +15,7 @@ class Main extends StatelessWidget {
 
   static const routeName = 'Main';
 
-  void toggleTheme(BuildContext context) {
-    AdaptiveTheme.of(context).toggleThemeMode();
-  }
+
 
   @override
   Widget build(BuildContext context) => RegisterLayout(
@@ -30,14 +28,7 @@ class Main extends StatelessWidget {
             ),
           ),
           Image.asset('assets/logo/dedal.png'),
-          /* Move to a profile section
-          ElevatedButton(
-              onPressed: () {
-                toggleTheme(context);
-              },
-              child: Text("changer theme")
-          ),
-          */
+          
           Text(
             'Le chemin de votre culture',
             style: GoogleFonts.archivo(

@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
@@ -30,12 +31,22 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
-        CrudLoaded<User?>() => GlobalButton(
-            text: 'deco',
-            onTap: () async => context
-                .read<ProfilCubit>()
-                .deconnection()
-                .then((value) => context.goNamed(Main.routeName)),
+        CrudLoaded<User?>() => Column(
+            children: [
+              GlobalButton(
+                text: 'deco',
+                onTap: () async => context
+                    .read<ProfilCubit>()
+                    .deconnection()
+                    .then((value) => context.goNamed(Main.routeName)),
+              ),
+              GlobalButton(
+                text: 'change theme',
+                onTap: () {
+                  AdaptiveTheme.of(context).toggleThemeMode();
+                },
+              ),
+            ],
           ),
         CrudError(message: final message) => Column(
             children: [
