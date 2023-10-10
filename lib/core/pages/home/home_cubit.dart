@@ -16,13 +16,11 @@ class HomeCubit extends Cubit<CrudState> {
     required GetUser getUser,
     required UserGetMap userGetMap,
   })  : _getUserGeolocation = getUserGeolocation,
-        _userGetMap = userGetMap,
         _getUser = getUser,
         super(const CrudInitial());
 
   final GetUserGeolocation _getUserGeolocation;
   final GetUser _getUser;
-  final UserGetMap _userGetMap;
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
@@ -33,29 +31,11 @@ class HomeCubit extends Cubit<CrudState> {
             .fold((value) => value, (error) => null);
         if (loc != null) {
           user!.pos = LatLng(loc.latitude, loc.longitude);
+          print(user.places);
+          print(user.info?.map);
           emit(CrudLoaded<User?>(user));
         }
-        final userGetMapResult = await _userGetMap.call(user).fold(
-              (value) => value,
-              (error) => null,
-            );
-        print('userGetMapResult => $userGetMapResult');
-        user!.info?.map = userGetMapResult;
-        emit(CrudLoaded<User?>(user));
-      } else {
-        emit(const CrudError('User not found'));
       }
     }, (error) => emit(CrudError(error.toString())));
   }
 }
-
-//  if (_user?.pos == null) {
-//       await Geolocator.requestPermission()
-//           .then((value) {})
-//           .onError((error, stackTrace) async {
-//         await Geolocator.requestPermission();
-//       });
-//     }
-//     emit(CrudLoaded<User?>(_user));
-//   }
-// }

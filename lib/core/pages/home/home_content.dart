@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
+import 'package:dedal/core/models/place.dart';
+import 'package:dedal/core/pages/home/home_place_display.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
@@ -9,16 +10,20 @@ class HomeContent extends StatefulWidget {
     Key? key,
     required this.userPosition,
     this.map,
+    this.places,
   }) : super(key: key);
 
   final LatLng userPosition;
   final Map<String, Object>? map;
+  final List<Place?>? places;
 
   @override
-  _HomeContentState createState() => _HomeContentState();
+  HomeContentState createState() => HomeContentState();
 }
 
-class _HomeContentState extends State<HomeContent> {
+class HomeContentState extends State<HomeContent> {
+  Place? selected;
+
   final Completer<GoogleMapController> _controller = Completer();
   Polyline polyline = const Polyline(
     points: [],
@@ -28,34 +33,32 @@ class _HomeContentState extends State<HomeContent> {
   );
   Set<Marker> markers = {};
   @override
-  Widget build(BuildContext context) {
-    print('widget.map => ${widget.map}');
-    var map = GoogleMap(
-      initialCameraPosition: CameraPosition(
-        target: widget.userPosition,
-        zoom: 14.4746,
-      ),
-      mapType: MapType.normal,
-      myLocationEnabled: true,
-      compassEnabled: true,
-      polylines: {polyline},
-      markers: markers,
-      onMapCreated: (GoogleMapController controller) {
-        _controller.complete(controller);
-      },
-    );
-    return map;
-  }
+  Widget build(BuildContext context) => Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: widget.userPosition,
+              zoom: 14.4746,
+            ),
+            mapType: MapType.normal,
+            myLocationEnabled: true,
+            compassEnabled: true,
+            polylines: {polyline},
+            markers: markers,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
+          if (selected.isNotNull) HomePlaceDisplay(place: selected!),
+        ],
+      );
 
   @override
   void initState() {
-    print('init');
     super.initState();
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
-      print(widget.map!.keys);
       final building = widget.map!['Buildings'] as List;
-      print(building);
       for (var element in lines) {
         final value = Map.from(element);
         polyline = polyline.copyWith(
@@ -74,20 +77,19 @@ class _HomeContentState extends State<HomeContent> {
       }
       for (var element in building) {
         final value = Map.from(element);
-        markers.add(Marker(
-          markerId: const MarkerId('ui'),
-          position: LatLng(
-            value['latitude'] != null
-                ? double.parse(value['latitude'].toString())
-                : 0,
-            value['longitude'] != null
-                ? double.parse(value['longitude'].toString())
-                : 0,
-          ),
-        ));
+        final place =
+            widget.places?.firstWhere((element) => element?.id == value['id']);
+        if (place?.coordinates != null) {
+          print(place?.name);
+          markers.add(Marker(
+            markerId: MarkerId(place!.id!),
+            position: place.coordinates!,
+            onTap: () => setState(() {
+              selected = place;
+            }),
+          ));
+        }
       }
-
-      print(polyline.points);
     }
   }
 }

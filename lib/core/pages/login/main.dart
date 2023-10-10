@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
 class Main extends StatelessWidget {
-  Main({
+  const Main({
     super.key,
   });
 

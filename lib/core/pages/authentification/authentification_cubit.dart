@@ -5,15 +5,18 @@ import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/authentification/authentification_event.dart';
 import 'package:dedal/core/pages/authentification/authentification_state.dart';
-import 'package:flutter/foundation.dart';
+import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
+import 'package:wyatt_architecture/wyatt_architecture.dart';
+import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
+    required GetUser getUser,
     required LoginDataSource loginDataSource,
   })  : _loginDataSource = loginDataSource,
+        _getUser = getUser,
         super(const AuthenticationState.unknown()) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     _authenticationStatusSubscription =
@@ -21,17 +24,12 @@ class AuthenticationBloc
       add(AuthenticationStatusChanged(status));
     });
   }
-  late Box<User> _user;
+  final GetUser _getUser;
   final LoginDataSource _loginDataSource;
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 
-  // UserDatasource get userDatasource => _userDatasource;
-
-  Future<void> init() async {
-    Hive.registerAdapter(UserAdapter());
-    _user = await Hive.openBox<User>('user');
-  }
+  Future<void> init() async {}
 
   @override
   Future<void> close() {
@@ -45,13 +43,14 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     switch (event.status) {
-      case AuthenticationStatus.unauthenticated:
-        return emit(const AuthenticationState.unauthenticated());
+      // case AuthenticationStatus.unauthenticated:
+      //   return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.apiOffline:
         return emit(const AuthenticationState.apiOffline());
-      case AuthenticationStatus.authenticated:
-        final User? user = await _tryGetUser();
-
+      case AuthenticationStatus.unauthenticated:
+        final User? user = await _getUser
+            .call(const NoParam())
+            .fold((value) => value, (error) => null);
         return emit(
           user != null
               ? AuthenticationState.authenticated(user)
@@ -61,22 +60,17 @@ class AuthenticationBloc
         break;
       case AuthenticationStatus.loggingIn:
         break;
+
+      case AuthenticationStatus.authenticated:
+        final User? user = await _getUser
+            .call(const NoParam())
+            .fold((value) => value, (error) => null);
+        return emit(
+          user != null
+              ? AuthenticationState.authenticated(user)
+              : const AuthenticationState.unauthenticated(),
+        );
     }
     return emit(const AuthenticationState.unknown());
   }
-
-  Future<User?> _tryGetUser() async {
-    try {
-      // final user = await _userDatasource.getUser(force: true);
-      // return user.value;
-    } catch (e, __) {
-      if (kDebugMode) {}
-      return null;
-    }
-    return null;
-  }
-
-  void setUser(User value) => _user.put('user', value);
-
-  User? getUser() => _user.get('user');
 }

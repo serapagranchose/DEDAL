@@ -2,7 +2,7 @@ import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
-import 'package:dedal/core/datasources/local_storage_datasource.dart';
+import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_content.dart';
@@ -35,6 +35,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
             ? HomeContent(
                 userPosition: data!.pos!,
                 map: data.info?.map,
+                places: data.places,
               )
             : const MainLoader(),
         CrudError(message: final message) => Column(

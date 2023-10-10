@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
-import 'package:http/http.dart' as http;
-import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class FilterDataSourceImpl extends FilterDataSource {
   @override
@@ -89,7 +89,6 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Content-type': 'application/json',
         },
       ).then((value) {
-        print('map => ${value.body}');
         if (value.statusCode == 200) {
           return Map<String, Object>.from(jsonDecode(value.body));
         }

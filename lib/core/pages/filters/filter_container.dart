@@ -4,7 +4,8 @@ import 'package:dedal/core/models/filter.dart';
 import 'package:flutter/material.dart';
 
 class FilterContainer extends StatelessWidget {
-  FilterContainer({
+  const FilterContainer({
+    super.key,
     required this.filter,
     required this.onTap,
     required this.selected,
