@@ -51,7 +51,7 @@ class AppRouter {
             name: HomeScreen.name,
             path: '/home',
             pageBuilder: (context, state) =>
-                noTransition(context, state, HomeScreen()),
+                noTransition(context, state, const HomeScreen()),
           ),
           GoRoute(
             name: ProfilScreen.name,

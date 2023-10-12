@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
 
 class Main extends StatelessWidget {
   const Main({
@@ -14,8 +13,6 @@ class Main extends StatelessWidget {
   });
 
   static const routeName = 'Main';
-
-
 
   @override
   Widget build(BuildContext context) => RegisterLayout(
@@ -28,7 +25,6 @@ class Main extends StatelessWidget {
             ),
           ),
           Image.asset('assets/logo/dedal.png'),
-          
           Text(
             'Le chemin de votre culture',
             style: GoogleFonts.archivo(

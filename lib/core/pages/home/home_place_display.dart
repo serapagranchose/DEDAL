@@ -2,7 +2,8 @@ import 'package:dedal/core/models/place.dart';
 import 'package:flutter/material.dart';
 
 class HomePlaceDisplay extends StatelessWidget {
-  HomePlaceDisplay({
+  const HomePlaceDisplay({
+    super.key,
     required this.place,
   });
 

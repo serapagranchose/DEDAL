@@ -1,7 +1,6 @@
 import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
-import 'package:dedal/constants/enum/home_load_enum.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/extensions/get_it.dart';
@@ -18,14 +17,9 @@ import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
 class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   static const name = 'home';
-  @override
-  void onListen(BuildContext context, CrudState state) {
-    print('state => $state');
-    super.onListen(context, state);
-  }
 
   @override
   create(BuildContext context) => HomeCubit(

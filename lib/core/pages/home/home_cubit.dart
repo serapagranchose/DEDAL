@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dedal/constants/enum/home_load_enum.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
