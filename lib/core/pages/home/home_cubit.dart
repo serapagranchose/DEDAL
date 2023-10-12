@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dedal/constants/enum/home_load_enum.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
@@ -17,21 +18,27 @@ class HomeCubit extends Cubit<CrudState> {
     required UserGetMap userGetMap,
   })  : _getUserGeolocation = getUserGeolocation,
         _getUser = getUser,
+        _userGetMap = userGetMap,
         super(const CrudInitial());
 
   final GetUserGeolocation _getUserGeolocation;
   final GetUser _getUser;
+  final UserGetMap _userGetMap;
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
     await _getUser.call(const NoParam()).fold((user) async {
       if (user.isNotNull) {
-        print(user?.info?.mapName);
         final loc = await _getUserGeolocation
             .call(const NoParam())
             .fold((value) => value, (error) => null);
         if (loc != null) {
           user!.pos = LatLng(loc.latitude, loc.longitude);
+        }
+        if (user?.info?.mapName.isNotNull ?? false) {
+          final map =
+              await _userGetMap(user).fold((value) => value, (error) => null);
+          user?.info?.map = map;
           emit(CrudLoaded<User?>(user));
         }
       }
