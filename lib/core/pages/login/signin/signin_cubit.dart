@@ -23,6 +23,7 @@ class SignInCubit extends Cubit<CrudState> {
     emit(const CrudLoading());
     return _signIn.call(params).fold((value) {
       if (value.isNotNull) {
+        print('value => $value');
         setValue(value);
         emit(CrudLoaded<User>(value));
       } else {

@@ -24,9 +24,10 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<bool> setinfoUser(User user) async {
+    print('user.info => ${user.info}');
     return await http.post(
       Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
-      body: jsonEncode(user.info!.toJson(user.token!)),
+      body: jsonEncode({'lastinfo': user.info!.toJson(user.token!)}),
       headers: {
         'x-access-token': user.token!,
         'Accept': '*/*',
@@ -46,6 +47,7 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Content-type': 'application/json',
         },
       ).then((value) {
+        print('result => ${value.body}');
         if (value.statusCode == 200) {
           return (jsonDecode(value.body) as List<dynamic>)
               .map(
@@ -61,26 +63,31 @@ class FilterDataSourceImpl extends FilterDataSource {
       });
 
   @override
-  Future<String?> getPath(User user) async => http
-          .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
-              headers: {
-                'x-access-token': user.token!,
-                'Accept': '*/*',
-                'Content-type': 'application/json',
-              },
-              body: jsonEncode({
-                'position': user.posToJson(),
-                'places': user.places?.map((e) => e?.toJson()).toList(),
-              }))
-          .then((value) {
-        if (value.statusCode == 200) {
-          final payload = jsonDecode(value.body)['Payload'];
-          if (payload != null) {
-            return jsonDecode(payload)['mapPath'];
-          }
+  Future<String?> getPath(User user) async {
+    print('user =<w ${user.posToJson()}');
+    return http
+        .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
+            headers: {
+              'x-access-token': user.token!,
+              'Accept': '*/*',
+              'Content-type': 'application/json',
+            },
+            body: jsonEncode({
+              'position': user.posToJson(),
+              'places': user.places?.map((e) => e?.toJson()).toList(),
+            }))
+        .then((value) {
+      print('value => ${value.body}');
+      if (value.statusCode == 200) {
+        print(jsonDecode(value.body)['Payload']);
+        final payload = jsonDecode(value.body)['Payload'];
+        if (payload != null) {
+          return jsonDecode(payload)['mapPath'];
         }
-        return null;
-      });
+      }
+      return null;
+    });
+  }
 
   @override
   Future<Map<String, Object>?> getMap(User user) async => await http.get(

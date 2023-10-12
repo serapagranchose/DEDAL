@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:dedal/core/pages/filters/route_generate/route_generate_screen.dart';
+import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
@@ -32,6 +33,8 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
             GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
         getFilters: GetFilters(filterDataSource: getIt<FilterDataSource>()),
         setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()),
+        updateUser:
+            UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       )..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) {

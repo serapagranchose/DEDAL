@@ -27,7 +27,8 @@ class User {
   List<Place?>? places;
 
   factory User.fromJson(Map<String, Object?> json) {
-    return User(
+    print(json);
+    final user = User(
         id: json['id'].isNotNull ? json['id'].toString() : null,
         name: json['username'].isNotNull ? json['username'].toString() : null,
         email: json['email'].isNotNull ? json['email'].toString() : null,
@@ -38,13 +39,29 @@ class User {
                 ),
               )
             : null,
-        token: json['token'].isNotNull ? json['token'].toString() : null);
+        token: json['token'].isNotNull ? json['token'].toString() : null,
+        pos: json['pos'].isNotNull
+            ? LatLng(
+                double.parse(Map<String, Object?>.from(
+                        json['pos'] as Map<Object, Object?>)['x']
+                    .toString()),
+                double.parse(Map<String, Object?>.from(
+                        json['pos'] as Map<Object, Object?>)['y']
+                    .toString()),
+              )
+            : null);
+    print('sdljfkhskjfhsdlfh ===============+> $user');
+    return user;
   }
 
   Map<String, Object?> toJson() => <String, Object?>{
-        'Username': name,
-        'Email': email,
-        'lastInfo': info?.toJson('')
+        'username': name,
+        'email': email,
+        'lastInfo': info?.toJson(''),
+        'token': token,
+        'place': places,
+        'id': id,
+        'pos': {'x': pos?.latitude, 'y': pos?.longitude}
       };
 
   Map<String, Object?> posToJson() => <String, Object?>{
@@ -52,5 +69,6 @@ class User {
         'y': pos?.longitude,
       };
   @override
-  String toString() => '$name, $email + $info, $id,\n $token,\n $id';
+  String toString() =>
+      '$name, $email + $info, [${pos?.latitude} : ${pos?.longitude}]';
 }

@@ -9,6 +9,7 @@ import 'package:dedal/core/pages/home/home_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
+import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:dedal/core/use_cases/user_get_map.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,9 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
   create(BuildContext context) => HomeCubit(
       getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       getUserGeolocation: GetUserGeolocation(),
-      userGetMap: UserGetMap(filterDataSource: getIt<FilterDataSource>()))
+      userGetMap: UserGetMap(filterDataSource: getIt<FilterDataSource>()),
+      updateUser:
+          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(

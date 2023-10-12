@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
+import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:dedal/core/use_cases/user_get_map.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,14 +16,17 @@ class HomeCubit extends Cubit<CrudState> {
     required GetUserGeolocation getUserGeolocation,
     required GetUser getUser,
     required UserGetMap userGetMap,
+    required UpdateUser updateUser,
   })  : _getUserGeolocation = getUserGeolocation,
         _getUser = getUser,
         _userGetMap = userGetMap,
+        _updateUser = updateUser,
         super(const CrudInitial());
 
   final GetUserGeolocation _getUserGeolocation;
   final GetUser _getUser;
   final UserGetMap _userGetMap;
+  final UpdateUser _updateUser;
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
@@ -39,7 +43,11 @@ class HomeCubit extends Cubit<CrudState> {
               await _userGetMap(user).fold((value) => value, (error) => null);
           user?.info?.map = map;
           emit(CrudLoaded<User?>(user));
+        } else {
+          emit(CrudLoaded<User?>(user));
         }
+        await _updateUser(user);
+        print('done');
       }
     }, (error) => emit(CrudError(error.toString())));
   }

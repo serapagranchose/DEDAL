@@ -16,7 +16,8 @@ class Info {
   Map<String, Object>? map;
 
   factory Info.toJson(Map<String, Object?> json) {
-    return Info(
+    print('info =========================================== \n$json');
+    final info = Info(
         time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
         budget:
             json['budget'].isNotNull ? int.parse(json['budget'].toString()) : 0,
@@ -26,19 +27,19 @@ class Info {
                 .toList()
             : [],
         mapName: json['map']?.toString());
+    print('info =========================================== \n$info');
+    return info;
   }
 
   @override
   String toString() => '$filter, $time + $budget + $map';
 
   Map<String, Object?> toJson(String token) => <String, Object?>{
-        'lastInfo': {
-          "budget": budget,
-          "filter": filter,
-          "nbPeople": 4,
-          "time": time,
-          "map": mapName,
-        },
+        "budget": budget,
+        "filter": filter,
+        "nbPeople": 4,
+        "time": time,
+        "map": 'mapName',
         'token': token,
       };
 }

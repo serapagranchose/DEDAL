@@ -1,4 +1,4 @@
-  import 'dart:async';
+import 'dart:async';
 
 import 'package:dedal/constants/enum/generate_route_enum.dart';
 import 'package:dedal/core/models/user.dart';
@@ -44,6 +44,7 @@ class RouteGenerateCubit extends Cubit<CrudState> {
           (error) => null,
         );
     if (getUserResult.isNotNull) {
+      print('USER GET ==> $getUserResult');
       user = getUserResult;
       emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.start));
     } else {
@@ -55,7 +56,7 @@ class RouteGenerateCubit extends Cubit<CrudState> {
     await _updateUser(user).fold(
         (value) => emit(
             const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.saveUser)),
-        (error) => emit(CrudError(error.message)));
+        (error) => emit(CrudError('updade :  ${error.message}')));
   }
 
   FutureOr<void> places() async => _userGetPlace(user).fold((value) async {
@@ -64,28 +65,29 @@ class RouteGenerateCubit extends Cubit<CrudState> {
           return;
         }
         user?.places = value;
+
         await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPlace));
-      }, (error) => emit(CrudError(error.message)));
+      }, (error) => emit(CrudError('place :${error.message}')));
 
   FutureOr<void> path() async => _userGetPath(user).fold((value) async {
         user?.info?.mapName = value;
         await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPath));
-      }, (error) => emit(CrudError(error.message)));
+      }, (error) => emit(CrudError('path : ${error.message}')));
 
   FutureOr<void> map() async => _userGetMap(user).fold((value) async {
         user?.info?.map = value;
         await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getMap));
-      }, (error) => emit(CrudError(error.message)));
+      }, (error) => emit(CrudError('map : ${error.message}')));
 
   FutureOr<void> lastUpdate() async {
     await _updateUser(user).fold(
         (value) async => await _setInfoUser(user).fold(
             (value) => emit(
                 const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.end)),
-            (error) => emit(CrudError(error.message))),
-        (error) => emit(CrudError(error.message)));
+            (error) => emit(CrudError('update 1 : ${error.message}'))),
+        (error) => emit(CrudError('update2 : ${error.message}')));
   }
 }
