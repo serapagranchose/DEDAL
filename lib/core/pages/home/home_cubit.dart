@@ -26,6 +26,7 @@ class HomeCubit extends Cubit<CrudState> {
     emit(const CrudLoading());
     await _getUser.call(const NoParam()).fold((user) async {
       if (user.isNotNull) {
+        print(user?.info?.mapName);
         final loc = await _getUserGeolocation
             .call(const NoParam())
             .fold((value) => value, (error) => null);

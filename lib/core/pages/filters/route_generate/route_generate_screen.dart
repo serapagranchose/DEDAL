@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/core/use_cases/set_user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +29,8 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
       userGetPat: UserGetPath(filterDataSource: getIt<FilterDataSource>()),
       userGetPlace: UserGetPlace(filterDataSource: getIt<FilterDataSource>()),
       updateUser:
-          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
+          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
+      setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()))
     ..load();
 
   @override

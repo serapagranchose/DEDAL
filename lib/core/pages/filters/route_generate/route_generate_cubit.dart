@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dedal/constants/enum/generate_route_enum.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/set_user_info.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:dedal/core/use_cases/user_get_map.dart';
 import 'package:dedal/core/use_cases/user_get_path.dart';
@@ -19,11 +20,13 @@ class RouteGenerateCubit extends Cubit<CrudState> {
     required UserGetPath userGetPat,
     required UserGetPlace userGetPlace,
     required UpdateUser updateUser,
+    required SetInfoUser setInfoUser,
   })  : _getUser = getUser,
         _userGetMap = userGetMap,
         _userGetPath = userGetPat,
         _userGetPlace = userGetPlace,
         _updateUser = updateUser,
+        _setInfoUser = setInfoUser,
         super(const CrudInitial());
 
   final GetUser _getUser;
@@ -31,6 +34,7 @@ class RouteGenerateCubit extends Cubit<CrudState> {
   final UserGetPath _userGetPath;
   final UserGetPlace _userGetPlace;
   final UpdateUser _updateUser;
+  final SetInfoUser _setInfoUser;
   User? user;
 
   FutureOr<void> load() async {
@@ -78,8 +82,10 @@ class RouteGenerateCubit extends Cubit<CrudState> {
 
   FutureOr<void> lastUpdate() async {
     await _updateUser(user).fold(
-        (value) =>
-            emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.end)),
+        (value) async => await _setInfoUser(user).fold(
+            (value) => emit(
+                const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.end)),
+            (error) => emit(CrudError(error.message))),
         (error) => emit(CrudError(error.message)));
   }
 }

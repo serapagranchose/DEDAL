@@ -37,7 +37,7 @@ class Info {
           "filter": filter,
           "nbPeople": 4,
           "time": time,
-          "map": "test"
+          "map": mapName,
         },
         'token': token,
       };
