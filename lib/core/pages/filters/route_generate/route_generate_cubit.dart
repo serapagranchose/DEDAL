@@ -44,7 +44,6 @@ class RouteGenerateCubit extends Cubit<CrudState> {
           (error) => null,
         );
     if (getUserResult.isNotNull) {
-      print('USER GET ==> $getUserResult');
       user = getUserResult;
       emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.start));
     } else {
@@ -66,19 +65,16 @@ class RouteGenerateCubit extends Cubit<CrudState> {
         }
         user?.places = value;
 
-        await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPlace));
       }, (error) => emit(CrudError('place :${error.message}')));
 
   FutureOr<void> path() async => _userGetPath(user).fold((value) async {
         user?.info?.mapName = value;
-        await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPath));
       }, (error) => emit(CrudError('path : ${error.message}')));
 
   FutureOr<void> map() async => _userGetMap(user).fold((value) async {
         user?.info?.map = value;
-        await _updateUser.call(user);
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getMap));
       }, (error) => emit(CrudError('map : ${error.message}')));
 

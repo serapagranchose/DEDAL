@@ -2,21 +2,26 @@ import 'dart:async';
 
 import 'package:dedal/constants/enum/authentification_enum.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';
+import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/authentification/authentification_event.dart';
 import 'package:dedal/core/pages/authentification/authentification_state.dart';
+import 'package:dedal/core/use_cases/get_credential.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc({
-    required GetUser getUser,
-    required LoginDataSource loginDataSource,
-  })  : _loginDataSource = loginDataSource,
-        _getUser = getUser,
+  AuthenticationBloc(
+      {required GetCredential getCredential,
+      required LoginDataSource loginDataSource,
+      required UpdateUser updateUser})
+      : _loginDataSource = loginDataSource,
+        _getCredential = getCredential,
+        _updateUser = updateUser,
         super(const AuthenticationState.unknown()) {
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     _authenticationStatusSubscription =
@@ -24,8 +29,9 @@ class AuthenticationBloc
       add(AuthenticationStatusChanged(status));
     });
   }
-  final GetUser _getUser;
+  final GetCredential _getCredential;
   final LoginDataSource _loginDataSource;
+  final UpdateUser _updateUser;
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 
@@ -48,28 +54,25 @@ class AuthenticationBloc
       case AuthenticationStatus.apiOffline:
         return emit(const AuthenticationState.apiOffline());
       case AuthenticationStatus.unauthenticated:
-        final User? user = await _getUser
+        final SigninDto? crendtial = await _getCredential
             .call(const NoParam())
             .fold((value) => value, (error) => null);
+        if (crendtial.isNotNull) {
+          final User? user = await _loginDataSource.signIn.call(
+            crendtial?.email ?? '',
+            crendtial?.password ?? '',
+          );
+          _updateUser(user);
+          if (user.isNotNull) {
+            emit(AuthenticationState.authenticated(user!));
+            return;
+          }
+        }
         return emit(
-          user != null
-              ? AuthenticationState.authenticated(user)
-              : const AuthenticationState.unauthenticated(),
+          const AuthenticationState.unauthenticated(),
         );
-      case AuthenticationStatus.unknown:
+      default:
         break;
-      case AuthenticationStatus.loggingIn:
-        break;
-
-      case AuthenticationStatus.authenticated:
-        final User? user = await _getUser
-            .call(const NoParam())
-            .fold((value) => value, (error) => null);
-        return emit(
-          user != null
-              ? AuthenticationState.authenticated(user)
-              : const AuthenticationState.unauthenticated(),
-        );
     }
     return emit(const AuthenticationState.unknown());
   }

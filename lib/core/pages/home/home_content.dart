@@ -59,6 +59,7 @@ class HomeContentState extends State<HomeContent> {
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
       final building = widget.map!['Buildings'] as List;
+      print('building ===> $building');
       for (var element in lines) {
         final value = Map.from(element);
         polyline = polyline.copyWith(

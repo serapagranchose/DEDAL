@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
+import 'package:dedal/core/use_cases/get_credential.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
@@ -44,7 +46,9 @@ void main() async {
         BlocProvider<AuthenticationBloc>(
             create: (_) => AuthenticationBloc(
                   loginDataSource: getIt<LoginDataSource>(),
-                  getUser: GetUser(
+                  getCredential: GetCredential(
+                      localStorageDataSource: getIt<LocalStorageDataSource>()),
+                  updateUser: UpdateUser(
                       localStorageDataSource: getIt<LocalStorageDataSource>()),
                 )..init()),
       ],

@@ -27,7 +27,6 @@ class User {
   List<Place?>? places;
 
   factory User.fromJson(Map<String, Object?> json) {
-    print(json);
     final user = User(
         id: json['id'].isNotNull ? json['id'].toString() : null,
         name: json['username'].isNotNull ? json['username'].toString() : null,
@@ -42,15 +41,16 @@ class User {
         token: json['token'].isNotNull ? json['token'].toString() : null,
         pos: json['pos'].isNotNull
             ? LatLng(
-                double.parse(Map<String, Object?>.from(
-                        json['pos'] as Map<Object, Object?>)['x']
-                    .toString()),
-                double.parse(Map<String, Object?>.from(
-                        json['pos'] as Map<Object, Object?>)['y']
-                    .toString()),
+                double.tryParse(Map<String, Object?>.from(
+                            json['pos'] as Map<Object, Object?>)['x']
+                        .toString()) ??
+                    0,
+                double.tryParse(Map<String, Object?>.from(
+                            json['pos'] as Map<Object, Object?>)['y']
+                        .toString()) ??
+                    0,
               )
             : null);
-    print('sdljfkhskjfhsdlfh ===============+> $user');
     return user;
   }
 

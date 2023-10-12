@@ -16,18 +16,18 @@ class Info {
   Map<String, Object>? map;
 
   factory Info.toJson(Map<String, Object?> json) {
-    print('info =========================================== \n$json');
     final info = Info(
-        time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
-        budget:
-            json['budget'].isNotNull ? int.parse(json['budget'].toString()) : 0,
-        filter: json['filter'].isNotNull
-            ? (json['filter'] as List<Object?>)
-                .map((e) => e.toString())
-                .toList()
-            : [],
-        mapName: json['map']?.toString());
-    print('info =========================================== \n$info');
+      time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
+      budget:
+          json['budget'].isNotNull ? int.parse(json['budget'].toString()) : 0,
+      filter: json['filter'].isNotNull
+          ? (json['filter'] as List<Object?>).map((e) => e.toString()).toList()
+          : [],
+      mapName: json['map']?.toString(),
+      // map: json['mapData'] != null
+      //     ? Map<String, Object>.from(json['mapData'] as Map<Object, Object>)
+      //     : null,
+    );
     return info;
   }
 
@@ -40,6 +40,7 @@ class Info {
         "nbPeople": 4,
         "time": time,
         "map": 'mapName',
+        "mapData": map,
         'token': token,
       };
 }
