@@ -20,7 +20,12 @@ import 'package:dedal/core/use_cases/user_get_path.dart';
 import 'package:dedal/core/use_cases/user_get_place.dart';
 
 class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
-  const RouteGenerateScreen({super.key});
+  const RouteGenerateScreen({
+    super.key,
+    this.skip,
+  });
+
+  final bool? skip;
 
   @override
   RouteGenerateCubit create(BuildContext context) => RouteGenerateCubit(
@@ -30,7 +35,8 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
       userGetPlace: UserGetPlace(filterDataSource: getIt<FilterDataSource>()),
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
-      setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()))
+      setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()),
+      skip : skip)
     ..load();
 
   @override

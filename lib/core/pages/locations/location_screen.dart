@@ -12,8 +12,8 @@ import 'package:dedal/core/pages/locations/location_content.dart';
 import 'package:dedal/core/pages/locations/location_cubit.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/locations_get_list.dart';
+import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
@@ -28,7 +28,9 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
       getUser: GetUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       locationGetLists: LocationGetLists(
           filterDataSource: getIt<FilterDataSource>(),
-          locationsDataSource: getIt<LocationsDataSource>()))
+          locationsDataSource: getIt<LocationsDataSource>()),
+      updateUser:
+          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
@@ -39,10 +41,11 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
             list: list,
             submit: (place) async {
               await context.read<LocationCubit>().setPlace(place);
-              return;
               showDialog(
                   context: context,
-                  builder: (context) => const RouteGenerateScreen());
+                  builder: (context) => const RouteGenerateScreen(
+                        skip: true,
+                      ));
             }),
         CrudError(message: final message) => Column(
             children: [

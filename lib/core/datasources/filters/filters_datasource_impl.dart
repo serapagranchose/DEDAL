@@ -69,6 +69,7 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<String?> getPath(User user) async {
+    print('place => ${user.places}');
     return http
         .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
             headers: {

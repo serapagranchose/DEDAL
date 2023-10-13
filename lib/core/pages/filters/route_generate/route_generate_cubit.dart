@@ -21,6 +21,7 @@ class RouteGenerateCubit extends Cubit<CrudState> {
     required UserGetPlace userGetPlace,
     required UpdateUser updateUser,
     required SetInfoUser setInfoUser,
+    this.skip,
   })  : _getUser = getUser,
         _userGetMap = userGetMap,
         _userGetPath = userGetPat,
@@ -36,6 +37,7 @@ class RouteGenerateCubit extends Cubit<CrudState> {
   final UpdateUser _updateUser;
   final SetInfoUser _setInfoUser;
   User? user;
+  final bool? skip;
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
@@ -45,6 +47,10 @@ class RouteGenerateCubit extends Cubit<CrudState> {
         );
     if (getUserResult.isNotNull) {
       user = getUserResult;
+      if (skip ?? false) {
+        emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPlace));
+        return;
+      }
       emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.start));
     } else {
       emit(const CrudError('cannot get user'));

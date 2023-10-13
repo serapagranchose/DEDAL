@@ -24,7 +24,7 @@ class User {
   String? token;
   Info? info;
   LatLng? pos;
-  List<Place?>? places;
+  List<Place>? places;
 
   factory User.fromJson(Map<String, Object?> json) {
     final user = User(

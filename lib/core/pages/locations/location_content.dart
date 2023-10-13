@@ -4,6 +4,8 @@ import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_list_display.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class LocationContent extends StatefulWidget {
   const LocationContent({
@@ -54,14 +56,42 @@ class LocationContentState extends State<LocationContent> {
                 LocationPageEnum.close => widget.list?.$2,
                 LocationPageEnum.liked => widget.list?.$3
               },
-              onTap: print,
+              action: switch (page) {
+                LocationPageEnum.parcours => true,
+                LocationPageEnum.close => false,
+                LocationPageEnum.liked => false
+              },
+              onTap: (place) {
+                print('place => $place');
+                if (page == LocationPageEnum.parcours) {
+                  setState(() {
+                    final target = widget.list?.$1
+                        ?.firstWhere((elem) => elem.id == place.id);
+                    if (target.isNotNull) {
+                      widget.list?.$1?.remove(target);
+                      widget.list?.$2?.add(target!);
+                    }
+                  });
+                } else {
+                  print('herr');
+                  setState(() {
+                    int? target = widget.list?.$1?.indexOf(place);
+
+                    if (target == -1) {
+                      widget.list?.$1?.add(place);
+                    }
+                    page = LocationPageEnum.parcours;
+                  });
+                }
+                context.pop();
+              },
               //   text: page == LocationPageEnum.parcours
               // ? 'Retirer'
               // : 'Ajouter',
             ),
           ),
           Expanded(
-              flex: 3,
+              flex: 1,
               child: Column(
                 //data.$1.info?.filter
                 children: [
@@ -74,9 +104,4 @@ class LocationContentState extends State<LocationContent> {
           const Gap(20),
         ],
       );
-
-  // ListView(
-  //       children: widget.list?.$1?.map((e) => Text(e.name ?? '')).toList() ??
-  //           [const Text('no list found')],
-  //     );
 }
