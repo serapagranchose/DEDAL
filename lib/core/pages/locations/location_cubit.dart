@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/locations_get_list.dart';
@@ -28,10 +29,11 @@ class LocationCubit extends Cubit<CrudState> {
               (list) => emit(CrudLoaded(list)),
               (error) => emit(const CrudError('Error in loading places')),
             );
-        emit(CrudLoaded<User?>(user));
       } else {
         emit(const CrudError('User not found'));
       }
     }, (error) => emit(CrudError(error.toString())));
   }
+
+  Future<void> setPlace(List<Place>? place) async => print('$place');
 }

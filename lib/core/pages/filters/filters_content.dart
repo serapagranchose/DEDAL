@@ -10,11 +10,12 @@ import 'package:gap/gap.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class FilterContent extends StatefulWidget {
-  const FilterContent(
-      {super.key,
-      required this.filters,
-      required this.info,
-      required this.submit});
+  const FilterContent({
+    super.key,
+    required this.filters,
+    required this.info,
+    required this.submit,
+  });
 
   final List<Filter> filters;
   final void Function(Info info) submit;
@@ -113,7 +114,6 @@ class FilterContentState extends State<FilterContent> {
                   ),
                 ],
               )),
-          const Gap(20),
         ],
       );
 

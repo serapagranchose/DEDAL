@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
+import 'package:dedal/core/datasources/locations/locations_datasource.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';
@@ -10,9 +11,11 @@ class LocationGetLists
     extends AsyncUseCase<User, (List<Place>?, List<Place>?, List<Place>?)> {
   LocationGetLists({
     required this.filterDataSource,
+    required this.locationsDataSource,
   });
 
   FilterDataSource filterDataSource;
+  LocationsDataSource locationsDataSource;
 
   @override
   FutureOr<void> onStart(User? params) {
@@ -26,7 +29,9 @@ class LocationGetLists
           User? params) async =>
       Result.tryCatchAsync(() async {
         final userPlace = await filterDataSource.getPlaces(params!);
-        return ((userPlace, userPlace, userPlace));
+        final placeNear = await locationsDataSource.getPlaceClose(params);
+        final placeNoFilter = await locationsDataSource.getPlaceFilter(params);
+        return ((userPlace, placeNear, placeNoFilter));
       },
           (error) => error is AppException
               ? error
