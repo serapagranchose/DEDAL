@@ -26,13 +26,21 @@ class FilterDataSourceImpl extends FilterDataSource {
   Future<bool> setinfoUser(User user) async {
     return await http.post(
       Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
-      body: jsonEncode({'lastinfo': user.info!.toJson(user.token!)}),
+      body: jsonEncode({
+        'lastInfo': {
+          'time': user.info?.time,
+          'budget': user.info?.budget,
+          'filter': user.info?.filter,
+          'map': 'map_${user.id}',
+        }
+      }),
       headers: {
         'x-access-token': user.token!,
         'Accept': '*/*',
         'Content-type': 'application/json',
       },
     ).then((value) {
+      print('set user info => ${value.statusCode}');
       return value.statusCode == 200;
     });
   }
@@ -62,6 +70,7 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<String?> getPath(User user) async {
+    print('user.places => ${user.places}');
     return http
         .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
             headers: {
@@ -70,11 +79,12 @@ class FilterDataSourceImpl extends FilterDataSource {
               'Content-type': 'application/json',
             },
             body: jsonEncode({
-              'x': 50.64814595483293,
-              'y': 3.068790032299227,
+              'position': user.posToJson(),
               'places': user.places?.map((e) => e?.toJson()).toList(),
             }))
         .then((value) {
+      print('code => ${value.statusCode}');
+      print('body => ${value.body}');
       if (value.statusCode == 200) {
         final payload = jsonDecode(value.body)['Payload'];
         if (payload != null) {

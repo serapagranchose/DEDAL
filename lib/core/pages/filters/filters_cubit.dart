@@ -48,6 +48,7 @@ class FiltersCubit extends Cubit<CrudState> {
   }
 
   FutureOr<bool> setInfo(Info info) async {
+    print(info);
     user?.info = info;
     await _updateUser(user);
     return await _setInfoUser

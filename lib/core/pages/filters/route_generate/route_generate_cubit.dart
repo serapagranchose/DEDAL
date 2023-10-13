@@ -69,6 +69,7 @@ class RouteGenerateCubit extends Cubit<CrudState> {
       }, (error) => emit(CrudError('place :${error.message}')));
 
   FutureOr<void> path() async => _userGetPath(user).fold((value) async {
+        print('mapname => $value');
         user?.info?.mapName = value;
         emit(const CrudLoaded<GenerateRouteEnum>(GenerateRouteEnum.getPath));
       }, (error) => emit(CrudError('path : ${error.message}')));

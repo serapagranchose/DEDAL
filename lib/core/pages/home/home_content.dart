@@ -77,6 +77,7 @@ class HomeContentState extends State<HomeContent> {
         );
       }
       for (var element in building) {
+        print('elem => $element');
         final value = Map.from(element);
         if (widget.places?.isEmpty ?? false) {
           return;
