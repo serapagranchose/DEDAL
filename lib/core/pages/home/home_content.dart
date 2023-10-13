@@ -59,7 +59,6 @@ class HomeContentState extends State<HomeContent> {
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
       final building = widget.map!['Buildings'] as List;
-      print('building ===> $building');
       for (var element in lines) {
         final value = Map.from(element);
         polyline = polyline.copyWith(
@@ -77,21 +76,10 @@ class HomeContentState extends State<HomeContent> {
         );
       }
       for (var element in building) {
-        print('elem => $element');
-        final value = Map.from(element);
-        if (widget.places?.isEmpty ?? false) {
-          return;
-        }
-        Place? place;
-        try {
-          place = widget.places?.firstWhere(
-            (element) => element?.id == value['id'],
-          );
-        } catch (_) {}
-
-        if (place.isNotNull && place?.coordinates != null) {
+        final place = Place.fromJson(element);
+        if (place.coordinates != null) {
           markers.add(Marker(
-            markerId: MarkerId(place!.id!),
+            markerId: MarkerId(place.id!),
             position: place.coordinates!,
             onTap: () => setState(() {
               selected = place;

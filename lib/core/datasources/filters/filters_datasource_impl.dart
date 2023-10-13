@@ -31,7 +31,7 @@ class FilterDataSourceImpl extends FilterDataSource {
           'time': user.info?.time,
           'budget': user.info?.budget,
           'filter': user.info?.filter,
-          'map': 'map_${user.id}',
+          'map': 'map-${user.id}',
         }
       }),
       headers: {
@@ -40,7 +40,6 @@ class FilterDataSourceImpl extends FilterDataSource {
         'Content-type': 'application/json',
       },
     ).then((value) {
-      print('set user info => ${value.statusCode}');
       return value.statusCode == 200;
     });
   }
@@ -70,7 +69,6 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<String?> getPath(User user) async {
-    print('user.places => ${user.places}');
     return http
         .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
             headers: {
@@ -83,8 +81,6 @@ class FilterDataSourceImpl extends FilterDataSource {
               'places': user.places?.map((e) => e?.toJson()).toList(),
             }))
         .then((value) {
-      print('code => ${value.statusCode}');
-      print('body => ${value.body}');
       if (value.statusCode == 200) {
         final payload = jsonDecode(value.body)['Payload'];
         if (payload != null) {

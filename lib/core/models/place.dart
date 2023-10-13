@@ -57,9 +57,17 @@ class Place {
   Map<String, Object?> toJson() => <String, Object?>{
         'id': id,
         'name': name,
-        "coordinates": {
-          "x": coordinates?.latitude,
-          "y": coordinates?.longitude,
+        'description': description,
+        'address': address,
+        'price': price,
+        'duration': duration,
+        'type': type,
+        'coordinates': {
+          'x': coordinates?.latitude,
+          'y': coordinates?.longitude,
         }
       };
+
+  @override
+  String toString() => '$name : $description';
 }

@@ -42,8 +42,7 @@ class HomeCubit extends Cubit<CrudState> {
             user!.pos = LatLng(loc.latitude, loc.longitude);
           }
         }
-
-        if (user?.info?.mapName.isNull ?? false) {
+        if (user?.info?.mapName.isNotNull ?? false) {
           change = true;
           final map =
               await _userGetMap(user).fold((value) => value, (error) => null);
