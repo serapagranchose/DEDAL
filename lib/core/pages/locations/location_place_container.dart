@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class LocationPlaceContainer extends StatelessWidget {
   const LocationPlaceContainer({
+    super.key,
     required this.place,
     required this.onTap,
     required this.action,

@@ -7,7 +7,6 @@ import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/authentification/authentification_event.dart';
 import 'package:dedal/core/pages/authentification/authentification_state.dart';
 import 'package:dedal/core/use_cases/get_credential.dart';
-import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';

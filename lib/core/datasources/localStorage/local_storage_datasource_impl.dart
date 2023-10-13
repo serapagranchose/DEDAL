@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/models/user.dart';

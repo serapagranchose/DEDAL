@@ -6,7 +6,6 @@ import 'package:dedal/core/pages/filters/filters_cost_display.dart';
 import 'package:dedal/core/pages/filters/filters_display.dart';
 import 'package:dedal/core/pages/filters/filters_time_display.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class FilterContent extends StatefulWidget {

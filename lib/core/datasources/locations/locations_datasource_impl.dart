@@ -15,8 +15,6 @@ class LocationsDataSourceImpl extends LocationsDataSource {
               },
               body: jsonEncode({'position': user.posToJson()}))
           .then((value) {
-        print('status => ${value.statusCode}');
-        print('body => ${value.body}');
         if (value.statusCode == 200) {
           return (jsonDecode(value.body) as List<dynamic>)
               .map(
@@ -39,8 +37,6 @@ class LocationsDataSourceImpl extends LocationsDataSource {
           'Content-type': 'application/json',
         },
       ).then((value) {
-        print('status => ${value.statusCode}');
-        print('body => ${value.body}');
         if (value.statusCode == 200) {
           return (jsonDecode(value.body) as List<dynamic>)
               .map(

@@ -62,7 +62,6 @@ class LocationContentState extends State<LocationContent> {
                 LocationPageEnum.liked => false
               },
               onTap: (place) {
-                print('place => $place');
                 if (page == LocationPageEnum.parcours) {
                   setState(() {
                     final target = widget.list?.$1
@@ -73,7 +72,6 @@ class LocationContentState extends State<LocationContent> {
                     }
                   });
                 } else {
-                  print('herr');
                   setState(() {
                     int? target = widget.list?.$1?.indexOf(place);
 
@@ -85,9 +83,6 @@ class LocationContentState extends State<LocationContent> {
                 }
                 context.pop();
               },
-              //   text: page == LocationPageEnum.parcours
-              // ? 'Retirer'
-              // : 'Ajouter',
             ),
           ),
           Expanded(

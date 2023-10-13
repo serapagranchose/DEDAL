@@ -69,7 +69,6 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<String?> getPath(User user) async {
-    print('place => ${user.places}');
     return http
         .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
             headers: {
@@ -79,7 +78,7 @@ class FilterDataSourceImpl extends FilterDataSource {
             },
             body: jsonEncode({
               'position': user.posToJson(),
-              'places': user.places?.map((e) => e?.toJson()).toList(),
+              'places': user.places?.map((e) => e.toJson()).toList(),
             }))
         .then((value) {
       if (value.statusCode == 200) {

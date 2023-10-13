@@ -29,7 +29,6 @@ class LocationCubit extends Cubit<CrudState> {
     emit(const CrudLoading());
     await _getUser.call(const NoParam()).fold((user) async {
       if (user.isNotNull) {
-        print('user place => ${user?.places}');
         _user = user;
         if (user?.places.isNull ?? false) {
           await _locationGetLists.call(user!).fold(
