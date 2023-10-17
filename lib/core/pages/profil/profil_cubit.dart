@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 class ProfilCubit extends Cubit<CrudState> {
   ProfilCubit({
@@ -32,5 +34,13 @@ class ProfilCubit extends Cubit<CrudState> {
 
   Future<void> deconnection() async {
     _clearUser.call(const NoParam());
+  }
+
+  void toggleThemeMode(BuildContext context) {
+    final themeMode = AdaptiveTheme.of(context).mode;
+    final newMode = themeMode == AdaptiveThemeMode.light
+        ? AdaptiveThemeMode.dark
+        : AdaptiveThemeMode.light;
+    AdaptiveTheme.of(context).setThemeMode(newMode);
   }
 }
