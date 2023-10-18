@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
-import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';

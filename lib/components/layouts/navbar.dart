@@ -67,7 +67,7 @@ class _NavBarState extends State<NavBar> {
               items: [
                 BottomNavigationBarItem(
                   icon: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Icon(
                       Icons.filter_alt_outlined,
                       color: widget.currentIndex == 0
@@ -79,7 +79,7 @@ class _NavBarState extends State<NavBar> {
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Icon(
                       Icons.map,
                       color: widget.currentIndex == 1

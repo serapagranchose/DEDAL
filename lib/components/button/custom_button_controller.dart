@@ -1,7 +1,5 @@
 import 'package:dedal/components/loaders/main_loader.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wyatt_ui_components/wyatt_ui_components.dart';
 
 class ButtonController<T> extends ChangeNotifier {
   ButtonController(this._content, this._onTap, [this._async = false]);

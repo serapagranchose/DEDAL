@@ -1,9 +1,5 @@
 import 'package:dedal/components/layouts/navbar.dart';
 import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/pages/filters/filters_screen.dart';
-import 'package:dedal/core/pages/home/home_screen.dart';
-import 'package:dedal/core/pages/locations/location_screen.dart';
-import 'package:dedal/core/pages/profil/profil_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';

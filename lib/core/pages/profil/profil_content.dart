@@ -1,9 +1,6 @@
-import 'package:dedal/core/pages/profil/profil_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wyatt_architecture/wyatt_architecture.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);

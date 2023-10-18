@@ -1,4 +1,3 @@
-import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';

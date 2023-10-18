@@ -1,4 +1,3 @@
-import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/constants/enum/location_page_enum.dart';
 import 'package:dedal/core/models/place.dart';

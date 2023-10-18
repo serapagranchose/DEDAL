@@ -1,4 +1,3 @@
-import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/core/use_cases/set_user_info.dart';
 import 'package:flutter/material.dart';

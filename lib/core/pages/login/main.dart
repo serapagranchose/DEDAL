@@ -1,11 +1,9 @@
-import 'package:dedal/components/button/button.dart';
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/pages/login/signin/signin_screen.dart';
 import 'package:dedal/core/pages/login/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
