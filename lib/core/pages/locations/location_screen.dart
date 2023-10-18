@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
@@ -34,6 +35,7 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+      index: 2,
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
@@ -50,9 +52,10 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
         CrudError(message: final message) => Column(
             children: [
               Text(message ?? 'une erreur est subvenu'),
-              GlobalButton(
+              CustomStringButton(
+                context: context,
                 text: 'reload',
-                onTap: () => context.read<LocationCubit>().load(),
+                onTap: (c) async => context.read<LocationCubit>().load(),
               )
             ],
           ),

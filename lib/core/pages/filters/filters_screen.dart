@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/core/pages/filters/route_generate/route_generate_screen.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
@@ -37,36 +38,35 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
             UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       )..load();
   @override
-  Widget onBuild(BuildContext context, CrudState state) {
-    var tmp = RegisterLayout(
-        appBar: true,
-        title: 'Filtre',
-        navBar: true,
-        child: switch (state) {
-          CrudLoading() => const MainLoader(),
-          CrudLoaded<(User, List<Filter>?)>(data: final data) =>
-            data?.$1 != null && data?.$2 != null
-                ? FilterContent(
-                    filters: data!.$2!,
-                    info: data.$1.info,
-                    submit: (info) async {
-                      await context.read<FiltersCubit>().setInfo(info);
-                      showDialog(
-                          context: context,
-                          builder: (context) => const RouteGenerateScreen());
-                    })
-                : const SizedBox.shrink(),
-          CrudError(message: final message) => Column(
-              children: [
-                Text(message ?? 'une erreur est subvenu'),
-                GlobalButton(
-                  text: 'reload',
-                  onTap: () => context.read<HomeCubit>().load(),
-                )
-              ],
-            ),
-          _ => const Text('error'),
-        });
-    return tmp;
-  }
+  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+      index: 0,
+      appBar: true,
+      title: 'Filtre',
+      navBar: true,
+      child: switch (state) {
+        CrudLoading() => const MainLoader(),
+        CrudLoaded<(User, List<Filter>?)>(data: final data) =>
+          data?.$1 != null && data?.$2 != null
+              ? FilterContent(
+                  filters: data!.$2!,
+                  info: data.$1.info,
+                  submit: (info) async {
+                    await context.read<FiltersCubit>().setInfo(info);
+                    showDialog(
+                        context: context,
+                        builder: (context) => const RouteGenerateScreen());
+                  })
+              : const SizedBox.shrink(),
+        CrudError(message: final message) => Column(
+            children: [
+              Text(message ?? 'une erreur est subvenu'),
+              CustomStringButton(
+                context: context,
+                text: 'reload',
+                onTap: (controller) async => context.read<HomeCubit>().load(),
+              )
+            ],
+          ),
+        _ => const Text('error'),
+      });
 }

@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/constants/enum/location_page_enum.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_list_display.dart';
@@ -90,9 +91,10 @@ class LocationContentState extends State<LocationContent> {
               child: Column(
                 //data.$1.info?.filter
                 children: [
-                  GlobalButton(
+                  CustomStringButton(
+                    context: context,
                     text: 'Valider',
-                    onTap: () => widget.submit.call(widget.list?.$1),
+                    onTap: (c) async => widget.submit.call(widget.list?.$1),
                   ),
                 ],
               )),

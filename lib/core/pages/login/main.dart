@@ -1,5 +1,7 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/pages/login/signin/signin_screen.dart';
 import 'package:dedal/core/pages/login/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) => RegisterLayout(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             'DEDAL',
@@ -31,15 +34,25 @@ class Main extends StatelessWidget {
               fontSize: 30,
             ),
           ),
-          GlobalButton(
-            text: 'Sign up',
-            onTap: () => context.pushNamed(SignUpScreen.routeName),
-          ),
-          GlobalButton(text: 'Google + ${Uri.base}'),
-          const Gap(20),
-          GlobalButton(
-            text: 'Sign in',
-            onTap: () => context.pushNamed(SignInScreen.routeName),
+          const SizedBox.shrink(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomStringButton(
+                context: context,
+                text: 'Sign up',
+                onTap: (controller) async =>
+                    context.pushNamed(SignUpScreen.routeName),
+              ),
+              CustomStringButton(
+                context: context,
+                backgroundColor: Colors.white,
+                textColor: SharedColorPalette().main,
+                text: 'Sign in',
+                onTap: (controller) async =>
+                    context.pushNamed(SignInScreen.routeName),
+              ),
+            ],
           ),
         ],
       ));

@@ -58,6 +58,7 @@ dependencies:
   http: ^0.13.6
   adaptive_theme: ^2.0.0
   shared_preferences: ^2.2.2
+  provider: ^6.0.5
   
 dev_dependencies:
   wyatt_analysis:
@@ -85,3 +86,4 @@ flutter:
     # Add assets from the images directory to the application.
     - assets/logo/
     - assets/images/
+    - assets/loader/

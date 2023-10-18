@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/text_fields/main_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -49,8 +50,10 @@ class _CodeDialogState extends State<CodeDialog> {
                     onChanged: (value) => setState(() {
                           code = value;
                         })),
-                GlobalButton(
-                  onTap: () => widget.action.call(code),
+                CustomStringButton(
+                  text: '',
+                  context: context,
+                  onTap: (c) async => widget.action.call(code),
                 )
               ],
             ),

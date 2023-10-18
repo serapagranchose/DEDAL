@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/text_fields/main_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -41,13 +42,14 @@ class SigninContentyState extends State<SigninContent> {
           ),
           if (widget.isError == false)
             const Text('Email ou mot de passe incorrect'),
-          GlobalButton(
-            disable: !(RegExp(
+          CustomStringButton(
+            context: context,
+            disabled: !(RegExp(
                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                     .hasMatch(_email) &&
                 RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})+")
                     .hasMatch(_password)),
-            onTap: () => widget.validate.call(_email, _password),
+            onTap: (c) async => widget.validate.call(_email, _password),
             text: 'Connection',
           ),
         ],

@@ -7,11 +7,13 @@ class GlobalButton extends StatefulWidget {
     this.onTap,
     this.text,
     this.color,
+    this.textColor,
     this.disable = false,
   });
 
   final VoidCallback? onTap;
   final String? text;
+  final Color? textColor;
   final Color? color;
   final bool disable;
 
@@ -37,22 +39,11 @@ class GlobalButtonState extends State<GlobalButton> {
                     (widget.disable
                         ? SharedColorPalette().mainDisable
                         : SharedColorPalette().main),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 10.0,
-                    spreadRadius: 2.0,
-                  )
-                ], //B,
                 borderRadius: const BorderRadius.all(Radius.circular(10))),
             child: Center(
               child: Text(
                 widget.text ?? 'valider',
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: widget.textColor ?? Colors.white),
               ),
             ),
           ),

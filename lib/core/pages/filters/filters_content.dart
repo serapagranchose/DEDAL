@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/constants/enum/filter_page_enum.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/info.dart';
@@ -96,17 +97,19 @@ class FilterContentState extends State<FilterContent> {
               child: Column(
                 //data.$1.info?.filter
                 children: [
-                  GlobalButton(
+                  CustomStringButton(
+                    context: context,
                     text: 'Réinitialisé',
-                    onTap: () => setState(() {
+                    onTap: (controller) async => setState(() {
                       cost = 0;
                       time = 0;
                       currentSelected = [];
                     }),
                   ),
-                  GlobalButton(
+                  CustomStringButton(
+                    context: context,
                     text: 'Valider',
-                    onTap: () => widget.submit.call(Info(
+                    onTap: (controller) async => widget.submit.call(Info(
                         filter: currentSelected,
                         budget: cost.round(),
                         time: time.round())),

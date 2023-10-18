@@ -36,17 +36,18 @@ class _ProfilScreenState extends State<ProfilScreen> {
   }
 
   void _loadUserData() async {
-  final getUserResult = await context.read<ProfilCubit>().getUser.call(const NoParam());
+    // final getUserResult =
+    //     await context.read<ProfilCubit>().getUser.call(const NoParam());
 
-  getUserResult.fold(
-    (user) {
-      // Update the _user variable with the fetched user data.
-      setState(() {
-        _user = user;
-      });
-    },
-  );
-}
+    // getUserResult.fold(
+    //   (user) {
+    //     // Update the _user variable with the fetched user data.
+    //     setState(() {
+    //       _user = user;
+    //     });
+    //   },
+    // );
+  }
 
   @override
   Widget build(BuildContext context) {

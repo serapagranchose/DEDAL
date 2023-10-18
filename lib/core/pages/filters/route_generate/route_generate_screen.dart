@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/core/use_cases/set_user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       setInfoUser: SetInfoUser(filterDataSource: getIt<FilterDataSource>()),
-      skip : skip)
+      skip: skip)
     ..load();
 
   @override
@@ -85,7 +86,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
                   'Chargment',
                   textAlign: TextAlign.center,
                 ),
-                const MainLoader(),
+                const PlanLoader(),
                 if (state is CrudLoaded<GenerateRouteEnum>)
                   Text(
                     switch (state.data) {
@@ -102,9 +103,10 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
                 else if (state is CrudError) ...[
                   const Text('user erreur est subvenu'),
                   Text(state.message ?? ''),
-                  GlobalButton(
+                  CustomStringButton(
+                    context: context,
                     text: ('fermer'),
-                    onTap: () => context.pop(),
+                    onTap: (controller) async => context.pop(),
                   )
                 ]
               ],

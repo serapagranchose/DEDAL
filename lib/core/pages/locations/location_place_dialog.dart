@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:flutter/material.dart';
 
@@ -41,9 +42,10 @@ class LocationPlaceDialog extends StatelessWidget {
                   place.description ?? '',
                   textAlign: TextAlign.center,
                 ),
-                GlobalButton(
+                CustomStringButton(
+                  context: context,
                   text: text,
-                  onTap: () => action.call(place),
+                  onTap: (c) async => action.call(place),
                 )
               ],
             ),

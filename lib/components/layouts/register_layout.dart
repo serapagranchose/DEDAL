@@ -1,3 +1,4 @@
+import 'package:dedal/components/layouts/navbar.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/pages/filters/filters_screen.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
@@ -8,19 +9,20 @@ import 'package:go_router/go_router.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class RegisterLayout extends StatelessWidget {
-  const RegisterLayout({
-    super.key,
-    required this.child,
-    this.appBar,
-    this.title,
-    this.actions,
-    this.navBar,
-  });
+  const RegisterLayout(
+      {super.key,
+      required this.child,
+      this.appBar,
+      this.title,
+      this.actions,
+      this.navBar,
+      this.index = 0});
 
   final bool? appBar;
   final bool? navBar;
   final Widget child;
   final String? title;
+  final int index;
   final List<Widget>? actions;
 
   @override
@@ -45,39 +47,8 @@ class RegisterLayout extends StatelessWidget {
           child: child,
         )),
         bottomNavigationBar: navBar.isNotNull
-            ? BottomNavigationBar(
-                onTap: (value) => switch (value) {
-                  0 => context.goNamed(FilterScreen.name),
-                  1 => context.goNamed(HomeScreen.name),
-                  2 => context.goNamed(LocationScreen.name),
-                  _ => context.goNamed(ProfilScreen.name),
-                },
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.filter_alt_outlined,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Filtres'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.map,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Home'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.list,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Location'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.person,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Profil'),
-                ],
+            ? NavBar(
+                currentIndex: index,
               )
             : null,
       );

@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/button.dart';
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
@@ -32,6 +33,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+      index: 1,
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
@@ -45,9 +47,10 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
         CrudError(message: final message) => Column(
             children: [
               Text(message ?? 'une erreur est subvenu'),
-              GlobalButton(
+              CustomStringButton(
+                context: context,
                 text: 'reload',
-                onTap: () => context.read<HomeCubit>().load(),
+                onTap: (c) async => context.read<HomeCubit>().load(),
               )
             ],
           ),
