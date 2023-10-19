@@ -5,16 +5,19 @@ import 'package:go_router/go_router.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class RegisterLayout extends StatelessWidget {
-  const RegisterLayout(
-      {super.key,
-      required this.child,
-      this.appBar,
-      this.title,
-      this.actions,
-      this.navBar,
-      this.index = 0});
+  const RegisterLayout({
+    super.key,
+    required this.child,
+    this.appBar,
+    this.title,
+    this.actions,
+    this.navBar,
+    this.index = 0,
+    this.padding = true,
+  });
 
   final bool? appBar;
+  final bool padding;
   final bool? navBar;
   final Widget child;
   final String? title;
@@ -39,7 +42,7 @@ class RegisterLayout extends StatelessWidget {
             : null,
         body: SafeArea(
             child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(padding ? 8.0 : 0),
           child: child,
         )),
         bottomNavigationBar: navBar.isNotNull

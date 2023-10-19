@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/custom_button.dart';
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/constants/enum/filter_page_enum.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/info.dart';
@@ -54,17 +55,26 @@ class FilterContentState extends State<FilterContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                      icon: const Icon(Icons.list),
+                      icon: Icon(
+                        Icons.list,
+                        color: SharedColorPalette().main,
+                      ),
                       onPressed: () => setState(() {
                             page = FilterPageEnum.filter;
                           })),
                   IconButton(
-                      icon: const Icon(Icons.attach_money),
+                      icon: Icon(
+                        Icons.attach_money,
+                        color: SharedColorPalette().main,
+                      ),
                       onPressed: () => setState(() {
                             page = FilterPageEnum.cost;
                           })),
                   IconButton(
-                      icon: const Icon(Icons.watch_later_outlined),
+                      icon: Icon(
+                        Icons.watch_later_outlined,
+                        color: SharedColorPalette().main,
+                      ),
                       onPressed: () => setState(() {
                             page = FilterPageEnum.time;
                           })),
@@ -96,22 +106,28 @@ class FilterContentState extends State<FilterContent> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CustomStringButton(
-                    context: context,
-                    text: 'Réinitialisé',
-                    onTap: (controller) async => setState(() {
-                      cost = 0;
-                      time = 0;
-                      currentSelected = [];
-                    }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: CustomStringButton(
+                      context: context,
+                      text: 'Réinitialiser',
+                      onTap: (controller) async => setState(() {
+                        cost = 0;
+                        time = 0;
+                        currentSelected = [];
+                      }),
+                    ),
                   ),
-                  CustomStringButton(
-                    context: context,
-                    text: 'Valider',
-                    onTap: (controller) async => widget.submit.call(Info(
-                        filter: currentSelected,
-                        budget: cost.round(),
-                        time: time.round())),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: CustomStringButton(
+                      context: context,
+                      text: 'Valider',
+                      onTap: (controller) async => widget.submit.call(Info(
+                          filter: currentSelected,
+                          budget: cost.round(),
+                          time: time.round())),
+                    ),
                   ),
                 ],
               )),

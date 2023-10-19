@@ -15,6 +15,7 @@ class LocationListDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GridView.count(
+    physics: BouncingScrollPhysics(),
         shrinkWrap: true,
         crossAxisCount: 2,
         childAspectRatio: 3,

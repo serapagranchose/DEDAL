@@ -18,7 +18,7 @@ class FiltersDisplay extends StatelessWidget {
   Widget build(BuildContext context) => GridView.count(
       shrinkWrap: true,
       crossAxisCount: 2,
-      childAspectRatio: 1.5,
+      childAspectRatio: 2,
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       physics: const BouncingScrollPhysics(),

@@ -34,17 +34,27 @@ class LocationPlaceDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  place.name ?? '',
-                  textAlign: TextAlign.center,
+                  place.name ?? 'name',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
                 Text(
-                  place.description ?? '',
+                  place.description ?? 'description',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                   textAlign: TextAlign.center,
                 ),
-                CustomStringButton(
-                  context: context,
-                  text: text,
-                  onTap: (c) async => action.call(place),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: CustomStringButton(
+                    context: context,
+                    text: text,
+                    onTap: (c) async => action.call(place),
+                  ),
                 )
               ],
             ),

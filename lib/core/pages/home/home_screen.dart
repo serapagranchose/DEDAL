@@ -32,6 +32,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+      padding: false,
       index: 1,
       navBar: true,
       child: switch (state) {

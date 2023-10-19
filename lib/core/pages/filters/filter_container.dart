@@ -18,23 +18,74 @@ class FilterContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: !selected
-                  ? SharedColorPalette().mainDisable
-                  : SharedColorPalette().main,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
             ),
-            height: 1,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 4,
+                spreadRadius: 4,
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(26.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                    child: Text(
-                  (filter.name ?? '').capitalize(),
-                  style: const TextStyle(color: Colors.white),
-                )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        switch (filter.name ?? '') {
+                          'bar' => 'Bar et Brasserie',
+                          'magasin' => 'Shopping',
+                          'nature' => 'Parc et espace vert',
+                          "soin" => 'Bien-être',
+                          String() => (filter.name ?? '').capitalize(),
+                        },
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: !selected
+                              ? SharedColorPalette().mainDisable
+                              : SharedColorPalette().main,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      switch (filter.name ?? '') {
+                        'bar' => Icons.local_drink_sharp,
+                        'art et culture' => Icons.museum,
+                        'divertissement' => Icons.local_play_outlined,
+                        'restaurant' => Icons.restaurant,
+                        'café' => Icons.coffee,
+                        'histoire' => Icons.history,
+                        'enfant' => Icons.child_friendly_outlined,
+                        'magasin' => Icons.shopping_bag_outlined,
+                        'nature' => Icons.emoji_nature_outlined,
+                        "soin" => Icons.face_2_outlined,
+                        String() => Icons.abc,
+                      },
+                      color: !selected
+                          ? SharedColorPalette().mainDisable.withOpacity(0.2)
+                          : SharedColorPalette().main,
+                    )
+                  ],
+                )
               ],
-            )),
+            ),
+          ),
+        ),
         onTap: () => onTap(filter),
       );
 }

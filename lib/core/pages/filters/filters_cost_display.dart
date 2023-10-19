@@ -20,7 +20,7 @@ class FiltersCostDisplay extends StatelessWidget {
           SleekCircularSlider(
             appearance: CircularSliderAppearance(
                 infoProperties: InfoProperties(
-                    modifier: (percentage) => '${percentage.round()} \$',
+                    modifier: (percentage) => '${percentage.round()} €',
                     mainLabelStyle: const TextStyle(color: Colors.black)),
                 customColors: CustomSliderColors(
                     trackColor: SharedColorPalette().mainDisable,

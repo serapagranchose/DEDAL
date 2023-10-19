@@ -17,23 +17,37 @@ class LocationPlaceContainer extends StatelessWidget {
   final void Function(Place place) onTap;
 
   @override
-  Widget build(BuildContext context) => InkWell(
+  Widget build(BuildContext context) {
+    print('type => ${place.type}');
+    var tmp = Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: InkWell(
         child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: SharedColorPalette().main,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
             ),
-            height: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                    child: Text(
-                  (place.name ?? '').capitalize(),
-                  style: const TextStyle(color: Colors.white),
-                )),
-              ],
-            )),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 4,
+                spreadRadius: 4,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Text(
+                (place.name ?? '').capitalize(),
+                style: const TextStyle(color: Colors.black),
+                textAlign: TextAlign.center,
+              )),
+            ],
+          ),
+        ),
         onTap: () => showDialog(
             context: context,
             builder: (context) => LocationPlaceDialog(
@@ -41,5 +55,8 @@ class LocationPlaceContainer extends StatelessWidget {
                   action: onTap,
                   place: place,
                 )),
-      );
+      ),
+    );
+    return tmp;
+  }
 }

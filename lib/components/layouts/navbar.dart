@@ -75,7 +75,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Filtre',
+                  label: 'Filtres',
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -87,7 +87,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Home',
+                  label: 'Accueil',
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -99,7 +99,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Locations',
+                  label: 'Lieux',
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(

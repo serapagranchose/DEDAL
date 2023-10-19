@@ -1,4 +1,5 @@
 import 'package:dedal/components/button/custom_button.dart';
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/constants/enum/location_page_enum.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_list_display.dart';
@@ -32,19 +33,20 @@ class LocationContentState extends State<LocationContent> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                      icon: const Icon(Icons.list),
+                      icon: Icon(
+                        Icons.list,
+                        color: SharedColorPalette().main,
+                      ),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.parcours;
                           })),
                   IconButton(
-                      icon: const Icon(Icons.list),
+                      icon: Icon(
+                        Icons.new_label_outlined,
+                        color: SharedColorPalette().main,
+                      ),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.liked;
-                          })),
-                  IconButton(
-                      icon: const Icon(Icons.list),
-                      onPressed: () => setState(() {
-                            page = LocationPageEnum.close;
                           })),
                 ],
               )),
@@ -90,10 +92,13 @@ class LocationContentState extends State<LocationContent> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomStringButton(
-                    context: context,
-                    text: 'Valider',
-                    onTap: (c) async => widget.submit.call(widget.list?.$1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: CustomStringButton(
+                      context: context,
+                      text: 'Valider',
+                      onTap: (c) async => widget.submit.call(widget.list?.$1),
+                    ),
                   ),
                 ],
               )),
