@@ -1,3 +1,4 @@
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:flutter/material.dart';
 
@@ -13,18 +14,35 @@ class HomePlaceDisplay extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(16),
         child: Container(
-          color: Colors.amber,
+          decoration: BoxDecoration(
+              color: SharedColorPalette().main,
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
           child: AspectRatio(
             aspectRatio: 2,
-            child: Column(
-              children: [
-                Text(place.name ?? 'name'),
-                Text(place.description ?? 'description'),
-                Text(place.duration?.toString() ?? 'duration'),
-                Text(place.price?.toString() ?? 'price'),
-                Text(place.link?.toString() ?? 'link'),
-                Text(place.type?.toString() ?? 'type'),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    place.name ?? 'name',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    place.description ?? 'description',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

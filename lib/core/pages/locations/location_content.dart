@@ -37,12 +37,12 @@ class LocationContentState extends State<LocationContent> {
                             page = LocationPageEnum.parcours;
                           })),
                   IconButton(
-                      icon: const Icon(Icons.attach_money),
+                      icon: const Icon(Icons.list),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.liked;
                           })),
                   IconButton(
-                      icon: const Icon(Icons.watch_later_outlined),
+                      icon: const Icon(Icons.list),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.close;
                           })),
@@ -88,7 +88,7 @@ class LocationContentState extends State<LocationContent> {
           Expanded(
               flex: 1,
               child: Column(
-                //data.$1.info?.filter
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomStringButton(
                     context: context,
@@ -97,7 +97,6 @@ class LocationContentState extends State<LocationContent> {
                   ),
                 ],
               )),
-          const Gap(20),
         ],
       );
 }

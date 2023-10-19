@@ -7,12 +7,14 @@ import 'package:dedal/core/pages/authentification/authentification_state.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/router.dart';
+import 'package:dedal/core/use_cases/image_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'settings/settings_controller.dart';
 
@@ -22,12 +24,16 @@ class MyApp extends StatelessWidget {
     super.key,
     required this.settingsController,
   });
+
   final _navigatorKey = GlobalKey<NavigatorState>();
   late final GoRouter _router = AppRouter.router(_navigatorKey);
   final SettingsController settingsController;
+  static BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
 
   @override
   Widget build(BuildContext context) {
+    ImageHelper.getBytesFromAsset('assets/logo/pin.png', 64)
+        .then((value) => markerIcon = BitmapDescriptor.fromBytes(value));
     return AdaptiveTheme(
         light: lightTheme,
         dark: darkTheme,

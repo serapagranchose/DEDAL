@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/home/home_place_display.dart';
+import 'package:dedal/core/pages/login/main.dart';
+import 'package:dedal/src/app.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
@@ -25,11 +28,11 @@ class HomeContentState extends State<HomeContent> {
   Place? selected;
 
   final Completer<GoogleMapController> _controller = Completer();
-  Polyline polyline = const Polyline(
-    points: [],
-    polylineId: PolylineId('parcours'),
+  Polyline polyline = Polyline(
+    points: const [],
+    polylineId: const PolylineId('parcours'),
     width: 5,
-    color: Color.fromARGB(255, 252, 179, 0),
+    color: SharedColorPalette().main,
   );
   Set<Marker> markers = {};
   @override
@@ -42,6 +45,9 @@ class HomeContentState extends State<HomeContent> {
             ),
             mapType: MapType.normal,
             myLocationEnabled: true,
+            mapToolbarEnabled: false,
+            zoomControlsEnabled: false,
+            
             compassEnabled: true,
             polylines: {polyline},
             markers: markers,
@@ -80,6 +86,7 @@ class HomeContentState extends State<HomeContent> {
         if (place.coordinates != null) {
           markers.add(Marker(
             markerId: MarkerId(place.id!),
+            icon: MyApp.markerIcon,
             position: place.coordinates!,
             onTap: () => setState(() {
               selected = place;
