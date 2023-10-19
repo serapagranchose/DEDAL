@@ -69,7 +69,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
           ),
         ),
         child: AspectRatio(
-          aspectRatio: 1.2,
+          aspectRatio: 0.8,
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
@@ -82,26 +82,27 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
-                  'Chargment',
+                  'Chargment...',
                   textAlign: TextAlign.center,
                 ),
                 const PlanLoader(),
                 if (state is CrudLoaded<GenerateRouteEnum>)
                   Text(
                     switch (state.data) {
-                      GenerateRouteEnum.getMap => 'getMap',
-                      GenerateRouteEnum.getPath => 'getPath',
-                      GenerateRouteEnum.getPlace => 'getPlace',
-                      GenerateRouteEnum.saveUser => 'saveUser',
-                      GenerateRouteEnum.start => 'start',
-                      GenerateRouteEnum.end => 'end',
+                      GenerateRouteEnum.getMap => 'Génération de la carte',
+                      GenerateRouteEnum.getPath =>
+                        'Génération de votre parcours',
+                      GenerateRouteEnum.getPlace => 'Récuperation des lieux',
+                      GenerateRouteEnum.saveUser =>
+                        'Envoie de vos donnée a nos serveur',
+                      GenerateRouteEnum.start => "C'est parti",
+                      GenerateRouteEnum.end => 'Et voila !',
                       _ => 'null',
                     },
                     textAlign: TextAlign.center,
                   )
                 else if (state is CrudError) ...[
-                  const Text('user erreur est subvenu'),
-                  Text(state.message ?? ''),
+                  const Text('Oh! Une erreur est subvenue'),
                   CustomStringButton(
                     context: context,
                     text: ('fermer'),

@@ -30,7 +30,7 @@ class FiltersTimeDisplay extends StatelessWidget {
                 infoProperties: InfoProperties(
                     modifier: (percentage) =>
                         formattedTime(timeInSecond: percentage.round()),
-                    mainLabelStyle: const TextStyle(color: Colors.white)),
+                    mainLabelStyle: const TextStyle(color: Colors.black)),
                 customColors: CustomSliderColors(
                     trackColor: SharedColorPalette().mainDisable,
                     progressBarColor: SharedColorPalette().main)),

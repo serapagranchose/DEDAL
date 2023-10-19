@@ -21,7 +21,7 @@ class FiltersCostDisplay extends StatelessWidget {
             appearance: CircularSliderAppearance(
                 infoProperties: InfoProperties(
                     modifier: (percentage) => '${percentage.round()} \$',
-                    mainLabelStyle: const TextStyle(color: Colors.white)),
+                    mainLabelStyle: const TextStyle(color: Colors.black)),
                 customColors: CustomSliderColors(
                     trackColor: SharedColorPalette().mainDisable,
                     progressBarColor: SharedColorPalette().main)),

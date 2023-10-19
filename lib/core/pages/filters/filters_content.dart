@@ -92,9 +92,9 @@ class FilterContentState extends State<FilterContent> {
                   ),
               }),
           Expanded(
-              flex: 3,
+              flex: 2,
               child: Column(
-                //data.$1.info?.filter
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CustomStringButton(
                     context: context,
