@@ -18,71 +18,70 @@ class LocationPlaceContainer extends StatelessWidget {
   final void Function(Place place) onTap;
 
   @override
-  Widget build(BuildContext context) {
-    print('type => ${place.type}');
-    var tmp = Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: InkWell(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: InkWell(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 4,
+                  spreadRadius: 4,
+                ),
+              ],
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 4,
-                spreadRadius: 4,
-              ),
-            ],
+            child: Row(
+              children: [
+                const Gap(5),
+                Icon(
+                  switch (place.type) {
+                    'restaurant' => Icons.restaurant,
+                    'jeu' => Icons.games_outlined,
+                    'site historique' => Icons.museum,
+                    'jardin historique' => Icons.grass,
+                    'jardin artistique' => Icons.grass,
+                    'rue commerçante' => Icons.euro,
+                    'salon de beauté' => Icons.face_2_outlined,
+                    "parc d'attractions" => Icons.euro,
+                    'musée' => Icons.museum,
+                    'zoo' => Icons.grass,
+                    String()? => Icons.euro,
+                    null => null,
+                  },
+                color: SharedColorPalette().main,
+                ),
+                VerticalDivider(
+                  thickness: 1,
+                  color: Colors.black.withOpacity(0.12),
+                  width: 33,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      (place.name ?? '').capitalize(),
+                      style: const TextStyle(color: Colors.black),
+                      overflow: TextOverflow.fade,
+                      maxLines: 2,
+                      softWrap: true,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          child: Row(
-            children: [
-              const Gap(5),
-              Icon(switch (place.type) {
-                'restaurant' => Icons.restaurant,
-                'jeu' => Icons.games_outlined,
-                'site historique' => Icons.museum,
-                'jardin historique' => Icons.grass,
-                'jardin artistique' => Icons.grass,
-                'rue commerçante' => Icons.euro,
-                'salon de beauté' => Icons.face_2_outlined,
-                "parc d'attractions" => Icons.euro,
-                'musée' => Icons.museum,
-                'zoo' => Icons.grass,
-                String()? => Icons.euro,
-                null => null,
-              }),
-              VerticalDivider(
-                thickness: 1,
-                color: Colors.black.withOpacity(0.12),
-                width: 33,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    (place.name ?? '').capitalize(),
-                    style: const TextStyle(color: Colors.black),
-                    overflow: TextOverflow.fade,
-                    maxLines: 2,
-                    softWrap: true,
-                  ),
-                ],
-              ),
-            ],
-          ),
+          onTap: () => showDialog(
+              context: context,
+              builder: (context) => LocationPlaceDialog(
+                    text: !action ? 'Ajouter' : 'Retirer',
+                    action: onTap,
+                    place: place,
+                  )),
         ),
-        onTap: () => showDialog(
-            context: context,
-            builder: (context) => LocationPlaceDialog(
-                  text: !action ? 'Ajouter' : 'Retirer',
-                  action: onTap,
-                  place: place,
-                )),
-      ),
-    );
-    return tmp;
-  }
+      );
 }

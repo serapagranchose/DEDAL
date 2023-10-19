@@ -15,10 +15,17 @@ class HomePlaceDisplay extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Container(
           decoration: BoxDecoration(
-              color: SharedColorPalette().main,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 4,
+                  spreadRadius: 4,
+                ),
+              ],
+              color: Colors.white,
               borderRadius: const BorderRadius.all(Radius.circular(10))),
           child: AspectRatio(
-            aspectRatio: 1.5,
+            aspectRatio: 2,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -28,15 +35,16 @@ class HomePlaceDisplay extends StatelessWidget {
                     place.name ?? 'name',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 20,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   Text(
                     place.description ?? 'description',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 15,
                     ),
                     textAlign: TextAlign.center,
