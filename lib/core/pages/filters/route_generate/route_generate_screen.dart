@@ -92,7 +92,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
                       GenerateRouteEnum.getMap => 'Génération de la carte',
                       GenerateRouteEnum.getPath =>
                         'Génération de votre parcours',
-                      GenerateRouteEnum.getPlace => 'Récuperation des lieux',
+                      GenerateRouteEnum.getPlace => 'Récupération des lieux',
                       GenerateRouteEnum.saveUser =>
                         'Envoie de vos donnée a nos serveur',
                       GenerateRouteEnum.start => "C'est parti",
@@ -102,7 +102,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
                     textAlign: TextAlign.center,
                   )
                 else if (state is CrudError) ...[
-                  const Text('Oh! Une erreur est subvenue'),
+                  const Text('Oh! Une erreur est survenue'),
                   CustomStringButton(
                     context: context,
                     text: ('fermer'),

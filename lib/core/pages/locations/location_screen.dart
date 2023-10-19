@@ -34,8 +34,9 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
     ..load();
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+      appBar: true,
+      title: 'Lieux',
       index: 2,
-      navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
         CrudLoaded(data: final list) => LocationContent(

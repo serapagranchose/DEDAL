@@ -3,6 +3,7 @@ import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_place_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class LocationPlaceContainer extends StatelessWidget {
   const LocationPlaceContainer({
@@ -36,15 +37,40 @@ class LocationPlaceContainer extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
             children: [
-              Center(
-                  child: Text(
-                (place.name ?? '').capitalize(),
-                style: const TextStyle(color: Colors.black),
-                textAlign: TextAlign.center,
-              )),
+              const Gap(5),
+              Icon(switch (place.type) {
+                'restaurant' => Icons.restaurant,
+                'jeu' => Icons.games_outlined,
+                'site historique' => Icons.museum,
+                'jardin historique' => Icons.grass,
+                'jardin artistique' => Icons.grass,
+                'rue commerçante' => Icons.euro,
+                'salon de beauté' => Icons.face_2_outlined,
+                "parc d'attractions" => Icons.euro,
+                'musée' => Icons.museum,
+                'zoo' => Icons.grass,
+                String()? => Icons.euro,
+                null => null,
+              }),
+              VerticalDivider(
+                thickness: 1,
+                color: Colors.black.withOpacity(0.12),
+                width: 33,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    (place.name ?? '').capitalize(),
+                    style: const TextStyle(color: Colors.black),
+                    overflow: TextOverflow.fade,
+                    maxLines: 2,
+                    softWrap: true,
+                  ),
+                ],
+              ),
             ],
           ),
         ),

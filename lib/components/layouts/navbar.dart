@@ -42,13 +42,13 @@ class _NavBarState extends State<NavBar> {
               onTap: (index) async {
                 switch (index) {
                   case 0:
-                    context.goNamed(FilterScreen.name);
+                    context.pushNamed(FilterScreen.name);
                     break;
                   case 1:
                     context.goNamed(HomeScreen.name);
                     break;
                   case 2:
-                    context.goNamed(LocationScreen.name);
+                    context.pushNamed(LocationScreen.name);
                     break;
                   case _:
                     context.goNamed(ProfilScreen.name);
