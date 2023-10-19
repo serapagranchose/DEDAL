@@ -18,7 +18,7 @@ class HomePlaceDisplay extends StatelessWidget {
               color: SharedColorPalette().main,
               borderRadius: const BorderRadius.all(Radius.circular(10))),
           child: AspectRatio(
-            aspectRatio: 2,
+            aspectRatio: 1.5,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(

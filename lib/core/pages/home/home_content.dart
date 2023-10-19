@@ -47,7 +47,6 @@ class HomeContentState extends State<HomeContent> {
             myLocationEnabled: true,
             mapToolbarEnabled: false,
             zoomControlsEnabled: false,
-            
             compassEnabled: true,
             polylines: {polyline},
             markers: markers,
