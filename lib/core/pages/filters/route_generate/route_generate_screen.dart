@@ -82,7 +82,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const Text(
-                  'Chargment...',
+                  'Chargement...',
                   textAlign: TextAlign.center,
                 ),
                 const PlanLoader(),

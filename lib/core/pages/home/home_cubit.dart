@@ -43,6 +43,7 @@ class HomeCubit extends Cubit<CrudState> {
           }
         }
         if (user?.info?.mapName.isNotNull ?? false) {
+          print('load map');
           change = true;
           final map =
               await _userGetMap(user).fold((value) => value, (error) => null);

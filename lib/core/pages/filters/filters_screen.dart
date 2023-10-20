@@ -41,6 +41,7 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
       index: 0,
       appBar: true,
       title: 'Filtre',
+      navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
         CrudLoaded<(User, List<Filter>?)>(data: final data) =>

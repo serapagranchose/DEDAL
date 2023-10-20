@@ -51,7 +51,7 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       appBar: true,
-      title: 'Connection',
+      title: 'Connexion',
       child: state is CrudLoading
           ? const MainLoader()
           : SigninContent(

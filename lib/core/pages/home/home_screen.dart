@@ -30,6 +30,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
+    
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       padding: false,

@@ -49,7 +49,7 @@ class SigninContentyState extends State<SigninContent> {
                 RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})+")
                     .hasMatch(_password)),
             onTap: (c) async => widget.validate.call(_email, _password),
-            text: 'Connection',
+            text: 'Connexion',
           ),
         ],
       );

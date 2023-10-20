@@ -35,6 +35,7 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       appBar: true,
+      navBar: true,
       title: 'Lieux',
       index: 2,
       child: switch (state) {
