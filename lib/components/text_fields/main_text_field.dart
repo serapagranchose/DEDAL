@@ -8,10 +8,12 @@ class MainTextFields extends StatefulWidget {
     this.placeholder,
     this.title,
     this.border,
+    this.isHide,
   });
 
   final void Function(String) onChanged;
   final String? placeholder;
+  final bool? isHide;
   final String? title;
   final Color? border;
   @override
@@ -20,6 +22,7 @@ class MainTextFields extends StatefulWidget {
 
 class _MainTextFieldsState extends State<MainTextFields> {
   final _controller = TextEditingController();
+  bool hided = false;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -33,14 +36,30 @@ class _MainTextFieldsState extends State<MainTextFields> {
                   )
                 : const SizedBox.shrink(),
             TextFormField(
+              obscureText: hided,
               textAlign: TextAlign.center,
               controller: _controller,
-              onChanged: (_) =>
-                  widget.onChanged.call(_controller.text.trim()),
+              onChanged: (_) => widget.onChanged.call(_controller.text.trim()),
               autocorrect: false,
               cursorColor: Colors.black,
               cursorWidth: 1,
               decoration: InputDecoration(
+                iconColor: widget.border ?? SharedColorPalette().main,
+                suffixIcon: widget.isHide ?? false
+                    ? hided
+                        ? InkWell(
+                            child: const Icon(Icons.lock),
+                            onTap: () => setState(() {
+                              hided = !hided;
+                            }),
+                          )
+                        : InkWell(
+                            child: const Icon(Icons.lock_open),
+                            onTap: () => setState(() {
+                              hided = !hided;
+                            }),
+                          )
+                    : null,
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: widget.border ?? SharedColorPalette().main,
@@ -53,4 +72,12 @@ class _MainTextFieldsState extends State<MainTextFields> {
           ],
         ),
       );
+
+  @override
+  void initState() {
+    setState(() {
+      hided = widget.isHide ?? false;
+    });
+    super.initState();
+  }
 }

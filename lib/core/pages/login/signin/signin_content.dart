@@ -49,6 +49,7 @@ class SigninContentyState extends State<SigninContent> {
           Column(
             children: [
               MainTextFields(
+                isHide: true,
                 title: 'Votre mot de passe',
                 onChanged: (String value) => setState(() {
                   _password = value;
