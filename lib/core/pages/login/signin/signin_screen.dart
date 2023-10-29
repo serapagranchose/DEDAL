@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';
@@ -23,6 +22,8 @@ import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   const SignInScreen({super.key});
 
+  static const routeName = '/signin';
+
   @override
   SignInCubit create(BuildContext context) => SignInCubit(
         signIn: SignIn(loginDataSource: getIt<LoginDataSource>()),
@@ -31,7 +32,6 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
         updateUser:
             UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       );
-  static const routeName = '/signin';
 
   @override
   Widget parent(BuildContext context, Widget child) => Scaffold(

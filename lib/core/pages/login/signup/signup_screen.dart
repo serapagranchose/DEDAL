@@ -25,7 +25,9 @@ import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
+
+  static const routeName = '/signup';
 
   @override
   SignUpCubit create(BuildContext context) => SignUpCubit(
@@ -35,9 +37,20 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
       signIn: SignIn(loginDataSource: getIt<LoginDataSource>()));
 
-  static const routeName = '/signup';
-
-  String? code;
+  @override
+  Widget parent(BuildContext context, Widget child) => Scaffold(
+        backgroundColor: Colors.transparent,
+        body: DraggableScrollableSheet(
+            initialChildSize: 0.6,
+            builder: (context, scrollController) => DecoratedBox(
+                  decoration: const BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20)),
+                    color: Colors.white,
+                  ),
+                  child: child,
+                )),
+      );
 
   @override
   Future<void> onListen(BuildContext context, CrudState state) async {
@@ -54,9 +67,8 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
                 }
               }));
     }
+    print('here => $state');
     if (state is CrudLoaded<User> && state.data.isNotNull) {
-      context.pop();
-      context.read<SignUpCubit>().setValue(state.data!);
       context.pushNamed(HomeScreen.name);
     }
     if (state is CrudError) {
@@ -65,14 +77,11 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   }
 
   @override
-  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
-      appBar: true,
-      title: 'Connexion',
-      child: state is CrudLoading
-          ? const MainLoader()
-          : SigninContent(validate: (email, password) async {
-              await context
-                  .read<SignUpCubit>()
-                  .userSignUp(SignUpDto(email: email, password: password));
-            }));
+  Widget onBuild(BuildContext context, CrudState state) => state is CrudLoading
+      ? const MainLoader()
+      : SigninContent(validate: (email, password) async {
+          await context
+              .read<SignUpCubit>()
+              .userSignUp(SignUpDto(email: email, password: password));
+        });
 }

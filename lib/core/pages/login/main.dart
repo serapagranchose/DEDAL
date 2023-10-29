@@ -39,8 +39,13 @@ class Main extends StatelessWidget {
               CustomStringButton(
                 context: context,
                 text: 'Sign up',
-                onTap: (controller) async =>
-                    context.pushNamed(SignUpScreen.routeName),
+                onTap: (controller) async => showModalBottomSheet<void>(
+                  isScrollControlled: true,
+                  isDismissible: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) => const SignUpScreen(),
+                ),
               ),
               CustomStringButton(
                 context: context,
@@ -55,11 +60,6 @@ class Main extends StatelessWidget {
                   builder: (context) => const SignInScreen(),
                 ),
               ),
-
-              //  Padding(
-              //   padding: MediaQuery.of(context).viewInsets,
-              //   child: const SignInScreen(),
-              // ),
             ],
           ),
         ],
