@@ -8,10 +8,10 @@ class ProfilScreen extends StatefulWidget {
   static const name = 'profil';
 
   @override
-  _ProfilScreenState createState() => _ProfilScreenState();
+  ProfilScreenState createState() => ProfilScreenState();
 }
 
-class _ProfilScreenState extends State<ProfilScreen> {
+class ProfilScreenState extends State<ProfilScreen> {
   late AdaptiveThemeMode _themeMode;
   late User? _user;
 

@@ -12,10 +12,10 @@ class ProfilScreen extends StatefulWidget {
   static const name = 'profil';
 
   @override
-  _ProfilScreenState createState() => _ProfilScreenState();
+  ProfilScreenState createState() => ProfilScreenState();
 }
 
-class _ProfilScreenState extends State<ProfilScreen> {
+class ProfilScreenState extends State<ProfilScreen> {
   late AdaptiveThemeMode _themeMode;
 
   @override
@@ -50,39 +50,39 @@ class _ProfilScreenState extends State<ProfilScreen> {
         title: const Text('Profil Screen'),
       ),
       bottomNavigationBar: BottomNavigationBar(
-                onTap: (value) => switch (value) {
-                  0 => context.goNamed(FilterScreen.name),
-                  1 => context.goNamed(HomeScreen.name),
-                  2 => context.goNamed(LocationScreen.name),
-                  _ => context.goNamed(ProfilScreen.name),
-                },
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.filter_alt_outlined,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Filtres'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.map,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Home'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.list,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Location'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.person,
-                        color: SharedColorPalette().main,
-                      ),
-                      label: 'Profil'),
-                ],
+        onTap: (value) => switch (value) {
+          0 => context.goNamed(FilterScreen.name),
+          1 => context.goNamed(HomeScreen.name),
+          2 => context.goNamed(LocationScreen.name),
+          _ => context.goNamed(ProfilScreen.name),
+        },
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.filter_alt_outlined,
+                color: SharedColorPalette().main,
               ),
+              label: 'Filtres'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.map,
+                color: SharedColorPalette().main,
+              ),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.list,
+                color: SharedColorPalette().main,
+              ),
+              label: 'Location'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+                color: SharedColorPalette().main,
+              ),
+              label: 'Profil'),
+        ],
+      ),
       body: Column(
         children: [
           Text('Current Theme: $themeText'),

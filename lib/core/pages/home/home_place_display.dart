@@ -1,4 +1,3 @@
-import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:flutter/material.dart';
 

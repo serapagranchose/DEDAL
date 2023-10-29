@@ -4,7 +4,6 @@ import 'package:dedal/constants/enum/location_page_enum.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_list_display.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
