@@ -22,37 +22,35 @@ class _MainTextFieldsState extends State<MainTextFields> {
   final _controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          widget.title != null ? Text(widget.title!) : const SizedBox.shrink(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                color: Colors.black12,
-              ),
-              child: TextFormField(
-                textAlign: TextAlign.center,
-                controller: _controller,
-                onChanged: (_) =>
-                    widget.onChanged.call(_controller.text.trim()),
-                autocorrect: false,
-                cursorColor: Colors.black,
-                cursorWidth: 1,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: widget.border ?? SharedColorPalette().main,
-                    ),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            widget.title != null
+                ? Text(
+                    widget.title!,
+                  )
+                : const SizedBox.shrink(),
+            TextFormField(
+              textAlign: TextAlign.center,
+              controller: _controller,
+              onChanged: (_) =>
+                  widget.onChanged.call(_controller.text.trim()),
+              autocorrect: false,
+              cursorColor: Colors.black,
+              cursorWidth: 1,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: widget.border ?? SharedColorPalette().main,
                   ),
-                  isDense: true,
-                  hintText: widget.placeholder,
                 ),
+                isDense: true,
+                hintText: widget.placeholder,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
 }

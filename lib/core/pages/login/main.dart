@@ -47,9 +47,19 @@ class Main extends StatelessWidget {
                 backgroundColor: Colors.white,
                 textColor: SharedColorPalette().main,
                 text: 'Sign in',
-                onTap: (controller) async =>
-                    context.pushNamed(SignInScreen.routeName),
+                onTap: (controller) async => showModalBottomSheet<void>(
+                  isScrollControlled: true,
+                  isDismissible: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) => const SignInScreen(),
+                ),
               ),
+
+              //  Padding(
+              //   padding: MediaQuery.of(context).viewInsets,
+              //   child: const SignInScreen(),
+              // ),
             ],
           ),
         ],

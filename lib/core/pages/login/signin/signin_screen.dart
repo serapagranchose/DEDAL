@@ -21,7 +21,7 @@ import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
-  SignInScreen({super.key});
+  const SignInScreen({super.key});
 
   @override
   SignInCubit create(BuildContext context) => SignInCubit(
@@ -33,31 +33,37 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
       );
   static const routeName = '/signin';
 
-  String? email;
-  String? password;
+  @override
+  Widget parent(BuildContext context, Widget child) => Scaffold(
+        backgroundColor: Colors.transparent,
+        body: DraggableScrollableSheet(
+            initialChildSize: 0.6,
+            builder: (context, scrollController) => DecoratedBox(
+                  decoration: const BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20)),
+                    color: Colors.white,
+                  ),
+                  child: child,
+                )),
+      );
 
   @override
   Future<void> onListen(BuildContext context, CrudState state) async {
     super.onListen(context, state);
 
     if (state is CrudLoaded<User> && state.data.isNotNull) {
-      context
-          .read<SignInCubit>()
-          .setValue(SigninDto(email: email, password: password));
       context.pushNamed(HomeScreen.name);
     }
   }
 
   @override
-  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
-      appBar: true,
-      title: 'Connexion',
-      child: state is CrudLoading
-          ? const MainLoader()
-          : SigninContent(
-              validate: (email, password) async => context
-                  .read<SignInCubit>()
-                  .userSignIn(SigninDto(email: email, password: password)),
-              isError: state is CrudError,
-            ));
+  Widget onBuild(BuildContext context, CrudState state) => state is CrudLoading
+      ? const MainLoader()
+      : SigninContent(
+          validate: (email, password) async => context
+              .read<SignInCubit>()
+              .userSignIn(SigninDto(email: email, password: password)),
+          isError: state is CrudError,
+        );
 }
