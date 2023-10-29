@@ -25,21 +25,21 @@ class SigninContentyState extends State<SigninContent> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           MainTextFields(
-            title: 'Votre E-mail',
+            title: 'Votre Email',
             placeholder: 'exemple@test.idk',
             onChanged: (String value) => setState(() {
               _email = value;
             }),
-            border: widget.isError == false ? Colors.red : null,
+            border: widget.isError ?? false ? Colors.red : null,
           ),
           MainTextFields(
             title: 'Votre mot de passe',
             onChanged: (String value) => setState(() {
               _password = value;
             }),
-            border: widget.isError == false ? Colors.red : null,
+            border: widget.isError ?? false ? Colors.red : null,
           ),
-          if (widget.isError == false)
+          if (widget.isError ?? false)
             const Text('Email ou mot de passe incorrect'),
           CustomStringButton(
             context: context,

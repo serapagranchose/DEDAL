@@ -1,7 +1,10 @@
+import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/pages/filters/filters_screen.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/locations/location_screen.dart';
+import 'package:dedal/core/pages/login/main.dart';
+import 'package:dedal/core/pages/login/signin/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:go_router/go_router.dart';
@@ -90,6 +93,10 @@ class ProfilScreenState extends State<ProfilScreen> {
             onPressed: toggleThemeMode,
             child: const Text('Toggle Theme'),
           ),
+          CustomStringButton(
+              context: context,
+              text: 'Deconnection',
+              onTap: (_) async => context.goNamed(Main.routeName))
         ],
       ),
     );
