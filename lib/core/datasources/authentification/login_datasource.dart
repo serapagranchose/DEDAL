@@ -8,4 +8,5 @@ abstract class LoginDataSource extends BaseDataSource {
   Future<User?> signIn(String email, String password);
   Future<bool> signUp(String email, String password);
   Future<bool> signUpCode(String email, String code);
+  Future<bool> unsubscribe(String id, String email);
 }

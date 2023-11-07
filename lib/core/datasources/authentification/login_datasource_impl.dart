@@ -95,4 +95,18 @@ class LoginDataSourceImpl extends LoginDataSource {
       return false;
     });
   }
+
+  @override
+  Future<bool> unsubscribe(String id, String email) async {
+    return await http.post(
+      Uri.parse('http://52.166.128.133/unsubscribe?id=$id'),
+      body: jsonEncode({'email': email}),
+      headers: {'Content-type': 'application/json', 'Accept': '*/*'},
+    ).then((result) {
+      if (result.statusCode == 200) {
+        return true;
+      }
+      return false;
+    });
+  }
 }

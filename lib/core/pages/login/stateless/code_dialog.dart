@@ -50,7 +50,7 @@ class _CodeDialogState extends State<CodeDialog> {
                           code = value;
                         })),
                 CustomStringButton(
-                  text: '',
+                  text: 'Valider',
                   context: context,
                   onTap: (c) async => widget.action.call(code),
                 )

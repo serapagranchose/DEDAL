@@ -67,7 +67,6 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
                 }
               }));
     }
-    print('here => $state');
     if (state is CrudLoaded<User> && state.data.isNotNull) {
       context.pushNamed(HomeScreen.name);
     }

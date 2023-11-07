@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/user_unsubscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wyatt_architecture/wyatt_architecture.dart';
@@ -14,12 +15,15 @@ class ProfilCubit extends Cubit<CrudState> {
   ProfilCubit({
     required GetUser getUser,
     required ClearUser clearUser,
+    required UserUnsubscribe userUnsubscribe,
   })  : _getUser = getUser,
         _clearUser = clearUser,
+        _userUnsubscribe = userUnsubscribe,
         super(const CrudInitial());
 
   final GetUser _getUser;
   final ClearUser _clearUser;
+  final UserUnsubscribe _userUnsubscribe;
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
@@ -34,6 +38,13 @@ class ProfilCubit extends Cubit<CrudState> {
 
   Future<void> deconnection() async {
     _clearUser.call(const NoParam());
+  }
+
+  Future<void> unsubscribe() async {
+    await _getUser.call(null).fold(
+          (value) => _userUnsubscribe.call(value),
+          (error) => null,
+        );
   }
 
   void toggleThemeMode(BuildContext context) {

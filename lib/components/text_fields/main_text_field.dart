@@ -37,7 +37,6 @@ class _MainTextFieldsState extends State<MainTextFields> {
                 : const SizedBox.shrink(),
             TextFormField(
               obscureText: hided,
-              textAlign: TextAlign.center,
               controller: _controller,
               onChanged: (_) => widget.onChanged.call(_controller.text.trim()),
               autocorrect: false,
