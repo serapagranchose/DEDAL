@@ -1,4 +1,6 @@
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:flutter/material.dart';
 
 class GlobalButton extends StatefulWidget {
@@ -42,7 +44,7 @@ class GlobalButtonState extends State<GlobalButton> {
                 borderRadius: const BorderRadius.all(Radius.circular(10))),
             child: Center(
               child: Text(
-                widget.text ?? 'valider',
+                widget.text ?? context.l18n!.globalValidate.capitalize(),
                 style: TextStyle(color: widget.textColor ?? Colors.white),
               ),
             ),

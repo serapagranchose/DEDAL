@@ -1,6 +1,8 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/text_fields/main_text_field.dart';
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -39,7 +41,7 @@ class SigninContentyState extends State<SigninContent> {
             ],
           ),
           MainTextFields(
-            title: 'Votre Email',
+            title: context.l18n!.loginEmail.capitalize(),
             placeholder: 'exemple@test.idk',
             onChanged: (String value) => setState(() {
               _email = value;
@@ -50,7 +52,7 @@ class SigninContentyState extends State<SigninContent> {
             children: [
               MainTextFields(
                 isHide: true,
-                title: 'Votre mot de passe',
+                title: context.l18n!.loginPassword.capitalize(),
                 onChanged: (String value) => setState(() {
                   _password = value;
                 }),
@@ -60,7 +62,7 @@ class SigninContentyState extends State<SigninContent> {
               ),
               if (widget.isError ?? false)
                 Text(
-                  'Email ou mot de passe incorrect',
+                  context.l18n!.loginError.capitalize(),
                   style: TextStyle(color: Colors.red.shade900),
                 ),
             ],
@@ -75,7 +77,7 @@ class SigninContentyState extends State<SigninContent> {
                   RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})+")
                       .hasMatch(_password)),
               onTap: (c) async => widget.validate.call(_email, _password),
-              text: 'Connexion',
+              text: context.l18n!.loginConnect.capitalize(),
             ),
           ),
         ],

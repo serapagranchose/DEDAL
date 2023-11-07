@@ -1,6 +1,8 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/constants/enum/filter_page_enum.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/info.dart';
 import 'package:dedal/core/pages/filters/filters_cost_display.dart';
@@ -110,7 +112,7 @@ class FilterContentState extends State<FilterContent> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: CustomStringButton(
                       context: context,
-                      text: 'Réinitialiser',
+                      text: context.l18n!.globalReset.capitalize(),
                       onTap: (controller) async => setState(() {
                         cost = 0;
                         time = 0;
@@ -122,7 +124,7 @@ class FilterContentState extends State<FilterContent> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: CustomStringButton(
                       context: context,
-                      text: 'Valider',
+                      text: context.l18n!.globalValidate.capitalize(),
                       onTap: (controller) async => widget.submit.call(Info(
                           filter: currentSelected,
                           budget: cost.round(),

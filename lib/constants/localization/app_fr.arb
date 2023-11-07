@@ -1,6 +1,52 @@
 {
-  "appTitle": "dedal",
-  "@appTitle": {
-    "description": "The title of the application"
-  }
+"@_GLOBAL" : {},
+  "globalValidate" : "valider",
+  "globalReset" : "réinitialiser",
+  "globalRestart" : "relancer",
+  "globalLoading" : "Chargement...",
+  "globalError" : "Oh ! Une erreur est subvenu...\nMereci de relancer l'application",
+  "globalClose" : "fermer",
+  "globalAdd" : "ajouter",
+  "globalRemove" : "retirer",
+  "globalOffLine" : "nos serveur sont hors ligne merci de réessyer plus tard :(",
+
+"@_MAIN" : {},
+  "mainCatch" : "le chemin de votre culture",
+  "mainSignUp" : "créer un compte",
+  "mainSignIn" : "se connecter",
+
+"@_NAVBAR" : {},
+  "navBarFilter" : "filtres",
+  "navBarHome" : "accueil",
+  "navBarLocation" : "lieux",
+  "navBarProfil" : "profil",
+
+"@_FILTER" : {},
+  "filterGenerateMap" : "Génération de la carte",
+  "filterGeneratePath" : "Génération de votre parcours",
+  "filterGeneratePlace" : "Récupération des lieux",
+  "filterGenerateUser" : "Envoie de vos donnée a nos serveur",
+  "filterGenerateStart" : "C'est parti",
+  "filterGenerateEnd" : "Et voila !",
+  "filterBuget" : "sélectionner votre budget",
+  "filterTime" : "sélectionnez l'heure de votre visite",
+
+
+"@_LOGIN" : {},
+  "loginEmail" : "votre email",
+  "loginPassword" : "votre mot de passe",
+  "loginError" : "email ou mot de passe incorrect",
+  "loginConnect" : "connexion",
+  "loginCode" : "code",
+  "loginCodeBis" : "entrez le code que vous avez reçu par mail",
+
+"@_PROFIL" : {},
+  "profilDeco" : "déconnexion",
+  "profilDeletAccount" : "supprmier le compte",
+
+"@_LOCATIONS" : {},
+  "locationNoPlace" : "Aucun lieu trouvé...",
+
+
+"last" : "last"
 }

@@ -1,4 +1,6 @@
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/pages/filters/filters_screen.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/locations/location_screen.dart';
@@ -75,7 +77,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Filtres',
+                  label: context.l18n!.navBarFilter.capitalize(),
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -87,7 +89,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Accueil',
+                  label: context.l18n!.navBarHome.capitalize(),
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -99,7 +101,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Lieux',
+                  label: context.l18n!.navBarLocation.capitalize(),
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -111,7 +113,7 @@ class _NavBarState extends State<NavBar> {
                           : SharedColorPalette().mainDisable,
                     ),
                   ),
-                  label: 'Profil',
+                  label: context.l18n!.navBarProfil.capitalize(),
                 ),
               ],
             ),

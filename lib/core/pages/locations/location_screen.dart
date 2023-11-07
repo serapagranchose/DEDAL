@@ -6,7 +6,9 @@ import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/datasources/locations/locations_datasource.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/get_it.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/pages/filters/route_generate/route_generate_screen.dart';
 import 'package:dedal/core/pages/locations/location_content.dart';
 import 'package:dedal/core/pages/locations/location_cubit.dart';
@@ -36,7 +38,7 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       appBar: true,
       navBar: true,
-      title: 'Lieux',
+      title: context.l18n!.navBarLocation.capitalize(),
       index: 2,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
@@ -52,14 +54,14 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
             }),
         CrudError(message: final message) => Column(
             children: [
-              Text(message ?? 'une erreur est subvenu'),
+              Text(message ?? context.l18n!.globalError.capitalize()),
               CustomStringButton(
                 context: context,
-                text: 'reload',
+                text: context.l18n!.globalRestart.capitalize(),
                 onTap: (c) async => context.read<LocationCubit>().load(),
               )
             ],
           ),
-        _ => const Text('error'),
+        _ => Text(context.l18n!.globalError.capitalize()),
       });
 }

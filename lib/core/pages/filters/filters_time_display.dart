@@ -1,4 +1,6 @@
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -24,7 +26,7 @@ class FiltersTimeDisplay extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Text('Séléctionnner votre temps de visite'),
+          Text(context.l18n!.filterTime.capitalize()),
           SleekCircularSlider(
             appearance: CircularSliderAppearance(
                 infoProperties: InfoProperties(

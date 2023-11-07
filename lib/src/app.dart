@@ -67,8 +67,7 @@ class MyApp extends StatelessWidget {
                   Locale('en', ''),
                   Locale('fr', ''),
                 ],
-                onGenerateTitle: (BuildContext context) =>
-                    context.l18n!.appTitle,
+                onGenerateTitle: (BuildContext context) => 'Dedal',
 
                 // Define a light and dark color theme. Then, read the user's
                 // preferred ThemeMode (light, dark, or system default) from the

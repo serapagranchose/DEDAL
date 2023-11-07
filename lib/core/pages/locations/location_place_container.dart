@@ -1,4 +1,5 @@
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_place_dialog.dart';
@@ -53,7 +54,7 @@ class LocationPlaceContainer extends StatelessWidget {
                     String()? => Icons.euro,
                     null => null,
                   },
-                color: SharedColorPalette().main,
+                  color: SharedColorPalette().main,
                 ),
                 VerticalDivider(
                   thickness: 1,
@@ -78,7 +79,9 @@ class LocationPlaceContainer extends StatelessWidget {
           onTap: () => showDialog(
               context: context,
               builder: (context) => LocationPlaceDialog(
-                    text: !action ? 'Ajouter' : 'Retirer',
+                    text: !action
+                        ? context.l18n!.globalAdd.capitalize()
+                        : context.l18n!.globalRemove.capitalize(),
                     action: onTap,
                     place: place,
                   )),

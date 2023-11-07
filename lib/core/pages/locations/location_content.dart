@@ -1,6 +1,8 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/constants/enum/location_page_enum.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_list_display.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +97,7 @@ class LocationContentState extends State<LocationContent> {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: CustomStringButton(
                       context: context,
-                      text: 'Valider',
+                      text: context.l18n!.globalValidate.capitalize(),
                       onTap: (c) async => widget.submit.call(widget.list?.$1),
                     ),
                   ),

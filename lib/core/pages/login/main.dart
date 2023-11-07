@@ -1,10 +1,11 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/pages/login/signin/signin_screen.dart';
 import 'package:dedal/core/pages/login/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Main extends StatelessWidget {
@@ -27,7 +28,7 @@ class Main extends StatelessWidget {
           ),
           Image.asset('assets/logo/dedal.png'),
           Text(
-            'Le chemin de votre culture',
+            context.l18n!.mainCatch.capitalize(),
             style: GoogleFonts.archivo(
               fontSize: 30,
             ),
@@ -38,7 +39,7 @@ class Main extends StatelessWidget {
             children: [
               CustomStringButton(
                 context: context,
-                text: 'Sign up',
+                text: context.l18n!.mainSignUp.capitalize(),
                 onTap: (controller) async => showModalBottomSheet<void>(
                   isScrollControlled: true,
                   isDismissible: true,
@@ -51,7 +52,7 @@ class Main extends StatelessWidget {
                 context: context,
                 backgroundColor: Colors.white,
                 textColor: SharedColorPalette().main,
-                text: 'Sign in',
+                text: context.l18n!.mainSignIn.capitalize(),
                 onTap: (controller) async => showModalBottomSheet<void>(
                   isScrollControlled: true,
                   isDismissible: true,

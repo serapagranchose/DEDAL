@@ -1,5 +1,7 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/text_fields/main_text_field.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:flutter/material.dart';
 
 class CodeDialog extends StatefulWidget {
@@ -37,12 +39,12 @@ class _CodeDialogState extends State<CodeDialog> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text(
-                  'Code',
+                Text(
+                  context.l18n!.loginCode.capitalize(),
                   textAlign: TextAlign.center,
                 ),
-                const Text(
-                  'entrez le code que vous avez reçu par mail',
+                Text(
+                  context.l18n!.loginCodeBis.capitalize(),
                   textAlign: TextAlign.center,
                 ),
                 MainTextFields(
@@ -50,7 +52,7 @@ class _CodeDialogState extends State<CodeDialog> {
                           code = value;
                         })),
                 CustomStringButton(
-                  text: 'Valider',
+                  text: context.l18n!.globalValidate.capitalize(),
                   context: context,
                   onTap: (c) async => widget.action.call(code),
                 )

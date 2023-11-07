@@ -3,7 +3,9 @@ import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/get_it.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
@@ -30,7 +32,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
-    
+
   @override
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       padding: false,
@@ -47,14 +49,14 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
             : const MainLoader(),
         CrudError(message: final message) => Column(
             children: [
-              Text(message ?? 'une erreur est subvenu'),
+              Text(message ?? context.l18n!.globalError.capitalize()),
               CustomStringButton(
                 context: context,
-                text: 'reload',
+                text: context.l18n!.globalRestart,
                 onTap: (c) async => context.read<HomeCubit>().load(),
               )
             ],
           ),
-        _ => const Text('error'),
+        _ => Text(context.l18n!.globalError.capitalize()),
       });
 }

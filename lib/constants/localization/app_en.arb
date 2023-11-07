@@ -1,6 +1,50 @@
 {
-  "appTitle": "dedal",
-  "@appTitle": {
-    "description": "The title of the application"
-  }
+"@_GLOBAL" : {},
+  "globalValidate" : "validate",
+  "globalReset": "reset",
+  "globalRestart" : "reload",
+  "globalLoading" : "Loading...",
+  "globalError": "Oh, an error has occurred...Please restart the application",
+  "globalClose" : "close",
+  "globalAdd" : "add",
+  "globalRemove" : "remove",
+
+"@_MAIN" : {},
+  "mainCatch": "the path of your culture",
+  "mainSignUp" : "SignUp",
+  "mainSignIn" : "SignIn",
+
+"@_NAVBAR" : {},
+  "navBarFilter": "filters",
+  "navBarHome": "home",
+  "navBarLocation": "locations",
+  "navBarProfil": "profile",
+  "globalOffLine" : "our server is offline please try again later :(",
+
+"@_FILTER" : {},
+  "filterGenerateMap": "Map generation",
+  "filterGeneratePath": "Generate your path",
+  "filterGeneratePlace": "Recover places",
+  "filterGenerateUser": "Send your data to our server",
+  "filterGenerateStart": "Start",
+  "filterGenerateEnd": "Et voila!",
+  "filterBuget": "select your budget",
+  "filterTime": "select the time of your visit",
+
+"@_LOGIN" : {},
+  "loginEmail": "your email",
+  "loginPassword": "your password",
+  "loginError": "incorrect email or password",
+  "loginConnect": "connection",
+  "loginCode" : "code",
+  "loginCodeBis": "enter the code you received by e-mail",
+
+"@_PROFIL" : {},
+  "profilDeco" : "log off",
+  "profilDeletAccount" : "delete account",
+
+"@_LOCATIONS" : {},
+  "locationNoPlace" : "No location found...",
+
+"last" : "last"
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:dedal/components/button/custom_button.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/pages/filters/route_generate/route_generate_screen.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +42,7 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
   Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
       index: 0,
       appBar: true,
-      title: 'Filtre',
+      title: context.l18n!.navBarFilter.capitalize(),
       navBar: true,
       child: switch (state) {
         CrudLoading() => const MainLoader(),
@@ -58,14 +60,14 @@ class FilterScreen extends CubitScreen<FiltersCubit, CrudState> {
               : const SizedBox.shrink(),
         CrudError(message: final message) => Column(
             children: [
-              Text(message ?? 'une erreur est subvenu'),
+              Text(message ?? context.l18n!.globalError),
               CustomStringButton(
                 context: context,
-                text: 'reload',
+                text: context.l18n!.globalReset.capitalize(),
                 onTap: (controller) async => context.read<HomeCubit>().load(),
               )
             ],
           ),
-        _ => const Text('error'),
+        _ => Text(context.l18n!.globalError.capitalize()),
       });
 }

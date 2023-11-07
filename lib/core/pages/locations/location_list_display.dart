@@ -1,3 +1,5 @@
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/locations/location_place_container.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,6 @@ class LocationListDisplay extends StatelessWidget {
                       action: action,
                     ))
                 .toList() ??
-            [const Text('no list found')],
+            [Text(context.l18n!.locationNoPlace.capitalize())],
       );
 }

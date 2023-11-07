@@ -1,6 +1,8 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/get_it.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/profil/profil_cubit.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
@@ -28,17 +30,17 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
         index: 3,
         navBar: true,
         appBar: true,
-        title: 'Profil',
+        title: context.l18n!.navBarProfil.capitalize(),
         child: Column(
           children: [
             CustomStringButton(
               context: context,
-              text: 'Deconnection',
+              text: context.l18n!.profilDeco.capitalize(),
               onTap: (_) async => context.goNamed(Main.routeName),
             ),
             CustomStringButton(
               context: context,
-              text: 'Supprmier le compte',
+              text: context.l18n!.profilDeletAccount.capitalize(),
               onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
             ),
           ],
