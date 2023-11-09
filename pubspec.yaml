@@ -59,6 +59,7 @@ dependencies:
   adaptive_theme: ^2.0.0
   shared_preferences: ^2.2.2
   provider: ^6.0.5
+  auto_size_text: ^3.0.0
   
 dev_dependencies:
   wyatt_analysis:

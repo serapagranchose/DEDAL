@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/filter.dart';
@@ -32,7 +33,7 @@ class FilterContainer extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(26.0),
+            padding: const EdgeInsets.all(26),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -40,7 +41,7 @@ class FilterContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Center(
-                      child: Text(
+                      child: AutoSizeText(
                         switch (filter.name ?? '') {
                           'bar' => 'Bar et Brasserie',
                           'magasin' => 'Shopping',
@@ -50,7 +51,6 @@ class FilterContainer extends StatelessWidget {
                         },
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
                           color: !selected
                               ? SharedColorPalette().mainDisable
                               : SharedColorPalette().main,
@@ -76,6 +76,7 @@ class FilterContainer extends StatelessWidget {
                         "soin" => Icons.face_2_outlined,
                         String() => Icons.abc,
                       },
+                      size: 20,
                       color: !selected
                           ? SharedColorPalette().mainDisable.withOpacity(0.2)
                           : SharedColorPalette().main,

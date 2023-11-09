@@ -25,6 +25,7 @@ class HomeContent extends StatefulWidget {
 
 class HomeContentState extends State<HomeContent> {
   Place? selected;
+  MapType mapType = MapType.normal;
 
   final Completer<GoogleMapController> _controller = Completer();
   Polyline polyline = Polyline(
@@ -42,7 +43,8 @@ class HomeContentState extends State<HomeContent> {
               target: widget.userPosition,
               zoom: 14.4746,
             ),
-            mapType: MapType.normal,
+            mapType: mapType,
+            myLocationButtonEnabled: false,
             myLocationEnabled: true,
             mapToolbarEnabled: false,
             zoomControlsEnabled: false,
@@ -54,6 +56,66 @@ class HomeContentState extends State<HomeContent> {
             },
           ),
           if (selected.isNotNull) HomePlaceDisplay(place: selected!),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () => print('ui'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.pin_drop,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      if (mapType == MapType.normal) {
+                        setState(() {
+                          mapType = MapType.satellite;
+                        });
+                      } else {
+                        setState(() {
+                          mapType = MapType.normal;
+                        });
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Icon(
+                            mapType == MapType.normal
+                                ? Icons.map_outlined
+                                : Icons.map,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       );
 
