@@ -31,7 +31,7 @@ class LocationGetLists
         final userPlace =
             params?.places ?? await filterDataSource.getPlaces(params!);
         final placeNear = await locationsDataSource.getPlaceClose(params!);
-        final placeNoFilter = await locationsDataSource.getPlaceFilter(params);
+        final placeNoFilter = await locationsDataSource.getPlaceClose(params);
         return ((userPlace, placeNear, placeNoFilter));
       },
           (error) => error is AppException

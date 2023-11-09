@@ -55,7 +55,7 @@ class LoginDataSourceImpl extends LoginDataSource {
   }
 
   @override
-  Future<User?> signIn(String email, String password) async => await http.post(
+  Future<User?> signIn(String email, String password) async => http.post(
         Uri.parse('http://52.166.128.133/signin'),
         body: jsonEncode({'email': email, 'password': password}),
         headers: {'Content-type': 'application/json', 'Accept': '*/*'},

@@ -51,7 +51,7 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   @override
   Future<void> onListen(BuildContext context, CrudState state) async {
     super.onListen(context, state);
-
+    
     if (state is CrudLoaded<User> && state.data.isNotNull) {
       context.pushNamed(HomeScreen.name);
     }
