@@ -11,11 +11,7 @@ class SharedColorPalette {
 }
 
 ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primaryColor: const Color(0xFF294F87)
-);
+    brightness: Brightness.light, primaryColor: const Color(0xFF294F87));
 
 ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primaryColor: const Color(0xFF294F87)
-);
+    brightness: Brightness.dark, primaryColor: const Color(0xFF294F87));
