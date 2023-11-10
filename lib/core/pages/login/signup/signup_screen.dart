@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';

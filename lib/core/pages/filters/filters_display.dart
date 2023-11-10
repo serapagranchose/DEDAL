@@ -1,7 +1,6 @@
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/pages/filters/filter_container.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class FiltersDisplay extends StatelessWidget {
   const FiltersDisplay({

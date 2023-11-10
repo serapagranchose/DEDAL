@@ -4,7 +4,6 @@ import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class SigninContent extends StatefulWidget {

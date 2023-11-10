@@ -39,13 +39,13 @@ class AppRouter {
             name: SignInScreen.routeName,
             path: '/signin',
             pageBuilder: (context, state) =>
-                noTransition(context, state, SignInScreen()),
+                noTransition(context, state, const SignInScreen()),
           ),
           GoRoute(
             name: SignUpScreen.routeName,
             path: '/signup',
             pageBuilder: (context, state) =>
-                noTransition(context, state, SignUpScreen()),
+                noTransition(context, state, const SignUpScreen()),
           ),
           GoRoute(
             name: HomeScreen.name,

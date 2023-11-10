@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/home/home_place_display.dart';
@@ -62,27 +63,21 @@ class HomeContentState extends State<HomeContent> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () => print('ui'),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(
-                            Icons.pin_drop,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
+                  CustomIconButton(
+                    icon: const Icon(
+                      Icons.pin_drop,
+                      color: Colors.black,
                     ),
+                    action: () => print('ui'),
                   ),
-                  InkWell(
-                    onTap: () {
+                  CustomIconButton(
+                    icon: Icon(
+                      mapType == MapType.normal
+                          ? Icons.map_outlined
+                          : Icons.map,
+                      color: Colors.black,
+                    ),
+                    action: () {
                       if (mapType == MapType.normal) {
                         setState(() {
                           mapType = MapType.satellite;
@@ -93,24 +88,6 @@ class HomeContentState extends State<HomeContent> {
                         });
                       }
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Icon(
-                            mapType == MapType.normal
-                                ? Icons.map_outlined
-                                : Icons.map,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),

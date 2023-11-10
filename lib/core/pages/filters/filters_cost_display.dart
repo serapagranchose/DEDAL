@@ -1,5 +1,4 @@
 import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/pages/filters/filters_settings_container.dart';
 import 'package:flutter/material.dart';
 
 class FiltersCostDisplay extends StatelessWidget {

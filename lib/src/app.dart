@@ -1,6 +1,5 @@
 import 'package:dedal/constants/enum/authentification_enum.dart';
 import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/pages/api_offline_page.dart';
 import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
 import 'package:dedal/core/pages/authentification/authentification_state.dart';
