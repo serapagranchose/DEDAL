@@ -1,6 +1,7 @@
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/pages/filters/filter_container.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class FiltersDisplay extends StatelessWidget {
   const FiltersDisplay({
@@ -15,19 +16,26 @@ class FiltersDisplay extends StatelessWidget {
   final List<String>? selected;
 
   @override
-  Widget build(BuildContext context) => GridView.count(
-      shrinkWrap: true,
-      crossAxisCount: 2,
-      childAspectRatio: 2,
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      physics: const BouncingScrollPhysics(),
-      children: filters
-          .map((e) => FilterContainer(
-                filter: e,
-                onTap: (filter) => onTap(filter),
-                selected:
-                    selected != null ? selected!.contains(e.id ?? '') : false,
-              ))
-          .toList());
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          physics: const BouncingScrollPhysics(),
+          children: [
+            ...filters
+                .map((e) => FilterContainer(
+                      filter: e,
+                      onTap: (filter) => onTap(filter),
+                      selected: selected != null
+                          ? selected!.contains(e.id ?? '')
+                          : false,
+                    ))
+                .toList(),
+          ],
+        ),
+      );
 }

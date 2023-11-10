@@ -28,7 +28,7 @@ class RegisterLayout extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: appBar.isNotNull
             ? AppBar(
-                backgroundColor: SharedColorPalette().main,
+                backgroundColor: SharedColorPalette().main2,
                 leading: context.canPop()
                     ? InkWell(
                         onTap: () => context.pop(),

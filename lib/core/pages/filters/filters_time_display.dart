@@ -1,8 +1,5 @@
-import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
-import 'package:dedal/core/extensions/string_extention.dart';
+import 'package:dedal/core/pages/filters/filters_settings_container.dart';
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class FiltersTimeDisplay extends StatelessWidget {
   const FiltersTimeDisplay({
@@ -13,6 +10,8 @@ class FiltersTimeDisplay extends StatelessWidget {
 
   final double time;
   final void Function(double value) onChange;
+  static List list =
+      List.generate(9, (index) => double.parse((index + 1).toString()));
 
   formattedTime({required int timeInSecond}) {
     int sec = timeInSecond % 60;
@@ -22,25 +21,24 @@ class FiltersTimeDisplay extends StatelessWidget {
     return "$minute : $second";
   }
 
+  String doubleToString(double value) {
+    if (value % 1 == 0.0) return ('${value.round().toString()}h');
+    return ('${value.round().toString()}h30');
+  }
+
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(context.l18n!.filterTime.capitalize()),
-          SleekCircularSlider(
-            appearance: CircularSliderAppearance(
-                infoProperties: InfoProperties(
-                    modifier: (percentage) =>
-                        formattedTime(timeInSecond: percentage.round()),
-                    mainLabelStyle: const TextStyle(color: Colors.black)),
-                customColors: CustomSliderColors(
-                    trackColor: SharedColorPalette().mainDisable,
-                    progressBarColor: SharedColorPalette().main)),
-            initialValue: time,
-            min: 0,
-            max: 600,
-            onChange: (value) => onChange(value),
-          ),
-        ],
+  Widget build(BuildContext context) => ListView(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        children: list
+            .map((e) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: FiltersSettingsContainer(
+                    label: doubleToString(e),
+                    action: () => onChange.call(e),
+                    active: e == time,
+                  ),
+            ))
+            .toList(),
       );
 }

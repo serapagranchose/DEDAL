@@ -87,4 +87,5 @@ flutter:
     # Add assets from the images directory to the application.
     - assets/logo/
     - assets/images/
+    - assets/images/filters/
     - assets/loader/

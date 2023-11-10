@@ -1,6 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:flutter/material.dart';
 
@@ -18,74 +15,55 @@ class FilterContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 4,
-                spreadRadius: 4,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(26),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: AutoSizeText(
-                        switch (filter.name ?? '') {
-                          'bar' => 'Bar et Brasserie',
-                          'magasin' => 'Shopping',
-                          'nature' => 'Parc et espace vert',
-                          "soin" => 'Bien-être',
-                          String() => (filter.name ?? '').capitalize(),
-                        },
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: !selected
-                              ? SharedColorPalette().mainDisable
-                              : SharedColorPalette().main,
-                        ),
-                      ),
-                    )
-                  ],
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    switch (filter.name) {
+                      'Art et culture' => 'assets/images/filters/art.jpg',
+                      'Bar et brasserie' => 'assets/images/filters/bar.png',
+                      'Divertissement' =>
+                        'assets/images/filters/divertissement.jpg',
+                      'Shopping' => 'assets/images/filters/shopping.jpg',
+                      'Café' => 'assets/images/filters/cafe.png',
+                      'Parc et espace vert' => 'assets/images/filters/parc.jpg',
+                      'Histoire' => 'assets/images/filters/histoire_lille.jpg',
+                      'Restaurant' => 'assets/images/filters/restaurant.png',
+                      'Bien-être' => 'assets/images/filters/bien-etre.jpg',
+                      'Enfant' => 'assets/images/filters/enfant.png',
+                      _ => 'assets/images/filters/divertissement.jpg',
+                    },
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      switch (filter.name ?? '') {
-                        'bar' => Icons.local_drink_sharp,
-                        'art et culture' => Icons.museum,
-                        'divertissement' => Icons.local_play_outlined,
-                        'restaurant' => Icons.restaurant,
-                        'café' => Icons.coffee,
-                        'histoire' => Icons.history,
-                        'enfant' => Icons.child_friendly_outlined,
-                        'magasin' => Icons.shopping_bag_outlined,
-                        'nature' => Icons.emoji_nature_outlined,
-                        "soin" => Icons.face_2_outlined,
-                        String() => Icons.abc,
-                      },
-                      size: 20,
-                      color: !selected
-                          ? SharedColorPalette().mainDisable.withOpacity(0.2)
-                          : SharedColorPalette().main,
-                    )
-                  ],
-                )
-              ],
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+              ),
             ),
-          ),
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(26),
+              child: Text(
+                filter.name ?? '',
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ),
+          ],
         ),
         onTap: () => onTap(filter),
       );

@@ -73,8 +73,8 @@ class _NavBarState extends State<NavBar> {
                     child: Icon(
                       Icons.filter_alt_outlined,
                       color: widget.currentIndex == 0
-                          ? SharedColorPalette().main
-                          : SharedColorPalette().mainDisable,
+                          ? SharedColorPalette().main2
+                          : SharedColorPalette().mainDisable2,
                     ),
                   ),
                   label: context.l18n!.navBarFilter.capitalize(),
@@ -85,8 +85,8 @@ class _NavBarState extends State<NavBar> {
                     child: Icon(
                       Icons.map,
                       color: widget.currentIndex == 1
-                          ? SharedColorPalette().main
-                          : SharedColorPalette().mainDisable,
+                          ? SharedColorPalette().main2
+                          : SharedColorPalette().mainDisable2,
                     ),
                   ),
                   label: context.l18n!.navBarHome.capitalize(),
@@ -97,8 +97,8 @@ class _NavBarState extends State<NavBar> {
                     child: Icon(
                       Icons.list,
                       color: widget.currentIndex == 2
-                          ? SharedColorPalette().main
-                          : SharedColorPalette().mainDisable,
+                          ? SharedColorPalette().main2
+                          : SharedColorPalette().mainDisable2,
                     ),
                   ),
                   label: context.l18n!.navBarLocation.capitalize(),
@@ -109,8 +109,8 @@ class _NavBarState extends State<NavBar> {
                     child: Icon(
                       Icons.person,
                       color: widget.currentIndex == 3
-                          ? SharedColorPalette().main
-                          : SharedColorPalette().mainDisable,
+                          ? SharedColorPalette().main2
+                          : SharedColorPalette().mainDisable2,
                     ),
                   ),
                   label: context.l18n!.navBarProfil.capitalize(),
