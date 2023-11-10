@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
@@ -105,6 +106,23 @@ class FilterDataSourceImpl extends FilterDataSource {
       ).then((value) {
         if (value.statusCode == 200) {
           return Map<String, Object>.from(jsonDecode(value.body));
+        }
+        return null;
+      });
+
+  @override
+  Future<Place?> getPlace(String placeId) async => await http.get(
+        Uri.parse('http://52.166.128.133/places/?id=$placeId'),
+        headers: {
+          'x-access-token': GetStorage().read('token'),
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      ).then((value) {
+        print(value.body);
+        print(value.statusCode);
+        if (value.statusCode == 200) {
+          return Place.fromJson(jsonDecode(value.body));
         }
         return null;
       });

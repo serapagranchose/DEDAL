@@ -1,5 +1,7 @@
 import 'package:dedal/core/pages/filters/filters_screen.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
+import 'package:dedal/core/pages/location_detail/location_place_detail_screen.dart';
+import 'package:dedal/core/pages/locations/location_place_detail.dart';
 import 'package:dedal/core/pages/locations/location_screen.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/login/signin/signin_screen.dart';
@@ -70,6 +72,12 @@ class AppRouter {
             path: '/filters',
             pageBuilder: (context, state) =>
                 noTransition(context, state, const FilterScreen()),
+          ),
+          GoRoute(
+            name: LocationPlaceDetailScreen.name,
+            path: '/place-detail',
+            pageBuilder: (context, state) => noTransition(context, state,
+                LocationPlaceDetailScreen(id: state.pathParameters['id'])),
           )
         ],
       );

@@ -64,11 +64,33 @@ class HomeContentState extends State<HomeContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomIconButton(
+                      icon: const Icon(
+                        Icons.pin_drop,
+                        color: Colors.black,
+                      ),
+                      action: () async {
+                        if (widget.map.isNotNull) {
+                          final lines = widget.map!['LongLat'] as List;
+                          moveCamera(LatLng(
+                              lines[1]['latitude'], lines.first['longitude']));
+                        }
+                      }),
+                  CustomIconButton(
                     icon: const Icon(
-                      Icons.pin_drop,
+                      Icons.location_off_outlined,
                       color: Colors.black,
                     ),
-                    action: () => print('ui'),
+                    action: () {
+                      if (mapType == MapType.normal) {
+                        setState(() {
+                          mapType = MapType.satellite;
+                        });
+                      } else {
+                        setState(() {
+                          mapType = MapType.normal;
+                        });
+                      }
+                    },
                   ),
                   CustomIconButton(
                     icon: Icon(
@@ -133,5 +155,16 @@ class HomeContentState extends State<HomeContent> {
         }
       }
     }
+  }
+
+  Future<void> moveCamera(LatLng pos) async {
+    GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        // on below line we have given positions of Location 5
+        CameraPosition(
+      target: pos,
+      zoom: 14,
+    )));
+    setState(() {});
   }
 }

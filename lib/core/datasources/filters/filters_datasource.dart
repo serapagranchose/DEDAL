@@ -9,4 +9,5 @@ abstract class FilterDataSource extends BaseDataSource {
   Future<List<Place>?> getPlaces(User user);
   Future<String?> getPath(User user);
   Future<Map<String, Object>?> getMap(User user);
+  Future<Place?> getPlace(String placeId);
 }
