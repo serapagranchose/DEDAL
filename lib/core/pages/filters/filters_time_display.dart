@@ -32,13 +32,13 @@ class FiltersTimeDisplay extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: list
             .map((e) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-              child: FiltersSettingsContainer(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: FiltersSettingsContainer(
                     label: doubleToString(e),
-                    action: () => onChange.call(e),
-                    active: e == time,
+                    action: () => onChange.call(e * 60),
+                    active: e == (time / 60).round(),
                   ),
-            ))
+                ))
             .toList(),
       );
 }

@@ -108,7 +108,7 @@ class RouteGenerateScreen extends CubitScreen<RouteGenerateCubit, CrudState> {
                     textAlign: TextAlign.center,
                   )
                 else if (state is CrudError) ...[
-                  Text(context.l18n!.globalError.capitalize()),
+                  Text(state.message ?? 'error'),
                   CustomStringButton(
                     context: context,
                     text: (context.l18n!.globalClose.capitalize()),

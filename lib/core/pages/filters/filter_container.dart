@@ -1,3 +1,4 @@
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class FilterContainer extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
+                  Radius.circular(10),
                 ),
               ),
             ),
@@ -47,6 +48,12 @@ class FilterContainer extends StatelessWidget {
               height: double.infinity,
               width: double.infinity,
               decoration: BoxDecoration(
+                border: selected
+                    ? Border.all(
+                        width: 3,
+                        color: SharedColorPalette().main,
+                      )
+                    : null,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),

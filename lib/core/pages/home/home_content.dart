@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dedal/components/button/filter_icon.dart';
 import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/models/place.dart';
@@ -58,60 +59,155 @@ class HomeContentState extends State<HomeContent> {
           ),
           if (selected.isNotNull) HomePlaceDisplay(place: selected!),
           Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CustomIconButton(
-                      icon: const Icon(
-                        Icons.pin_drop,
-                        color: Colors.black,
+                  Column(
+                    children: [
+                      CustomIconButton(
+                          icon: const Icon(
+                            Icons.pin_drop,
+                            color: Colors.black,
+                          ),
+                          action: () async {
+                            if (widget.map.isNotNull) {
+                              final lines = widget.map!['LongLat'] as List;
+                              moveCamera(LatLng(lines[1]['latitude'],
+                                  lines.first['longitude']));
+                            }
+                          }),
+                      CustomIconButton(
+                        icon: const Icon(
+                          Icons.location_off_outlined,
+                          color: Colors.black,
+                        ),
+                        action: () {
+                          if (mapType == MapType.normal) {
+                            setState(() {
+                              mapType = MapType.satellite;
+                            });
+                          } else {
+                            setState(() {
+                              mapType = MapType.normal;
+                            });
+                          }
+                        },
                       ),
-                      action: () async {
-                        if (widget.map.isNotNull) {
-                          final lines = widget.map!['LongLat'] as List;
-                          moveCamera(LatLng(
-                              lines[1]['latitude'], lines.first['longitude']));
-                        }
-                      }),
-                  CustomIconButton(
-                    icon: const Icon(
-                      Icons.location_off_outlined,
-                      color: Colors.black,
-                    ),
-                    action: () {
-                      if (mapType == MapType.normal) {
-                        setState(() {
-                          mapType = MapType.satellite;
-                        });
-                      } else {
-                        setState(() {
-                          mapType = MapType.normal;
-                        });
-                      }
-                    },
-                  ),
-                  CustomIconButton(
-                    icon: Icon(
-                      mapType == MapType.normal
-                          ? Icons.map_outlined
-                          : Icons.map,
-                      color: Colors.black,
-                    ),
-                    action: () {
-                      if (mapType == MapType.normal) {
-                        setState(() {
-                          mapType = MapType.satellite;
-                        });
-                      } else {
-                        setState(() {
-                          mapType = MapType.normal;
-                        });
-                      }
-                    },
+                      CustomIconButton(
+                        icon: Icon(
+                          mapType == MapType.normal
+                              ? Icons.map_outlined
+                              : Icons.map,
+                          color: Colors.black,
+                        ),
+                        action: () {
+                          if (mapType == MapType.normal) {
+                            setState(() {
+                              mapType = MapType.satellite;
+                            });
+                          } else {
+                            setState(() {
+                              mapType = MapType.normal;
+                            });
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
+                  height: 57,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      FilterIcon(
+                        icon: Icon(Icons.museum),
+                        title: 'Art',
+                        action: () => print('Art'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.museum),
+                        title: 'Divertissement',
+                        action: () => print('Divertissement'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.add_to_home_screen),
+                        title: 'Nature',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.air),
+                        title: 'Shopping',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.add_ic_call),
+                        title: 'Enfant',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.badge),
+                        title: 'Bar',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                      FilterIcon(
+                        icon: Icon(Icons.filter),
+                        title: 'title',
+                        action: () => print('ui'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

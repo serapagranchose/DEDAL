@@ -25,6 +25,7 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<bool> setinfoUser(User user) async {
+    print(user.info);
     return await http.post(
       Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
       body: jsonEncode({
@@ -54,6 +55,7 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Content-type': 'application/json',
         },
       ).then((value) {
+        print(value.body);
         if (value.statusCode == 200) {
           return (jsonDecode(value.body) as List<dynamic>)
               .map(
