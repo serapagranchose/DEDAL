@@ -120,7 +120,7 @@ class HomePlaceDisplay extends StatelessWidget {
               ),
             ),
           ),
-          const Gap(40),
+          const Gap(60),
         ],
       );
 }
