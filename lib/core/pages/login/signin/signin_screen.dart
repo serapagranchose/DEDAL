@@ -37,7 +37,7 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   Widget parent(BuildContext context, Widget child) => Scaffold(
         backgroundColor: Colors.transparent,
         body: DraggableScrollableSheet(
-            initialChildSize: 0.6,
+            initialChildSize: 0.7,
             builder: (context, scrollController) => DecoratedBox(
                   decoration: const BoxDecoration(
                     borderRadius:
@@ -51,7 +51,7 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   @override
   Future<void> onListen(BuildContext context, CrudState state) async {
     super.onListen(context, state);
-    
+
     if (state is CrudLoaded<User> && state.data.isNotNull) {
       context.pushNamed(HomeScreen.name);
     }
@@ -61,9 +61,10 @@ class SignInScreen extends CubitScreen<SignInCubit, CrudState> {
   Widget onBuild(BuildContext context, CrudState state) => state is CrudLoading
       ? const MainLoader()
       : SigninContent(
-          validate: (email, password) async => context
+          validate: (email, password, saveCreadential) async => context
               .read<SignInCubit>()
-              .userSignIn(SigninDto(email: email, password: password)),
+              .userSignIn(
+                  SigninDto(email: email, password: password), saveCreadential),
           isError: state is CrudError,
         );
 }

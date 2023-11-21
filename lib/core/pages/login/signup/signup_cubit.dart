@@ -29,9 +29,11 @@ class SignUpCubit extends Cubit<CrudState> {
   final UpdateUser _updateUser;
 
   SignUpDto? info;
+  bool save = false;
 
-  FutureOr<void> userSignUp(SignUpDto? params) async {
+  FutureOr<void> userSignUp(SignUpDto? params, bool save) async {
     info = params;
+    save = save;
     final signUpResult =
         await _signUp.call(info).fold((value) => value, (error) => false);
     if (signUpResult) emit(const CrudOkReturn());
@@ -58,7 +60,9 @@ class SignUpCubit extends Cubit<CrudState> {
         .call(SigninDto(email: info?.email, password: info?.password))
         .fold((value) {
       if (value.isNotNull) {
-        setValue(value);
+        if (save) {
+          setValue(value);
+        }
         emit(CrudLoaded<User>(value));
       } else {
         emit(const CrudError(''));

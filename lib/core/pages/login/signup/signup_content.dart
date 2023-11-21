@@ -6,8 +6,8 @@ import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SigninContent extends StatefulWidget {
-  const SigninContent({
+class SignUpContent extends StatefulWidget {
+  const SignUpContent({
     required this.validate,
     this.isError,
     super.key,
@@ -18,12 +18,13 @@ class SigninContent extends StatefulWidget {
   final bool? isError;
 
   @override
-  SigninContentyState createState() => SigninContentyState();
+  SignUpContentyState createState() => SignUpContentyState();
 }
 
-class SigninContentyState extends State<SigninContent> {
+class SignUpContentyState extends State<SignUpContent> {
   String _email = '';
   String _password = '';
+  String _passwordVerif = '';
   bool _saveCreadential = false;
 
   @override
@@ -49,15 +50,25 @@ class SigninContentyState extends State<SigninContent> {
             }),
             border: widget.isError ?? false ? Colors.red.shade900 : null,
           ),
+          MainTextFields(
+            isHide: true,
+            title: context.l18n!.loginPassword.capitalize(),
+            onChanged: (String value) => setState(() {
+              _password = value;
+            }),
+            border: widget.isError ?? false
+                ? Colors.red.shade900
+                : SharedColorPalette().main,
+          ),
           Column(
             children: [
               MainTextFields(
                 isHide: true,
-                title: context.l18n!.loginPassword.capitalize(),
+                title: 'Password verification',
                 onChanged: (String value) => setState(() {
-                  _password = value;
+                  _passwordVerif = value;
                 }),
-                border: widget.isError ?? false
+                border: _passwordVerif != _password
                     ? Colors.red.shade900
                     : SharedColorPalette().main,
               ),
@@ -66,6 +77,10 @@ class SigninContentyState extends State<SigninContent> {
                   context.l18n!.loginError.capitalize(),
                   style: TextStyle(color: Colors.red.shade900),
                 ),
+              Text('Votre mot de passe doit contenir, au moins : '),
+              Text('- Une majuscue'),
+              Text('- Un charactère spécial'),
+              Text('- Un chiffre'),
             ],
           ),
           Row(
@@ -83,10 +98,11 @@ class SigninContentyState extends State<SigninContent> {
             child: CustomStringButton(
               context: context,
               disabled: !(RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9-]+\.[a-zA-Z]+")
-                      .hasMatch(_email) &&
-                  RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})+")
-                      .hasMatch(_password)),
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9-]+\.[a-zA-Z]+")
+                          .hasMatch(_email) &&
+                      RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})+")
+                          .hasMatch(_password)) &&
+                  _password == _passwordVerif,
               onTap: (c) async =>
                   widget.validate.call(_email, _password, _saveCreadential),
               text: context.l18n!.loginConnect.capitalize(),

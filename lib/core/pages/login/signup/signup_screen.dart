@@ -11,6 +11,7 @@ import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/login/signUp/signUp_cubit.dart';
 import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
+import 'package:dedal/core/pages/login/signup/signup_content.dart';
 import 'package:dedal/core/pages/login/stateless/code_dialog.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/sign_up.dart';
@@ -40,7 +41,7 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   Widget parent(BuildContext context, Widget child) => Scaffold(
         backgroundColor: Colors.transparent,
         body: DraggableScrollableSheet(
-            initialChildSize: 0.6,
+            initialChildSize: 0.9,
             builder: (context, scrollController) => DecoratedBox(
                   decoration: const BoxDecoration(
                     borderRadius:
@@ -62,7 +63,8 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
                     await context.read<SignUpCubit>().userSignUpCode(code);
                 if (res.isNotNull) {
                   context.read<SignInCubit>().userSignIn(
-                      SigninDto(email: res?.email, password: res?.password));
+                      SigninDto(email: res?.email, password: res?.password),
+                      false);
                 }
               }));
     }
@@ -77,9 +79,9 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   @override
   Widget onBuild(BuildContext context, CrudState state) => state is CrudLoading
       ? const MainLoader()
-      : SigninContent(validate: (email, password) async {
+      : SignUpContent(validate: (email, password, saveCreadential) async {
           await context
               .read<SignUpCubit>()
-              .userSignUp(SignUpDto(email: email, password: password));
+              .userSignUp(SignUpDto(email: email, password: password), saveCreadential);
         });
 }

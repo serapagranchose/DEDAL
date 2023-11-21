@@ -23,12 +23,14 @@ class SignInCubit extends Cubit<CrudState> {
   final SetCredential _setCredential;
   final UpdateUser _updateUser;
 
-  FutureOr<void> userSignIn(SigninDto? params) async {
+  FutureOr<void> userSignIn(SigninDto? params, bool save) async {
     emit(const CrudLoading());
     return _signIn.call(params).fold((value) {
       if (value.isNotNull) {
-        setValue(params);
-        _updateUser.call(value);
+        if (save) {
+          setValue(params);
+          _updateUser.call(value);
+        }
 
         emit(CrudLoaded<User>(value));
       } else {
