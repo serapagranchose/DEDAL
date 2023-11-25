@@ -4,6 +4,7 @@ import 'package:dedal/core/pages/api_offline_page.dart';
 import 'package:dedal/core/pages/authentification/authentification_cubit.dart';
 import 'package:dedal/core/pages/authentification/authentification_state.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
+import 'package:dedal/core/pages/home/onboarding_tooltip_wrapper.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/router.dart';
 import 'package:dedal/core/use_cases/image_helper.dart';
@@ -74,8 +75,9 @@ class MyApp extends StatelessWidget {
                 theme: theme,
                 darkTheme: darkTheme,
                 themeMode: settingsController.themeMode,
-                builder: (context, child) =>
-                    AppViewContent(_navigatorKey, child),
+                builder: (context, child) => OnboardingToolTipWrapper(
+                  child: AppViewContent(_navigatorKey, child),
+                ),
 
                 // Define a function to handle named routes in order to support
                 // Flutter web url navigation and deep linking.
