@@ -9,6 +9,7 @@
   "globalAdd" : "ajouter",
   "globalRemove" : "retirer",
   "globalOffLine" : "nos serveur sont hors ligne merci de réessyer plus tard :(",
+  "global" : "suivant",
 
 "@_MAIN" : {},
   "mainCatch" : "le chemin de votre culture",

@@ -8,6 +8,7 @@
   "globalClose" : "close",
   "globalAdd" : "add",
   "globalRemove" : "remove",
+  "globalNext" : "next",
 
 "@_MAIN" : {},
   "mainCatch": "the path of your culture",

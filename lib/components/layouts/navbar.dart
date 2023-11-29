@@ -1,6 +1,7 @@
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
+import 'package:dedal/core/extensions/tooltip.dart';
 import 'package:dedal/core/pages/filters/filters_screen.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/locations/location_screen.dart';
@@ -68,51 +69,95 @@ class _NavBarState extends State<NavBar> {
               type: BottomNavigationBarType.fixed,
               items: [
                 BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.filter_alt_outlined,
-                      color: widget.currentIndex == 0
-                          ? SharedColorPalette().main2
-                          : SharedColorPalette().mainDisable2,
+                  icon: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
                     ),
-                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.filter_alt_outlined,
+                        color: widget.currentIndex == 0
+                            ? SharedColorPalette().main2
+                            : SharedColorPalette().mainDisable2,
+                      ),
+                    ),
+                  ).allowShowTooltip(context,
+                      index: 1,
+                      title: context.l18n!.navBarFilter.capitalize(),
+                      display: true,
+                      description:
+                          'Ici, vous pouvez nous confier vos envie\nNous les changerons en parcours 100% adaté a vous !'),
                   label: context.l18n!.navBarFilter.capitalize(),
                 ),
                 BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.map,
-                      color: widget.currentIndex == 1
-                          ? SharedColorPalette().main2
-                          : SharedColorPalette().mainDisable2,
+                  icon: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
                     ),
-                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.map,
+                        color: widget.currentIndex == 1
+                            ? SharedColorPalette().main2
+                            : SharedColorPalette().mainDisable2,
+                      ),
+                    ),
+                  ).allowShowTooltip(context,
+                      index: 2,
+                      title: context.l18n!.navBarHome.capitalize(),
+                      display: true,
+                      description:
+                          'Ici vous pouvez consulter la carte, vos parcours et voir tout les lieux que vous pouvez visiter'),
                   label: context.l18n!.navBarHome.capitalize(),
                 ),
                 BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.list,
-                      color: widget.currentIndex == 2
-                          ? SharedColorPalette().main2
-                          : SharedColorPalette().mainDisable2,
+                  icon: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
                     ),
-                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.list,
+                        color: widget.currentIndex == 2
+                            ? SharedColorPalette().main2
+                            : SharedColorPalette().mainDisable2,
+                      ),
+                    ),
+                  ).allowShowTooltip(context,
+                      index: 3,
+                      title: context.l18n!.navBarLocation.capitalize(),
+                      display: true,
+                      description:
+                          'Ici, vous pouvez consulter les lieux sur votre parocurs sous forme de liste\nVOus pourrez aussi adapter cette liste à vos envie en temps réel!'),
                   label: context.l18n!.navBarLocation.capitalize(),
                 ),
                 BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.person,
-                      color: widget.currentIndex == 3
-                          ? SharedColorPalette().main2
-                          : SharedColorPalette().mainDisable2,
+                  icon: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
                     ),
-                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.person,
+                        color: widget.currentIndex == 3
+                            ? SharedColorPalette().main2
+                            : SharedColorPalette().mainDisable2,
+                      ),
+                    ),
+                  ).allowShowTooltip(context,
+                      index: 4,
+                      title: context.l18n!.navBarProfil.capitalize(),
+                      display: true,
+                      description:
+                          'Ici vous retrouverai les details de votre compte ...'),
                   label: context.l18n!.navBarProfil.capitalize(),
                 ),
               ],
