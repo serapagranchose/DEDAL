@@ -8,6 +8,7 @@ import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/profil/profil_cubit.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/set_first_step.dart';
 import 'package:dedal/core/use_cases/user_unsubscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,8 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
       // function that call APi should be in a usecase(check Getuser to get exeple) and api call must be in datasource
       getUser: GetUser(localStorageDataSource: getIt()),
       clearUser: ClearUser(localStorageDataSource: getIt()),
-      userUnsubscribe: UserUnsubscribe(loginDataSource: getIt()))
+      userUnsubscribe: UserUnsubscribe(loginDataSource: getIt()),
+      setFirstStep: SetFirstStep(localStorageDataSource: getIt()))
     ..load();
 
   @override
@@ -54,6 +56,11 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
               context: context,
               text: context.l18n!.profilDeletAccount.capitalize(),
               onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
+            ),
+            CustomStringButton(
+              context: context,
+              text: 'tmp redo first step',
+              onTap: (_) async => context.read<ProfilCubit>().resetFirstStep(),
             ),
           ],
         ),

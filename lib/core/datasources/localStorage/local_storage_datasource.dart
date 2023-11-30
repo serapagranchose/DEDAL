@@ -8,4 +8,6 @@ abstract class LocalStorageDataSource extends BaseDataSource {
   Future<void> clearUser();
   Future<SigninDto?> getCredential();
   Future<void> setCredential(SigninDto info);
+  Future<bool?> getFirstStep();
+  Future<void> setFirstStep(bool value);
 }

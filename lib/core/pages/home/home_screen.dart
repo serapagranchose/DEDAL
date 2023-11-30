@@ -9,8 +9,10 @@ import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
+import 'package:dedal/core/use_cases/get_first_step.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
+import 'package:dedal/core/use_cases/set_first_step.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:dedal/core/use_cases/user_get_map.dart';
 import 'package:flutter/widgets.dart';
@@ -30,7 +32,11 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
       getUserGeolocation: GetUserGeolocation(),
       userGetMap: UserGetMap(filterDataSource: getIt<FilterDataSource>()),
       updateUser:
-          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
+          UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
+      getFirstStep:
+          GetFirstStep(localStorageDataSource: getIt<LocalStorageDataSource>()),
+      setFirstStep:
+          SetFirstStep(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
 
   @override

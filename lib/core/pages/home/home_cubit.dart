@@ -1,8 +1,12 @@
 import 'dart:async';
 
+import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
+import 'package:dedal/core/use_cases/get_first_step.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
+import 'package:dedal/core/use_cases/set_first_step.dart';
+import 'package:dedal/core/use_cases/tooltip_helper.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:dedal/core/use_cases/user_get_map.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,18 +16,24 @@ import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 import 'package:wyatt_type_utils/wyatt_type_utils.dart';
 
 class HomeCubit extends Cubit<CrudState> {
-  HomeCubit({
-    required GetUserGeolocation getUserGeolocation,
-    required GetUser getUser,
-    required UserGetMap userGetMap,
-    required UpdateUser updateUser,
-  })  : _getUserGeolocation = getUserGeolocation,
+  HomeCubit(
+      {required GetUserGeolocation getUserGeolocation,
+      required GetUser getUser,
+      required UserGetMap userGetMap,
+      required UpdateUser updateUser,
+      required GetFirstStep getFirstStep,
+      required SetFirstStep setFirstStep})
+      : _getUserGeolocation = getUserGeolocation,
         _getUser = getUser,
         _userGetMap = userGetMap,
         _updateUser = updateUser,
+        _getFirstStep = getFirstStep,
+        _setFirstStep = setFirstStep,
         super(const CrudInitial());
 
   final GetUserGeolocation _getUserGeolocation;
+  final GetFirstStep _getFirstStep;
+  final SetFirstStep _setFirstStep;
   final GetUser _getUser;
   final UserGetMap _userGetMap;
   final UpdateUser _updateUser;
@@ -31,6 +41,11 @@ class HomeCubit extends Cubit<CrudState> {
   FutureOr<void> load() async {
     bool change = false;
     emit(const CrudLoading());
+    final res =
+        await _getFirstStep.call(null).fold((value) => value, (error) => null);
+    if (!(res ?? true)) {
+      getIt<OnboardingTooTipHelper>().start.call();
+    }
     await _getUser.call(const NoParam()).fold((user) async {
       if (user.isNotNull) {
         if (user?.pos.isNull ?? false) {
@@ -55,4 +70,6 @@ class HomeCubit extends Cubit<CrudState> {
       }
     }, (error) => emit(CrudError(error.toString())));
   }
+
+  Future<void> setUserFirstStep() async => _setFirstStep.call(true);
 }
