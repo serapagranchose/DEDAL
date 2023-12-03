@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
 import 'package:dedal/core/dtos/sign_up_dto.dart';
 import 'package:dedal/core/models/user.dart';
+import 'package:dedal/core/use_cases/set_credential.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/sign_up.dart';
 import 'package:dedal/core/use_cases/sign_up_code.dart';
@@ -17,16 +18,19 @@ class SignUpCubit extends Cubit<CrudState> {
     required SignUpCode signUpCode,
     required UpdateUser updateUser,
     required SignIn signIn,
+    required SetCredential setCredential,
   })  : _signUp = signUp,
         _signIn = signIn,
         _signUpCode = signUpCode,
         _updateUser = updateUser,
+        _setCredential = setCredential,
         super(const CrudInitial());
 
   final SignUp _signUp;
   final SignIn _signIn;
   final SignUpCode _signUpCode;
   final UpdateUser _updateUser;
+  final SetCredential _setCredential;
 
   SignUpDto? info;
   bool save = false;
@@ -61,8 +65,9 @@ class SignUpCubit extends Cubit<CrudState> {
         .fold((value) {
       if (value.isNotNull) {
         if (save) {
-          setValue(value);
+          setValue(SigninDto(email: info?.email, password: info?.password));
         }
+        _updateUser.call(value);
         emit(CrudLoaded<User>(value));
       } else {
         emit(const CrudError(''));
@@ -72,7 +77,7 @@ class SignUpCubit extends Cubit<CrudState> {
     });
   }
 
-  FutureOr<void> setValue(User? user) async {
-    _updateUser.call(user);
+  FutureOr<void> setValue(SigninDto? info) async {
+    await _setCredential.call(info);
   }
 }
