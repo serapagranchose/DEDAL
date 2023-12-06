@@ -95,11 +95,10 @@ class FilterContentState extends State<FilterContent> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 128),
             child: CustomStringButton(
-              backgroundColor: Colors.transparent,
-              textColor: SharedColorPalette().mainDisable,
+              backgroundColor: SharedColorPalette().secondary,
               border: Border.all(
                 width: 2,
-                color: SharedColorPalette().mainDisable,
+                color: SharedColorPalette().mainDisable(Theme.of(context)),
               ),
               context: context,
               text: context.l18n!.globalValidate.capitalize(),

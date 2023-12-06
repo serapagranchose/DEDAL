@@ -37,7 +37,7 @@ class HomeContentState extends State<HomeContent> {
     points: const [],
     polylineId: const PolylineId('parcours'),
     width: 5,
-    color: SharedColorPalette().mainDisable,
+    color: SharedColorPalette().secondary,
   );
   Set<Marker> markers = {};
   @override

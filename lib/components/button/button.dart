@@ -39,8 +39,8 @@ class GlobalButtonState extends State<GlobalButton> {
             decoration: BoxDecoration(
                 color: widget.color ??
                     (widget.disable
-                        ? SharedColorPalette().mainDisable
-                        : SharedColorPalette().main),
+                        ? SharedColorPalette().mainDisable(Theme.of(context))
+                        : SharedColorPalette().secondary),
                 borderRadius: const BorderRadius.all(Radius.circular(10))),
             child: Center(
               child: Text(

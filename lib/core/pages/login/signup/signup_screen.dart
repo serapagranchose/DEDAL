@@ -8,7 +8,7 @@ import 'package:dedal/core/dtos/sign_up_dto.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
-import 'package:dedal/core/pages/login/signUp/signUp_cubit.dart';
+import 'package:dedal/core/pages/login/signup/signup_cubit.dart';
 import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
 import 'package:dedal/core/pages/login/signup/signup_content.dart';

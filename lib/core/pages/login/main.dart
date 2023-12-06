@@ -51,7 +51,7 @@ class Main extends StatelessWidget {
               CustomStringButton(
                 context: context,
                 backgroundColor: Colors.white,
-                textColor: SharedColorPalette().main,
+                textColor: SharedColorPalette().secondary,
                 text: context.l18n!.mainSignIn.capitalize(),
                 onTap: (controller) async => showModalBottomSheet<void>(
                   isScrollControlled: true,

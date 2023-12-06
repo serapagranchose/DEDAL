@@ -15,6 +15,7 @@ import 'package:dedal/core/use_cases/user_unsubscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gap/gap.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
@@ -48,35 +49,29 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
             if (state is CrudLoaded<User?>)
               Column(
                 children: [
-                  /*
-                  MainTextFields(
-                    title: context.l18n!.loginEmail.capitalize(),
-                    onChanged: (String value) => (),
-                  ),
-                  MainTextFields(
-                    title: context.l18n!.loginEmail.capitalize(),
-                    onChanged: (String value) => (),
-                  ),
-                  */
-                  Container(height: 30),
+                  const Gap(30),
                   Text(
+                    '${Theme.of(context).brightness == Brightness.light ? 'light' : 'dark'}',
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                   Text(
                     '${state.data?.name}',
                     textAlign: TextAlign.start,
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  Container(height: 15),
+                  const Gap(15),
                   Text('${state.data?.email}'),
-                  Container(height: 30),
+                  const Gap(30),
                   // Modify Profile
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 90),
                     child: Column(children: [
                       CustomStringButton(
-                        backgroundColor: Colors.transparent,
-                        textColor: SharedColorPalette().mainDisable,
+                        backgroundColor: SharedColorPalette().accent(Theme.of(context)),
                         border: Border.all(
                           width: 2,
-                          color: SharedColorPalette().mainDisable,
+                          color: SharedColorPalette().mainDisable(Theme.of(context)),
                         ),
                         context: context,
                         text: context.l18n!.profilModify.capitalize(),
@@ -84,37 +79,37 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
                       ),
                     ])
                   ),
-                  Container(height: 15),
+                  const Gap(15),
                         ],
               ),
               // To get User info just look in state.data.whateveryouwant
               Expanded(
-                child: Container(height: 15),
+                child: const Gap(15),
               ),
               Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(children: [
                   // Delete account button
                   Expanded(
-        child: CustomStringButton(
+                    child: CustomStringButton(
                     border: Border.all(
                       width: 2,
-                      color: SharedColorPalette().mainDisable,
+                      color: SharedColorPalette().mainDisable(Theme.of(context)),
                     ),
+                    backgroundColor: SharedColorPalette().secondary,
                     context: context,
                     text: context.l18n!.profilDeletAccount.capitalize(),
                     onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
                   ),
                   ),
-                  Container(width: 30),
+                                    const Gap(30),
                   // Log out button
                   Expanded(
         child: CustomStringButton(
-                    backgroundColor: Colors.transparent,
-                    textColor: SharedColorPalette().mainDisable,
+                    backgroundColor: SharedColorPalette().accent(Theme.of(context)),
                     border: Border.all(
                       width: 2,
-                      color: SharedColorPalette().mainDisable,
+                      color: SharedColorPalette().mainDisable(Theme.of(context)),
                     ),
                     context: context,
                     text: context.l18n!.profilDeco.capitalize(),

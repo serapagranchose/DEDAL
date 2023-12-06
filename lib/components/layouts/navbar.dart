@@ -37,7 +37,7 @@ class _NavBarState extends State<NavBar> {
           ),
           child: BottomAppBar(
             shape: const CircularNotchedRectangle(),
-            color: Colors.white,
+            color: SharedColorPalette().navBar(Theme.of(context)),
             notchMargin: 6,
             elevation: 0,
             child: BottomNavigationBar(
@@ -79,8 +79,8 @@ class _NavBarState extends State<NavBar> {
                       child: Icon(
                         Icons.filter_alt_outlined,
                         color: widget.currentIndex == 0
-                            ? SharedColorPalette().main2
-                            : SharedColorPalette().mainDisable2,
+                            ? SharedColorPalette().primary
+                            : SharedColorPalette().lightPrimary,
                       ),
                     ),
                   ).allowShowTooltip(context,
@@ -102,8 +102,8 @@ class _NavBarState extends State<NavBar> {
                       child: Icon(
                         Icons.map,
                         color: widget.currentIndex == 1
-                            ? SharedColorPalette().main2
-                            : SharedColorPalette().mainDisable2,
+                            ? SharedColorPalette().primary
+                            : SharedColorPalette().lightPrimary,
                       ),
                     ),
                   ).allowShowTooltip(context,
@@ -125,8 +125,8 @@ class _NavBarState extends State<NavBar> {
                       child: Icon(
                         Icons.list,
                         color: widget.currentIndex == 2
-                            ? SharedColorPalette().main2
-                            : SharedColorPalette().mainDisable2,
+                            ? SharedColorPalette().primary
+                            : SharedColorPalette().lightPrimary,
                       ),
                     ),
                   ).allowShowTooltip(context,
@@ -148,8 +148,8 @@ class _NavBarState extends State<NavBar> {
                       child: Icon(
                         Icons.person,
                         color: widget.currentIndex == 3
-                            ? SharedColorPalette().main2
-                            : SharedColorPalette().mainDisable2,
+                            ? SharedColorPalette().primary
+                            : SharedColorPalette().lightPrimary,
                       ),
                     ),
                   ).allowShowTooltip(context,

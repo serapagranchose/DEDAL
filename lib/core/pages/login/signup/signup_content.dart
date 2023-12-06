@@ -58,7 +58,7 @@ class SignUpContentyState extends State<SignUpContent> {
             }),
             border: widget.isError ?? false
                 ? Colors.red.shade900
-                : SharedColorPalette().main,
+                : SharedColorPalette().secondary,
           ),
           Column(
             children: [
@@ -70,7 +70,7 @@ class SignUpContentyState extends State<SignUpContent> {
                 }),
                 border: _passwordVerif != _password
                     ? Colors.red.shade900
-                    : SharedColorPalette().main,
+                    : SharedColorPalette().secondary,
               ),
               if (widget.isError ?? false)
                 Text(

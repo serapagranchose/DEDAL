@@ -43,7 +43,7 @@ class _MainTextFieldsState extends State<MainTextFields> {
               cursorColor: Colors.black,
               cursorWidth: 1,
               decoration: InputDecoration(
-                iconColor: widget.border ?? SharedColorPalette().main,
+                iconColor: widget.border ?? SharedColorPalette().secondary,
                 suffixIcon: widget.isHide ?? false
                     ? hided
                         ? InkWell(
@@ -61,7 +61,7 @@ class _MainTextFieldsState extends State<MainTextFields> {
                     : null,
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: widget.border ?? SharedColorPalette().main,
+                    color: widget.border ?? SharedColorPalette().secondary,
                   ),
                 ),
                 isDense: true,
