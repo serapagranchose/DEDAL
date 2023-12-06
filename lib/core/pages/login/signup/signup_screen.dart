@@ -13,6 +13,7 @@ import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
 import 'package:dedal/core/pages/login/signup/signup_content.dart';
 import 'package:dedal/core/pages/login/stateless/code_dialog.dart';
+import 'package:dedal/core/use_cases/set_credential.dart';
 import 'package:dedal/core/use_cases/sign_in.dart';
 import 'package:dedal/core/use_cases/sign_up.dart';
 import 'package:dedal/core/use_cases/sign_up_code.dart';
@@ -35,7 +36,8 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
       signUpCode: SignUpCode(loginDataSource: getIt<LoginDataSource>()),
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()),
-      signIn: SignIn(loginDataSource: getIt<LoginDataSource>()));
+      signIn: SignIn(loginDataSource: getIt<LoginDataSource>()),
+      setCredential: SetCredential(localStorageDataSource: getIt()));
 
   @override
   Widget parent(BuildContext context, Widget child) => Scaffold(
@@ -80,8 +82,7 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   Widget onBuild(BuildContext context, CrudState state) => state is CrudLoading
       ? const MainLoader()
       : SignUpContent(validate: (email, password, saveCreadential) async {
-          await context
-              .read<SignUpCubit>()
-              .userSignUp(SignUpDto(email: email, password: password), saveCreadential);
+          await context.read<SignUpCubit>().userSignUp(
+              SignUpDto(email: email, password: password), saveCreadential);
         });
 }

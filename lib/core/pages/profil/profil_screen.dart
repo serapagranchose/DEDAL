@@ -11,6 +11,7 @@ import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/profil/profil_cubit.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/set_first_step.dart';
 import 'package:dedal/core/use_cases/user_unsubscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,8 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
       // function that call APi should be in a usecase(check Getuser to get exeple) and api call must be in datasource
       getUser: GetUser(localStorageDataSource: getIt()),
       clearUser: ClearUser(localStorageDataSource: getIt()),
-      userUnsubscribe: UserUnsubscribe(loginDataSource: getIt()))
+      userUnsubscribe: UserUnsubscribe(loginDataSource: getIt()),
+      setFirstStep: SetFirstStep(localStorageDataSource: getIt()))
     ..load();
 
   @override
@@ -80,42 +82,43 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
                     ])
                   ),
                   const Gap(15),
-                        ],
+                ],
               ),
               // To get User info just look in state.data.whateveryouwant
               Expanded(
                 child: const Gap(15),
               ),
               Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(children: [
                   // Delete account button
                   Expanded(
                     child: CustomStringButton(
-                    border: Border.all(
-                      width: 2,
-                      color: SharedColorPalette().mainDisable(Theme.of(context)),
+                      border: Border.all(
+                        width: 2,
+                        color: SharedColorPalette().mainDisable(Theme.of(context)),
+                      ),
+                      backgroundColor: SharedColorPalette().secondary,
+                      context: context,
+                      text: context.l18n!.profilDeletAccount.capitalize(),
+                      onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
                     ),
-                    backgroundColor: SharedColorPalette().secondary,
-                    context: context,
-                    text: context.l18n!.profilDeletAccount.capitalize(),
-                    onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
                   ),
-                  ),
-                                    const Gap(30),
+                  const Gap(30),
                   // Log out button
                   Expanded(
-        child: CustomStringButton(
-                    backgroundColor: SharedColorPalette().accent(Theme.of(context)),
-                    border: Border.all(
-                      width: 2,
-                      color: SharedColorPalette().mainDisable(Theme.of(context)),
+                    child: CustomStringButton(
+                      backgroundColor: SharedColorPalette().accent(Theme.of(context)),
+                      border: Border.all(
+                        width: 2,
+                        color: SharedColorPalette().mainDisable(Theme.of(context)),
+                      ),
+                      context: context,
+                      text: context.l18n!.profilDeco.capitalize(),
+                      onTap: (_) async => context.goNamed(Main.routeName),
                     ),
-                    context: context,
-                    text: context.l18n!.profilDeco.capitalize(),
-                    onTap: (_) async => context.goNamed(Main.routeName),
-                  ),
-                )])
+                  )
+                ])
               ),
           ],
         ),

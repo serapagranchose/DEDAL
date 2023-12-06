@@ -29,8 +29,8 @@ class SignInCubit extends Cubit<CrudState> {
       if (value.isNotNull) {
         if (save) {
           setValue(params);
-          _updateUser.call(value);
         }
+        _updateUser.call(value);
 
         emit(CrudLoaded<User>(value));
       } else {

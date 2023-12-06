@@ -41,4 +41,18 @@ class LocalStorageDataSourceImpl extends LocalStorageDataSource {
     final box = await Hive.openBox<User>(_userBoxName);
     await box.delete('user');
   }
+
+  @override
+  Future<bool?> getFirstStep() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final result = prefs.getBool('first-step') ?? false;
+    return result;
+  }
+
+  @override
+  Future<void> setFirstStep(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setBool('first-step', value);
+  }
 }

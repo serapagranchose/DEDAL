@@ -3,8 +3,10 @@ import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
+import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/use_cases/tooltip_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:overlay_tooltip/overlay_tooltip.dart';
 
@@ -59,12 +61,16 @@ extension ShowToolTip on Widget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: CustomStringButton(
-                        context: context,
-                        text: context.l18n!.globalNext.capitalize(),
-                        backgroundColor: SharedColorPalette().secondary,
-                        onTap: (_) async =>
-                            getIt<OnboardingTooTipHelper>().next(),
-                      ),
+                          context: context,
+                          text: context.l18n!.globalNext.capitalize(),
+                          backgroundColor: SharedColorPalette().secondary,
+                          onTap: (_) async {
+                            if (index == 4) {
+                              context.read<HomeCubit>().setUserFirstStep();
+                              getIt<OnboardingTooTipHelper>().next();
+                            }
+                            getIt<OnboardingTooTipHelper>().next();
+                          }),
                     ),
                   ],
                 ),

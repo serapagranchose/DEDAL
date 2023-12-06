@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
+import 'package:dedal/core/use_cases/set_first_step.dart';
 import 'package:dedal/core/use_cases/user_unsubscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,12 +17,15 @@ class ProfilCubit extends Cubit<CrudState> {
     required GetUser getUser,
     required ClearUser clearUser,
     required UserUnsubscribe userUnsubscribe,
+    required SetFirstStep setFirstStep,
   })  : _getUser = getUser,
         _clearUser = clearUser,
         _userUnsubscribe = userUnsubscribe,
+        _setFirstStep = setFirstStep,
         super(const CrudInitial());
 
   final GetUser _getUser;
+  final SetFirstStep _setFirstStep;
   final ClearUser _clearUser;
   final UserUnsubscribe _userUnsubscribe;
 
@@ -56,5 +60,10 @@ class ProfilCubit extends Cubit<CrudState> {
         ? AdaptiveThemeMode.dark
         : AdaptiveThemeMode.light;
     AdaptiveTheme.of(context).setThemeMode(newMode);
+  }
+
+  Future<void> resetFirstStep() async {
+    await _setFirstStep.call(false);
+    deconnection();
   }
 }
