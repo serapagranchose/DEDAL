@@ -5,6 +5,7 @@ import 'package:dedal/core/extensions/build_context_applocalisation_extention.da
 import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/pages/login/signin/signin_screen.dart';
 import 'package:dedal/core/pages/login/signup/signup_screen.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,6 +39,7 @@ class Main extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomStringButton(
+                backgroundColor: SharedColorPalette().secondary,
                 context: context,
                 text: context.l18n!.mainSignUp.capitalize(),
                 onTap: (controller) async => showModalBottomSheet<void>(
@@ -48,10 +50,10 @@ class Main extends StatelessWidget {
                   builder: (context) => const SignUpScreen(),
                 ),
               ),
+              const Gap(15),
               CustomStringButton(
+                backgroundColor: SharedColorPalette().accent(Theme.of(context)),
                 context: context,
-                backgroundColor: Colors.white,
-                textColor: SharedColorPalette().secondary,
                 text: context.l18n!.mainSignIn.capitalize(),
                 onTap: (controller) async => showModalBottomSheet<void>(
                   isScrollControlled: true,

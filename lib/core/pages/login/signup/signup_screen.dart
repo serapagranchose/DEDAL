@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:dedal/components/loaders/main_loader.dart';
+import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dart';
 import 'package:dedal/core/datasources/authentification/login_datasource.dart';
 import 'package:dedal/core/dtos/sign_in_dto.dart';
@@ -45,10 +46,10 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
         body: DraggableScrollableSheet(
             initialChildSize: 0.9,
             builder: (context, scrollController) => DecoratedBox(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(20)),
-                    color: Colors.white,
+                    color: SharedColorPalette().accent(Theme.of(context)),
                   ),
                   child: child,
                 )),

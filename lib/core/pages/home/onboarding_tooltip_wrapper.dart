@@ -23,7 +23,7 @@ class OnboardingToolTipWrapper extends StatelessWidget {
           child: Container(
             height: double.infinity,
             width: double.infinity,
-            color: SharedColorPalette().main.withOpacity(0.9),
+            color: SharedColorPalette().primary.withOpacity(0.9)
           ),
         ),
         builder: (context) => child,

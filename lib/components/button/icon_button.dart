@@ -1,3 +1,4 @@
+import 'package:dedal/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
@@ -25,7 +26,7 @@ class CustomIconButton extends StatelessWidget {
                     offset: const Offset(1, 4),
                   ),
                 ],
-                color: Colors.white,
+                color: SharedColorPalette().accent(Theme.of(context)),
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Padding(padding: const EdgeInsets.all(8), child: icon),
           ),
