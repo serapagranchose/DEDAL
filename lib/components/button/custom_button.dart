@@ -28,11 +28,11 @@ class CustomStringButton extends Button<String> {
                   fontSize: 15,
                 ),
             textColor: textColor ?? Colors.white,
-            backgroundColor: backgroundColor ?? SharedColorPalette().main,
+            backgroundColor: backgroundColor ?? SharedColorPalette().accent(Theme.of(context)),
             disabledTextColor:
                 disabledTextColor ?? SharedColorPalette().greyIcon,
             disabledBackgroundColor:
-                disabledBackgroundColor ?? SharedColorPalette().mainDisable,
+                disabledBackgroundColor ?? SharedColorPalette().mainDisable(Theme.of(context)),
             disabled: disabled,
           ),
         );

@@ -1,5 +1,8 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
+import 'package:dedal/components/text_fields/main_text_field.dart';
+import 'package:dedal/constants/colors.dart';
+import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
@@ -13,6 +16,7 @@ import 'package:dedal/core/use_cases/user_unsubscribe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gap/gap.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
@@ -45,23 +49,77 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
         child: Column(
           children: [
             if (state is CrudLoaded<User?>)
+              Column(
+                children: [
+                  const Gap(30),
+                  Text(
+                    '${Theme.of(context).brightness == Brightness.light ? 'light' : 'dark'}',
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                   Text(
+                    '${state.data?.name}',
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Gap(15),
+                  Text('${state.data?.email}'),
+                  const Gap(30),
+                  // Modify Profile
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 90),
+                    child: Column(children: [
+                      CustomStringButton(
+                        backgroundColor: SharedColorPalette().accent(Theme.of(context)),
+                        border: Border.all(
+                          width: 2,
+                          color: SharedColorPalette().mainDisable(Theme.of(context)),
+                        ),
+                        context: context,
+                        text: context.l18n!.profilModify.capitalize(),
+                        onTap: (_) async => (),
+                      ),
+                    ])
+                  ),
+                  const Gap(15),
+                ],
+              ),
               // To get User info just look in state.data.whateveryouwant
-              Text('email : ${state.data?.email}'),
-            CustomStringButton(
-              context: context,
-              text: context.l18n!.profilDeco.capitalize(),
-              onTap: (_) async => context.goNamed(Main.routeName),
-            ),
-            CustomStringButton(
-              context: context,
-              text: context.l18n!.profilDeletAccount.capitalize(),
-              onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
-            ),
-            CustomStringButton(
-              context: context,
-              text: 'tmp redo first step',
-              onTap: (_) async => context.read<ProfilCubit>().resetFirstStep(),
-            ),
+              Expanded(
+                child: const Gap(15),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(children: [
+                  // Delete account button
+                  Expanded(
+                    child: CustomStringButton(
+                      border: Border.all(
+                        width: 2,
+                        color: SharedColorPalette().mainDisable(Theme.of(context)),
+                      ),
+                      backgroundColor: SharedColorPalette().secondary,
+                      context: context,
+                      text: context.l18n!.profilDeletAccount.capitalize(),
+                      onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
+                    ),
+                  ),
+                  const Gap(30),
+                  // Log out button
+                  Expanded(
+                    child: CustomStringButton(
+                      backgroundColor: SharedColorPalette().accent(Theme.of(context)),
+                      border: Border.all(
+                        width: 2,
+                        color: SharedColorPalette().mainDisable(Theme.of(context)),
+                      ),
+                      context: context,
+                      text: context.l18n!.profilDeco.capitalize(),
+                      onTap: (_) async => context.goNamed(Main.routeName),
+                    ),
+                  )
+                ])
+              ),
           ],
         ),
       );

@@ -58,7 +58,7 @@ class SignUpContentyState extends State<SignUpContent> {
             }),
             border: widget.isError ?? false
                 ? Colors.red.shade900
-                : SharedColorPalette().main,
+                : SharedColorPalette().secondary,
           ),
           Column(
             children: [
@@ -70,7 +70,7 @@ class SignUpContentyState extends State<SignUpContent> {
                 }),
                 border: _passwordVerif != _password
                     ? Colors.red.shade900
-                    : SharedColorPalette().main,
+                    : SharedColorPalette().secondary,
               ),
               if (widget.isError ?? false)
                 Text(
@@ -78,7 +78,7 @@ class SignUpContentyState extends State<SignUpContent> {
                   style: TextStyle(color: Colors.red.shade900),
                 ),
               Text('Votre mot de passe doit contenir, au moins : '),
-              Text('- Une majuscue'),
+              Text('- Une majuscule'),
               Text('- Un charactère spécial'),
               Text('- Un chiffre'),
             ],
@@ -90,7 +90,7 @@ class SignUpContentyState extends State<SignUpContent> {
                   onChanged: (value) => setState(() {
                         _saveCreadential = !_saveCreadential;
                       })),
-              const Text('Sauvegardere mes info')
+              const Text('Sauvegarder mes informations')
             ],
           ),
           Padding(

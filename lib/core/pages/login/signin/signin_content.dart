@@ -59,7 +59,7 @@ class SigninContentyState extends State<SigninContent> {
                 }),
                 border: widget.isError ?? false
                     ? Colors.red.shade900
-                    : SharedColorPalette().main,
+                    : SharedColorPalette().secondary,
               ),
               if (widget.isError ?? false)
                 Text(

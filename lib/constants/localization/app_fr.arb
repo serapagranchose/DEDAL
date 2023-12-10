@@ -43,7 +43,8 @@
 
 "@_PROFIL" : {},
   "profilDeco" : "déconnexion",
-  "profilDeletAccount" : "supprmier le compte",
+  "profilDeletAccount" : "supprimer le compte",
+  "profilModify": "modifier le compte",
 
 "@_LOCATIONS" : {},
   "locationNoPlace" : "Aucun lieu trouvé...",

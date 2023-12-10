@@ -32,8 +32,8 @@ extension ShowToolTip on Widget {
               const EdgeInsets.only(bottom: 30),
             ),
             child: DecoratedBox(
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: SharedColorPalette().accent(Theme.of(context)),
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
               child: Padding(
@@ -46,7 +46,7 @@ extension ShowToolTip on Widget {
                     Text(
                       title ?? 'no title',
                       style: TextStyle(
-                          color: SharedColorPalette().main,
+                          color: SharedColorPalette().secondary,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -54,7 +54,7 @@ extension ShowToolTip on Widget {
                     const Gap(20),
                     Text(
                       description ?? 'no description',
-                      style: const TextStyle(color: Colors.black, fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                       textAlign: TextAlign.center,
                     ),
                     const Gap(20),
@@ -63,7 +63,7 @@ extension ShowToolTip on Widget {
                       child: CustomStringButton(
                           context: context,
                           text: context.l18n!.globalNext.capitalize(),
-                          backgroundColor: SharedColorPalette().mainDisable,
+                          backgroundColor: SharedColorPalette().secondary,
                           onTap: (_) async {
                             if (index == 4) {
                               context.read<HomeCubit>().setUserFirstStep();

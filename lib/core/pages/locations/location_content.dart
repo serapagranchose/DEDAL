@@ -36,7 +36,7 @@ class LocationContentState extends State<LocationContent> {
                   IconButton(
                       icon: Icon(
                         Icons.list,
-                        color: SharedColorPalette().main,
+                        color: SharedColorPalette().secondary,
                       ),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.parcours;
@@ -44,7 +44,7 @@ class LocationContentState extends State<LocationContent> {
                   IconButton(
                       icon: Icon(
                         Icons.new_label_outlined,
-                        color: SharedColorPalette().main,
+                        color: SharedColorPalette().secondary,
                       ),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.liked;

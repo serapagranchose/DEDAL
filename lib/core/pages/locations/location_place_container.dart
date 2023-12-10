@@ -54,7 +54,7 @@ class LocationPlaceContainer extends StatelessWidget {
                     String()? => Icons.euro,
                     null => null,
                   },
-                  color: SharedColorPalette().main,
+                  color: SharedColorPalette().secondary,
                 ),
                 VerticalDivider(
                   thickness: 1,

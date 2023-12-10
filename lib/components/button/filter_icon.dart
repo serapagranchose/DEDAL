@@ -1,3 +1,4 @@
+import 'package:dedal/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class FilterIcon extends StatelessWidget {
@@ -22,7 +23,7 @@ class FilterIcon extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
+                color: SharedColorPalette().accent(Theme.of(context)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

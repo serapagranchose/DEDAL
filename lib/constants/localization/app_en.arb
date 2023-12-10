@@ -43,6 +43,7 @@
 "@_PROFIL" : {},
   "profilDeco" : "log off",
   "profilDeletAccount" : "delete account",
+    "profilModify": "modify profile",
 
 "@_LOCATIONS" : {},
   "locationNoPlace" : "No location found...",

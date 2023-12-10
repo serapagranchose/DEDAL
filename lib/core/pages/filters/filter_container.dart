@@ -51,7 +51,7 @@ class FilterContainer extends StatelessWidget {
                 border: selected
                     ? Border.all(
                         width: 3,
-                        color: SharedColorPalette().main,
+                        color: SharedColorPalette().secondary,
                       )
                     : null,
                 borderRadius: const BorderRadius.all(

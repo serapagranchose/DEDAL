@@ -40,7 +40,7 @@ class HomeContentState extends State<HomeContent> {
     points: const [],
     polylineId: const PolylineId('parcours'),
     width: 5,
-    color: SharedColorPalette().mainDisable,
+    color: SharedColorPalette().secondary,
   );
   Set<Marker> markers = {};
   @override
@@ -86,7 +86,7 @@ class HomeContentState extends State<HomeContent> {
                       CustomIconButton(
                           icon: const Icon(
                             Icons.pin_drop,
-                            color: Colors.black,
+                            // color: Colors.black,
                           ),
                           action: () async {
                             if (widget.map.isNotNull) {
@@ -98,7 +98,7 @@ class HomeContentState extends State<HomeContent> {
                       CustomIconButton(
                         icon: const Icon(
                           Icons.location_off_outlined,
-                          color: Colors.black,
+                          // color: Colors.black,
                         ),
                         action: () {
                           if (mapType == MapType.normal) {
@@ -117,7 +117,7 @@ class HomeContentState extends State<HomeContent> {
                           mapType == MapType.normal
                               ? Icons.map_outlined
                               : Icons.map,
-                          color: Colors.black,
+                          // color: Colors.black,
                         ),
                         action: () {
                           if (mapType == MapType.normal) {
