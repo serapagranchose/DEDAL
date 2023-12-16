@@ -6,10 +6,25 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
-  group('Plus Operator', () {
-    test('should add two numbers together', () {
-      expect(1 + 1, 2);
-    });
-  });
+import 'test_extension.dart';
+import 'test_filter.dart';
+import 'test_filter_use_cases.dart';
+import 'test_info.dart';
+import 'test_init.dart';
+import 'test_location_uses_cases.dart';
+import 'test_login_use_cases.dart';
+import 'test_place.dart';
+import 'test_user.dart';
+
+void main() async {
+  await GetItInitializerTest.run();
+
+  group('Test User Class', userTest);
+  group('Test User Class', filterTest);
+  group('Test User Class', infoTest);
+  group('Test User Class', placeTest);
+  group('Test User Class', extensionTest);
+  group('Test login useCases', loginUseCasesTest);
+  group('Test filters useCases', filterUseCasesTest);
+  group('Test locations useCases', locationUseCasesTest);
 }
