@@ -64,7 +64,7 @@ class _NavBarState extends State<NavBar> {
               unselectedItemColor: const Color.fromRGBO(100, 116, 139, 1),
               showUnselectedLabels: true,
               showSelectedLabels: true,
-              iconSize: 21,
+              iconSize: 16,
               selectedFontSize: 12,
               type: BottomNavigationBarType.fixed,
               items: [
@@ -72,10 +72,10 @@ class _NavBarState extends State<NavBar> {
                   icon: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      color: SharedColorPalette().navBar(Theme.of(context)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       child: Icon(
                         Icons.filter_alt_outlined,
                         color: widget.currentIndex == 0
@@ -95,10 +95,10 @@ class _NavBarState extends State<NavBar> {
                   icon: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      color: SharedColorPalette().navBar(Theme.of(context)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       child: Icon(
                         Icons.map,
                         color: widget.currentIndex == 1
@@ -118,10 +118,10 @@ class _NavBarState extends State<NavBar> {
                   icon: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      color: SharedColorPalette().navBar(Theme.of(context)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       child: Icon(
                         Icons.list,
                         color: widget.currentIndex == 2
@@ -141,10 +141,10 @@ class _NavBarState extends State<NavBar> {
                   icon: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      color: SharedColorPalette().navBar(Theme.of(context)),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       child: Icon(
                         Icons.person,
                         color: widget.currentIndex == 3

@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   wyatt_bloc_helper:
     hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub/
-    version: 2.0.1
+    version: ^2.0.2
   wyatt_architecture:
     hosted: https://git.wyatt-studio.fr/api/packages/Wyatt-FOSS/pub/
     version: 0.2.0+1
