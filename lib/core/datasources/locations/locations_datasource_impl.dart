@@ -7,13 +7,16 @@ import 'package:http/http.dart' as http;
 
 class LocationsDataSourceImpl extends LocationsDataSource {
   @override
-  Future<List<Place>> getPlaceClose(User user) => http
-          .post(Uri.parse('http://52.166.128.133/near_places'),
-              headers: {
-                'Accept': '*/*',
-                'Content-type': 'application/json',
-              },
-              body: jsonEncode({'position': user.posToJson()}))
+  Future<List<Place>> getPlaceClose(User user) => http.get(
+        //TODO(dev): replace with right coorinates
+        Uri.parse(
+            'http://52.166.128.133/places/nearby?coordinates={x: 50.63904, y: 3.05867}'),
+        headers: {
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      )
+          // body: jsonEncode({'position': user.posToJson()}))
           .then((value) {
         if (value.statusCode == 200) {
           return (jsonDecode(value.body) as List<dynamic>)
@@ -31,7 +34,8 @@ class LocationsDataSourceImpl extends LocationsDataSource {
 
   @override
   Future<List<Place>> getPlaceFilter(User user) => http.get(
-        Uri.parse('http://52.166.128.133/places_nofilter/?id=${user.id}'),
+        Uri.parse(
+            'http://52.166.128.133/places/places_not_filter/?id=${user.id}'),
         headers: {
           'Accept': '*/*',
           'Content-type': 'application/json',

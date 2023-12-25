@@ -20,8 +20,10 @@ class LoginDataSourceImpl extends LoginDataSource {
     http.Response response;
     try {
       response = await http.get(
-        Uri.parse('http://52.166.128.133/ping'),
+        Uri.parse('http://52.166.128.133'),
       );
+      print('1 => ${response.statusCode}');
+      print('1 => ${response.body}');
       if (response.statusCode != 200) {
         yield AuthenticationStatus.apiOffline;
         yield* _controller.stream;
@@ -42,7 +44,8 @@ class LoginDataSourceImpl extends LoginDataSource {
         Uri.parse('https://app-api.mypet.fit/profile'),
         headers: {'Authorization': 'Bearer $userToken'},
       );
-
+      print('2 => ${response.statusCode}');
+      print('2 => ${response.body}');
       if (response.statusCode != 200) {
         await GetStorage().remove('token');
         yield AuthenticationStatus.unauthenticated;
@@ -60,6 +63,9 @@ class LoginDataSourceImpl extends LoginDataSource {
         body: jsonEncode({'email': email, 'password': password}),
         headers: {'Content-type': 'application/json', 'Accept': '*/*'},
       ).then((result) {
+        print('String $email, String $password');
+        print('3 => ${result.statusCode}');
+        print('3 => ${result.body}');
         if (result.statusCode == 202) {
           final user = User.fromJson(jsonDecode(result.body));
 
@@ -75,6 +81,8 @@ class LoginDataSourceImpl extends LoginDataSource {
       body: jsonEncode({'email': email, 'password': password}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
+      print('4 => ${result.statusCode}');
+      print('4 => ${result.body}');
       if (result.statusCode == 201) {
         return true;
       }
@@ -85,10 +93,12 @@ class LoginDataSourceImpl extends LoginDataSource {
   @override
   Future<bool> signUpCode(String email, String code) async {
     return await http.post(
-      Uri.parse('http://52.166.128.133/signup_code'),
+      Uri.parse('http://52.166.128.133/confirm'),
       body: jsonEncode({'email': email, 'code': code}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
+      print('5 => ${result.statusCode}');
+      print('5 => ${result.body}');
       if (result.statusCode == 201) {
         return true;
       }
@@ -103,6 +113,8 @@ class LoginDataSourceImpl extends LoginDataSource {
       body: jsonEncode({'email': email}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
+      print('6 => ${result.statusCode}');
+      print('6 => ${result.body}');
       if (result.statusCode == 200) {
         return true;
       }

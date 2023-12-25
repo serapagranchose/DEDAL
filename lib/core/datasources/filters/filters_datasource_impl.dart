@@ -25,7 +25,7 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<bool> setinfoUser(User user) async {
-    return await http.post(
+    return await http.patch(
       Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
       body: jsonEncode({
         'lastInfo': {
@@ -47,7 +47,7 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<List<Place>?> getPlaces(User user) async => http.post(
-        Uri.parse('http://52.166.128.133/places_generate/?id=${user.id}'),
+        Uri.parse('http://52.166.128.133/lambda/places/?id=${user.id}'),
         headers: {
           'x-access-token': user.token!,
           'Accept': '*/*',
@@ -72,7 +72,9 @@ class FilterDataSourceImpl extends FilterDataSource {
   @override
   Future<String?> getPath(User user) async {
     return http
-        .post(Uri.parse('http://52.166.128.133/path_finding/?id=${user.id}'),
+        .post(
+            Uri.parse(
+                'http://localhost:3000/lambda/pathfinding/?id=${user.id}'),
             headers: {
               'x-access-token': user.token!,
               'Accept': '*/*',
