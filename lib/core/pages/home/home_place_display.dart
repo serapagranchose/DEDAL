@@ -88,9 +88,13 @@ class HomePlaceDisplay extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onTap: () => context.pushNamed(
-                                LocationPlaceDetailScreen.name,
-                                pathParameters: {'id': place.id!}),
+                            onTap: () {
+                              context.pushNamed(LocationPlaceDetailScreen.name,
+                                  queryParameters: {
+                                    'id': place.id!,
+                                    'placeName': place.name
+                                  });
+                            },
                             child: const Text(
                               "Plus d'info >",
                               style: TextStyle(

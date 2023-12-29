@@ -17,6 +17,7 @@ class LocationPlaceDetailCubit extends Cubit<CrudState> {
   final String? id;
 
   FutureOr<void> load() async {
+    print('heremmmzlz');
     emit(const CrudLoading());
     await _getPlace.call(id).fold((value) => emit(CrudLoaded<Place?>(value)),
         (error) => emit(const CrudError('Place not found')));

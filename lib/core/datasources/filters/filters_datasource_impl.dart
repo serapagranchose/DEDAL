@@ -123,19 +123,22 @@ class FilterDataSourceImpl extends FilterDataSource {
       });
 
   @override
-  Future<Place?> getPlace(String placeId) async => await http.get(
-        Uri.parse('http://52.166.128.133/places/?id=$placeId'),
-        headers: {
-          'x-access-token': GetStorage().read('token'),
-          'Accept': '*/*',
-          'Content-type': 'application/json',
-        },
-      ).then((result) {
-        print('12 => ${result.statusCode}');
-        print('12 => ${result.body}');
-        if (result.statusCode == 200) {
-          return Place.fromJson(jsonDecode(result.body));
-        }
-        return null;
-      });
+  Future<Place?> getPlace(String placeId) async {
+    print('palce =========> $placeId');
+    print('http://52.166.128.133/places/$placeId');
+    return await http.get(
+      Uri.parse('http://52.166.128.133/places/$placeId'),
+      headers: {
+        'Accept': '*/*',
+        'Content-type': 'application/json',
+      },
+    ).then((result) {
+      print('12 => ${result.statusCode}');
+      print('12 => ${result.body}');
+      if (result.statusCode == 200) {
+        return Place.fromJson(jsonDecode(result.body));
+      }
+      return null;
+    });
+  }
 }

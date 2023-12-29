@@ -21,6 +21,7 @@ class GetPlace extends AsyncUseCase<String?, Place?> {
 
   @override
   FutureOrResult<Place?> execute(String? params) {
+    print('para => $params');
     return Result.tryCatchAsync(
         () => filterDataSource.getPlace(params!),
         (error) =>

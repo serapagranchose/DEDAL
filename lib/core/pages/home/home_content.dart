@@ -2,13 +2,9 @@ import 'dart:async';
 import 'package:dedal/components/button/filter_icon.dart';
 import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
-import 'package:dedal/core/extensions/get_it.dart';
-import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/extensions/tooltip.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/home/home_place_display.dart';
-import 'package:dedal/core/use_cases/tooltip_helper.dart';
 import 'package:dedal/src/app.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -237,7 +233,7 @@ class HomeContentState extends State<HomeContent> {
   @override
   void initState() {
     super.initState();
-    
+
     print('start');
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
