@@ -10,7 +10,6 @@ import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_screen.dart';
 import 'package:dedal/core/pages/login/signup/signup_cubit.dart';
-import 'package:dedal/core/pages/login/signin/signin_content.dart';
 import 'package:dedal/core/pages/login/signin/signin_cubit.dart';
 import 'package:dedal/core/pages/login/signup/signup_content.dart';
 import 'package:dedal/core/pages/login/stateless/code_dialog.dart';
@@ -80,10 +79,22 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
   }
 
   @override
-  Widget onBuild(BuildContext context, CrudState state) => state is CrudLoading
-      ? const MainLoader()
-      : SignUpContent(validate: (email, password, saveCreadential) async {
-          await context.read<SignUpCubit>().userSignUp(
-              SignUpDto(email: email, password: password), saveCreadential);
-        });
+  Widget onBuild(BuildContext context, CrudState state) => switch (state) {
+        CrudLoaded() =>
+          SignUpContent(validate: (email, password, saveCreadential) async {
+            await context.read<SignUpCubit>().userSignUp(
+                SignUpDto(email: email, password: password), saveCreadential);
+          }),
+        CrudError() =>
+          SignUpContent(validate: (email, password, saveCreadential) async {
+            await context.read<SignUpCubit>().userSignUp(
+                SignUpDto(email: email, password: password), saveCreadential);
+          }),
+        CrudInitial() =>
+          SignUpContent(validate: (email, password, saveCreadential) async {
+            await context.read<SignUpCubit>().userSignUp(
+                SignUpDto(email: email, password: password), saveCreadential);
+          }),
+        _ => const MainLoader(),
+      };
 }

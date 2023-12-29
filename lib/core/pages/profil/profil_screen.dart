@@ -55,40 +55,43 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
                   Text(
                     '${Theme.of(context).brightness == Brightness.light ? 'light' : 'dark'}',
                     textAlign: TextAlign.start,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                   Text(
+                  Text(
                     '${state.data?.name}',
                     textAlign: TextAlign.start,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const Gap(15),
                   Text('${state.data?.email}'),
                   const Gap(30),
                   // Modify Profile
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 90),
-                    child: Column(children: [
-                      CustomStringButton(
-                        backgroundColor: SharedColorPalette().accent(Theme.of(context)),
-                        border: Border.all(
-                          width: 2,
-                          color: SharedColorPalette().mainDisable(Theme.of(context)),
+                      padding: const EdgeInsets.symmetric(horizontal: 90),
+                      child: Column(children: [
+                        CustomStringButton(
+                          backgroundColor:
+                              SharedColorPalette().accent(Theme.of(context)),
+                          border: Border.all(
+                            width: 2,
+                            color: SharedColorPalette()
+                                .mainDisable(Theme.of(context)),
+                          ),
+                          context: context,
+                          text: context.l18n!.profilModify.capitalize(),
+                          onTap: (_) async => (),
                         ),
-                        context: context,
-                        text: context.l18n!.profilModify.capitalize(),
-                        onTap: (_) async => (),
-                      ),
-                    ])
-                  ),
+                      ])),
                   const Gap(15),
                 ],
               ),
-              // To get User info just look in state.data.whateveryouwant
-              Expanded(
-                child: const Gap(15),
-              ),
-              Padding(
+            // To get User info just look in state.data.whateveryouwant
+            const Expanded(
+              child: Gap(15),
+            ),
+            Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(children: [
                   // Delete account button
@@ -96,30 +99,37 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
                     child: CustomStringButton(
                       border: Border.all(
                         width: 2,
-                        color: SharedColorPalette().mainDisable(Theme.of(context)),
+                        color:
+                            SharedColorPalette().mainDisable(Theme.of(context)),
                       ),
                       backgroundColor: SharedColorPalette().secondary,
                       context: context,
                       text: context.l18n!.profilDeletAccount.capitalize(),
-                      onTap: (_) async => context.read<ProfilCubit>().unsubscribe(),
+                      onTap: (_) async => context
+                          .read<ProfilCubit>()
+                          .unsubscribe()
+                          .then((value) =>
+                              value ? context.goNamed(Main.routeName) : null),
                     ),
                   ),
                   const Gap(30),
                   // Log out button
                   Expanded(
                     child: CustomStringButton(
-                      backgroundColor: SharedColorPalette().accent(Theme.of(context)),
+                      backgroundColor:
+                          SharedColorPalette().accent(Theme.of(context)),
+                      textColor: SharedColorPalette().text(Theme.of(context)),
                       border: Border.all(
                         width: 2,
-                        color: SharedColorPalette().mainDisable(Theme.of(context)),
+                        color:
+                            SharedColorPalette().mainDisable(Theme.of(context)),
                       ),
                       context: context,
                       text: context.l18n!.profilDeco.capitalize(),
                       onTap: (_) async => context.goNamed(Main.routeName),
                     ),
                   )
-                ])
-              ),
+                ])),
           ],
         ),
       );

@@ -39,7 +39,7 @@ class User {
         //         ),
         //       )
         //     : null,
-        token: json['token'].isNotNull ? json['token'].toString() : null,
+        token: json['token'].isNotNull ? json['token'].toString() : 'token',
         pos: json['pos'].isNotNull
             ? LatLng(
                 double.tryParse(Map<String, Object?>.from(

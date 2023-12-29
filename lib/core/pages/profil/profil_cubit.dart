@@ -44,15 +44,14 @@ class ProfilCubit extends Cubit<CrudState> {
     _clearUser.call(const NoParam());
   }
 
-  Future<void> unsubscribe() async {
-    await _getUser.call(null).fold(
-      (value) {
-        _userUnsubscribe.call(value);
-        deconnection();
-      },
-      (error) => null,
-    );
-  }
+  Future<bool> unsubscribe() async => _getUser.call(null).fold(
+        (value) {
+          _userUnsubscribe.call(value);
+          deconnection();
+          return true;
+        },
+        (error) => false,
+      );
 
   void toggleThemeMode(BuildContext context) {
     final themeMode = AdaptiveTheme.of(context).mode;

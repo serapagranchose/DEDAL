@@ -99,7 +99,7 @@ class LoginDataSourceImpl extends LoginDataSource {
     ).then((result) {
       print('5 => ${result.statusCode}');
       print('5 => ${result.body}');
-      if (result.statusCode == 201) {
+      if (result.statusCode == 204) {
         return true;
       }
       return false;
@@ -109,8 +109,8 @@ class LoginDataSourceImpl extends LoginDataSource {
   @override
   Future<bool> unsubscribe(String id, String email) async {
     return await http.post(
-      Uri.parse('http://52.166.128.133/unsubscribe?id=$id'),
-      body: jsonEncode({'email': email}),
+      Uri.parse('http://52.166.128.133/unsubscribe'),
+      body: jsonEncode({'email': email, 'userId': id}),
       headers: {'Content-type': 'application/json', 'Accept': '*/*'},
     ).then((result) {
       print('6 => ${result.statusCode}');

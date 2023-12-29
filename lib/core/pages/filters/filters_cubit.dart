@@ -32,10 +32,12 @@ class FiltersCubit extends Cubit<CrudState> {
 
   FutureOr<void> load() async {
     emit(const CrudLoading());
+    print('hrer');
     final getUserResult = await _getUser.call(const NoParam()).fold(
           (value) => value,
           (error) => null,
         );
+    print('getUserResult?.token => ${getUserResult?.token}');
 
     if (getUserResult.isNotNull) {
       user = getUserResult;

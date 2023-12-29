@@ -14,6 +14,8 @@ class FilterDataSourceImpl extends FilterDataSource {
         Uri.parse('http://52.166.128.133/filter/'),
         headers: {'x-access-token': token, 'Accept': '*/*'},
       ).then((result) {
+        print('7 => ${result.statusCode}');
+        print('7 => ${result.body}');
         if (result.statusCode == 200) {
           final filters = (jsonDecode(result.body) as List<Object?>)
               .map((e) => Filter.fromJson(e as Map<String, Object?>))
@@ -25,23 +27,25 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<bool> setinfoUser(User user) async {
+    print(
+        "'lastInfo': {'time': ${user.info?.time},'budget': ${user.info?.budget},'filter': ${user.info?.filter},'map': 'map-${user.id}',}");
     return await http.patch(
       Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
       body: jsonEncode({
-        'lastInfo': {
-          'time': user.info?.time,
-          'budget': user.info?.budget,
-          'filter': user.info?.filter,
-          'map': 'map-${user.id}',
-        }
+        'time': user.info?.time,
+        'budget': user.info?.budget,
+        'filter': user.info?.filter,
+        'map': 'map-${user.id}',
       }),
       headers: {
         'x-access-token': user.token!,
         'Accept': '*/*',
         'Content-type': 'application/json',
       },
-    ).then((value) {
-      return value.statusCode == 200;
+    ).then((result) {
+      print('8 => ${result.statusCode}');
+      print('8 => ${result.body}');
+      return result.statusCode == 200;
     });
   }
 
@@ -53,10 +57,11 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Accept': '*/*',
           'Content-type': 'application/json',
         },
-      ).then((value) {
-        print(value.body);
-        if (value.statusCode == 200) {
-          return (jsonDecode(value.body) as List<dynamic>)
+      ).then((result) {
+        print('9 => ${result.statusCode}');
+        print('9 => ${result.body}');
+        if (result.statusCode == 200) {
+          return (jsonDecode(result.body) as List<dynamic>)
               .map(
                 (e) => Place.fromJson(
                   Map<String, Object?>.from(
@@ -74,7 +79,7 @@ class FilterDataSourceImpl extends FilterDataSource {
     return http
         .post(
             Uri.parse(
-                'http://localhost:3000/lambda/pathfinding/?id=${user.id}'),
+                'http://52.166.128.133/lambda/pathfinding/?id=${user.id}'),
             headers: {
               'x-access-token': user.token!,
               'Accept': '*/*',
@@ -87,9 +92,11 @@ class FilterDataSourceImpl extends FilterDataSource {
               },
               'places': user.places?.map((e) => e.toJson()).toList(),
             }))
-        .then((value) {
-      if (value.statusCode == 200) {
-        final payload = jsonDecode(value.body)['Payload'];
+        .then((result) {
+      print('10 => ${result.statusCode}');
+      print('10 => ${result.body}');
+      if (result.statusCode == 200) {
+        final payload = jsonDecode(result.body)['Payload'];
         if (payload != null) {
           return jsonDecode(payload)['mapPath'];
         }
@@ -106,9 +113,11 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Accept': '*/*',
           'Content-type': 'application/json',
         },
-      ).then((value) {
-        if (value.statusCode == 200) {
-          return Map<String, Object>.from(jsonDecode(value.body));
+      ).then((result) {
+        print('11 => ${result.statusCode}');
+        print('11 => ${result.body}');
+        if (result.statusCode == 200) {
+          return Map<String, Object>.from(jsonDecode(result.body));
         }
         return null;
       });
@@ -121,11 +130,11 @@ class FilterDataSourceImpl extends FilterDataSource {
           'Accept': '*/*',
           'Content-type': 'application/json',
         },
-      ).then((value) {
-        print(value.body);
-        print(value.statusCode);
-        if (value.statusCode == 200) {
-          return Place.fromJson(jsonDecode(value.body));
+      ).then((result) {
+        print('12 => ${result.statusCode}');
+        print('12 => ${result.body}');
+        if (result.statusCode == 200) {
+          return Place.fromJson(jsonDecode(result.body));
         }
         return null;
       });
