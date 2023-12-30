@@ -139,7 +139,6 @@ class HomeContentState extends State<HomeContent> {
   void didUpdateWidget(covariant HomeContent oldWidget) {
     markers.clear();
     if (widget.places.isNotNull && widget.places!.isNotEmpty) {
-      print('here => ${widget.places}');
       for (var place in widget.places!) {
         markers.add(Marker(
             markerId: MarkerId(place!.id!),
@@ -158,11 +157,8 @@ class HomeContentState extends State<HomeContent> {
   @override
   void initState() {
     super.initState();
-    print('place => ${widget.places}');
-    print('map => ${widget.map}');
 
     if (widget.map.isNotNull) {
-      print('here');
       final lines = widget.map!['LongLat'] as List;
       final building = widget.map!['Buildings'] as List;
       for (var element in lines) {
@@ -196,7 +192,6 @@ class HomeContentState extends State<HomeContent> {
         }
       }
     } else if (widget.places.isNotNull) {
-      print('here => ${widget.places}');
       for (var place in widget.places!) {
         markers.add(Marker(
             markerId: MarkerId(place!.id!),

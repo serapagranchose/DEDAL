@@ -62,8 +62,6 @@ class LocationsDataSourceImpl extends LocationsDataSource {
           'Content-type': 'application/json',
         },
       ).then((response) {
-        print(response.statusCode);
-        print(response.body);
         if (response.statusCode == 200) {
           return (jsonDecode(response.body) as List<dynamic>)
               .map(

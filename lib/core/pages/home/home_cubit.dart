@@ -77,7 +77,6 @@ class HomeCubit extends Cubit<CrudState> {
   }
 
   FutureOr<void> loadWithPlace(String filterId) async {
-    print('onCLick => $filterId');
     final userResult =
         await _getUser.call(null).fold((value) => value, (error) => null);
     if (userResult.isNull) {

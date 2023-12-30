@@ -75,17 +75,14 @@ class AppRouter {
           GoRoute(
               name: LocationPlaceDetailScreen.name,
               path: '/place-detail',
-              pageBuilder: (context, state) {
-                print('state => ${state.uri.queryParameters}');
-                return noTransition(
-                  context,
-                  state,
-                  LocationPlaceDetailScreen(
-                    id: state.uri.queryParameters['id'],
-                    placeName: state.uri.queryParameters['placeName'],
-                  ),
-                );
-              })
+              pageBuilder: (context, state) => noTransition(
+                    context,
+                    state,
+                    LocationPlaceDetailScreen(
+                      id: state.uri.queryParameters['id'],
+                      placeName: state.uri.queryParameters['placeName'],
+                    ),
+                  ))
         ],
       );
 }
