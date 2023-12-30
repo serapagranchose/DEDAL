@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:dedal/core/extensions/get_it.dart';
+import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/use_cases/get_first_step.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
+import 'package:dedal/core/use_cases/location_get_place_by_filter.dart';
 import 'package:dedal/core/use_cases/set_first_step.dart';
 import 'package:dedal/core/use_cases/tooltip_helper.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
@@ -22,6 +24,7 @@ class HomeCubit extends Cubit<CrudState> {
       required UserGetMap userGetMap,
       required UpdateUser updateUser,
       required GetFirstStep getFirstStep,
+      required LocationGetPlaceByFilter locationGetPlaceByFilter,
       required SetFirstStep setFirstStep})
       : _getUserGeolocation = getUserGeolocation,
         _getUser = getUser,
@@ -29,9 +32,11 @@ class HomeCubit extends Cubit<CrudState> {
         _updateUser = updateUser,
         _getFirstStep = getFirstStep,
         _setFirstStep = setFirstStep,
+        _locationGetPlaceByFilter = locationGetPlaceByFilter,
         super(const CrudInitial());
 
   final GetUserGeolocation _getUserGeolocation;
+  final LocationGetPlaceByFilter _locationGetPlaceByFilter;
   final GetFirstStep _getFirstStep;
   final SetFirstStep _setFirstStep;
   final GetUser _getUser;
@@ -69,6 +74,27 @@ class HomeCubit extends Cubit<CrudState> {
         emit(CrudLoaded<User?>(user));
       }
     }, (error) => emit(CrudError(error.toString())));
+  }
+
+  FutureOr<void> loadWithPlace(String filterId) async {
+    print('onCLick => $filterId');
+    final userResult =
+        await _getUser.call(null).fold((value) => value, (error) => null);
+    if (userResult.isNull) {
+      emit(const CrudError('user not found'));
+      return;
+    }
+    if (filterId == '') {
+      emit(CrudLoaded<(User, List<Place>)>((userResult!, [])));
+      return;
+    }
+    final filterResult = await _locationGetPlaceByFilter
+        .call((userResult!, filterId)).fold((value) => value, (error) => null);
+    if (filterResult.isNull) {
+      emit(const CrudError('placces not found'));
+      return;
+    }
+    emit(CrudLoaded<(User, List<Place>)>((userResult, filterResult!)));
   }
 
   Future<void> setUserFirstStep() async => _setFirstStep.call(true);

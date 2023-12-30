@@ -5,4 +5,5 @@ import 'package:wyatt_architecture/wyatt_architecture.dart';
 abstract class LocationsDataSource extends BaseDataSource {
   Future<List<Place>> getPlaceClose(User user);
   Future<List<Place>> getPlaceFilter(User user);
+  Future<List<Place>> getPlaceByFilter(User user, String placeId);
 }

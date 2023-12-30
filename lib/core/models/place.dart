@@ -1,18 +1,20 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Place {
-  Place(
-      {this.id,
-      this.accessible,
-      this.address,
-      this.name,
-      this.link,
-      this.description,
-      this.price,
-      this.duration,
-      this.coordinates,
-      this.type,
-      this.pict});
+  Place({
+    this.id,
+    this.accessible,
+    this.address,
+    this.name,
+    this.link,
+    this.description,
+    this.price,
+    this.duration,
+    this.coordinates,
+    this.type,
+    this.pict,
+    this.foundFilter,
+  });
 
   String? id;
   bool? accessible;
@@ -25,6 +27,7 @@ class Place {
   LatLng? coordinates;
   String? type;
   String? pict;
+  List<String>? foundFilter;
 
   factory Place.fromJson(Map<String, Object?> json) {
     try {
@@ -40,6 +43,11 @@ class Place {
         pict: json['photoLink']?.toString(),
         price: json['price'] != null
             ? double.parse(json['price']!.toString())
+            : null,
+        foundFilter: json['foundFilters'] != null
+            ? (json['foundFilters'] as List<Object?>)
+                .map((e) => e.toString())
+                .toList()
             : null,
         duration: json['duration'] != null
             ? double.parse(json['duration']!.toString())

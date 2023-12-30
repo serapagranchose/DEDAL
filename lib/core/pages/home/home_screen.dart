@@ -6,12 +6,14 @@ import 'package:dedal/core/datasources/localStorage/local_storage_datasource.dar
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
+import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/home/home_content.dart';
 import 'package:dedal/core/pages/home/home_cubit.dart';
 import 'package:dedal/core/use_cases/get_first_step.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/get_user_geolocation.dart';
+import 'package:dedal/core/use_cases/location_get_place_by_filter.dart';
 import 'package:dedal/core/use_cases/set_first_step.dart';
 import 'package:dedal/core/use_cases/update_user.dart';
 import 'package:dedal/core/use_cases/user_get_map.dart';
@@ -36,7 +38,9 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
       getFirstStep:
           GetFirstStep(localStorageDataSource: getIt<LocalStorageDataSource>()),
       setFirstStep:
-          SetFirstStep(localStorageDataSource: getIt<LocalStorageDataSource>()))
+          SetFirstStep(localStorageDataSource: getIt<LocalStorageDataSource>()),
+      locationGetPlaceByFilter:
+          LocationGetPlaceByFilter(locationsDataSource: getIt()))
     ..load();
 
   @override
@@ -62,6 +66,11 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
                 onTap: (c) async => context.read<HomeCubit>().load(),
               )
             ],
+          ),
+        CrudLoaded<(User, List<Place>)>(data: final data) => HomeContent(
+            userPosition: data!.$1.pos ?? const LatLng(0, 0),
+            places: data.$2.isEmpty ? null : data.$2,
+            map: null,
           ),
         _ => Text(context.l18n!.globalError.capitalize()),
       });

@@ -5,6 +5,7 @@ import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/tooltip.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/home/home_place_display.dart';
+import 'package:dedal/core/pages/home/home_place_filter/home_place_filter_screen.dart';
 import 'package:dedal/src/app.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -81,7 +82,7 @@ class HomeContentState extends State<HomeContent> {
                     children: [
                       CustomIconButton(
                           icon: const Icon(
-                            Icons.pin_drop,
+                            Icons.my_location,
                             // color: Colors.black,
                           ),
                           action: () async {
@@ -90,30 +91,18 @@ class HomeContentState extends State<HomeContent> {
                               moveCamera(LatLng(lines[1]['latitude'],
                                   lines.first['longitude']));
                             }
+                            if (widget.places.isNotNull &&
+                                widget.places?.first?.coordinates != null) {
+                              moveCamera(widget.places!.first!.coordinates!);
+                            } else {
+                              moveCamera(widget.userPosition);
+                            }
                           }),
-                      CustomIconButton(
-                        icon: const Icon(
-                          Icons.location_off_outlined,
-                          // color: Colors.black,
-                        ),
-                        action: () {
-                          if (mapType == MapType.normal) {
-                            setState(() {
-                              mapType = MapType.satellite;
-                            });
-                          } else {
-                            setState(() {
-                              mapType = MapType.normal;
-                            });
-                          }
-                        },
-                      ),
                       CustomIconButton(
                         icon: Icon(
                           mapType == MapType.normal
                               ? Icons.map_outlined
                               : Icons.map,
-                          // color: Colors.black,
                         ),
                         action: () {
                           if (mapType == MapType.normal) {
@@ -131,111 +120,49 @@ class HomeContentState extends State<HomeContent> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
-                  ),
-                  height: 57,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      FilterIcon(
-                        icon: Icon(Icons.museum),
-                        title: 'Art',
-                        action: () => print('Art'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.museum),
-                        title: 'Divertissement',
-                        action: () => print('Divertissement'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.add_to_home_screen),
-                        title: 'Nature',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.air),
-                        title: 'Shopping',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.add_ic_call),
-                        title: 'Enfant',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.badge),
-                        title: 'Bar',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                      FilterIcon(
-                        icon: Icon(Icons.filter),
-                        title: 'title',
-                        action: () => print('ui'),
-                      ),
-                    ],
-                  ),
-                ),
-              ).allowShowTooltip(context,
-                  index: 0,
-                  title: 'bienvenue !',
-                  display: true,
-                  description: 'Bienvenue sur DEDAL les boys'),
+              if (widget.map == null)
+                HomePlaceFilterScreen(
+                        selected: widget.places?.first?.foundFilter?.first)
+                    .allowShowTooltip(context,
+                        index: 0,
+                        title: 'bienvenue !',
+                        display: true,
+                        description: 'Bienvenue sur DEDAL les boys')
+              else
+                const SizedBox.shrink()
             ],
           ),
         ],
       );
 
   @override
+  void didUpdateWidget(covariant HomeContent oldWidget) {
+    markers.clear();
+    if (widget.places.isNotNull && widget.places!.isNotEmpty) {
+      print('here => ${widget.places}');
+      for (var place in widget.places!) {
+        markers.add(Marker(
+            markerId: MarkerId(place!.id!),
+            icon: MyApp.markerIcon,
+            position: place.coordinates!,
+            onTap: () {
+              setState(() {
+                selected = place;
+              });
+            }));
+      }
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void initState() {
     super.initState();
+    print('place => ${widget.places}');
+    print('map => ${widget.map}');
 
-    print('start');
     if (widget.map.isNotNull) {
+      print('here');
       final lines = widget.map!['LongLat'] as List;
       final building = widget.map!['Buildings'] as List;
       for (var element in lines) {
@@ -267,6 +194,19 @@ class HomeContentState extends State<HomeContent> {
                 });
               }));
         }
+      }
+    } else if (widget.places.isNotNull) {
+      print('here => ${widget.places}');
+      for (var place in widget.places!) {
+        markers.add(Marker(
+            markerId: MarkerId(place!.id!),
+            icon: MyApp.markerIcon,
+            position: place.coordinates!,
+            onTap: () {
+              setState(() {
+                selected = place;
+              });
+            }));
       }
     }
   }

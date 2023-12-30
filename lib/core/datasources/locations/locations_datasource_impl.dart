@@ -53,4 +53,28 @@ class LocationsDataSourceImpl extends LocationsDataSource {
         }
         return [];
       });
+
+  @override
+  Future<List<Place>> getPlaceByFilter(User user, String placeId) => http.get(
+        Uri.parse('http://52.166.128.133/places/byfilter?filterId=$placeId'),
+        headers: {
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      ).then((response) {
+        print(response.statusCode);
+        print(response.body);
+        if (response.statusCode == 200) {
+          return (jsonDecode(response.body) as List<dynamic>)
+              .map(
+                (e) => Place.fromJson(
+                  Map<String, Object?>.from(
+                    e as Map<Object, Object?>,
+                  ),
+                ),
+              )
+              .toList();
+        }
+        return [];
+      });
 }
