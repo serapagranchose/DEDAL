@@ -2,9 +2,10 @@ import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
+import 'package:dedal/core/pages/location_detail/location_place_detail_screen.dart';
 import 'package:dedal/core/pages/locations/location_place_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class LocationPlaceContainer extends StatelessWidget {
   const LocationPlaceContainer({
@@ -19,72 +20,83 @@ class LocationPlaceContainer extends StatelessWidget {
   final void Function(Place place) onTap;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: InkWell(
-          child: Container(
-            decoration: BoxDecoration(
+  Widget build(BuildContext context) => InkWell(
+    onTap: () => onTap,
+    child: Container(
+          decoration: const BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(10),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 4,
-                  spreadRadius: 4,
-                ),
-              ],
-            ),
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: AspectRatio(
+            aspectRatio: 2,
             child: Row(
               children: [
-                const Gap(5),
-                Icon(
-                  switch (place.type) {
-                    'restaurant' => Icons.restaurant,
-                    'jeu' => Icons.games_outlined,
-                    'site historique' => Icons.museum,
-                    'jardin historique' => Icons.grass,
-                    'jardin artistique' => Icons.grass,
-                    'rue commerçante' => Icons.euro,
-                    'salon de beauté' => Icons.face_2_outlined,
-                    "parc d'attractions" => Icons.euro,
-                    'musée' => Icons.museum,
-                    'zoo' => Icons.grass,
-                    String()? => Icons.euro,
-                    null => null,
-                  },
-                  color: SharedColorPalette().secondary,
-                ),
-                VerticalDivider(
-                  thickness: 1,
-                  color: Colors.black.withOpacity(0.12),
-                  width: 33,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      (place.name ?? '').capitalize(),
-                      style: const TextStyle(color: Colors.black),
-                      overflow: TextOverflow.fade,
-                      maxLines: 2,
-                      softWrap: true,
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          switch (place.type) {
+                            'Art et culture' => 'assets/images/filters/art.jpg',
+                            'bar' => 'assets/images/filters/bar.png',
+                            'Divertissement' =>
+                              'assets/images/filters/divertissement.jpg',
+                            'Shopping' => 'assets/images/filters/shopping.jpg',
+                            'Café' => 'assets/images/filters/cafe.png',
+                            'Parc et espace vert' =>
+                              'assets/images/filters/parc.jpg',
+                            'Histoire' =>
+                              'assets/images/filters/histoire_lille.jpg',
+                            'Restaurant' =>
+                              'assets/images/filters/restaurant.png',
+                            'Bien-être' => 'assets/images/filters/bien-etre.jpg',
+                            'Enfant' => 'assets/images/filters/enfant.png',
+                            _ => 'assets/images/filters/divertissement.jpg',
+                          },
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
                     ),
-                  ],
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          place.name ?? 'name',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Expanded(
+                            child: Text(
+                              place.description ?? 'description',
+                              overflow: TextOverflow.clip,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          onTap: () => showDialog(
-              context: context,
-              builder: (context) => LocationPlaceDialog(
-                    text: !action
-                        ? context.l18n!.globalAdd.capitalize()
-                        : context.l18n!.globalRemove.capitalize(),
-                    action: onTap,
-                    place: place,
-                  )),
         ),
-      );
+  );
 }

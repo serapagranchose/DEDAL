@@ -1,7 +1,7 @@
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
-import 'package:dedal/core/pages/home/home_place_display.dart';
+import 'package:dedal/core/pages/locations/location_place_container.dart';
 import 'package:flutter/material.dart';
 
 class LocationListDisplay extends StatelessWidget {
@@ -23,15 +23,14 @@ class LocationListDisplay extends StatelessWidget {
         childAspectRatio: 2,
         mainAxisSpacing: 10,
         children: list
-                ?.map((e) => HomePlaceDisplay(
-                      place: e,
-                    ))
+                ?.map((e) =>
 
-                // LocationPlaceContainer(
-                //       onTap: onTap,
-                //       place: e,
-                //       action: action,
-                //     ))
+
+                    LocationPlaceContainer(
+                      onTap: onTap,
+                      place: e,
+                      action: action,
+                    ))
                 .toList() ??
             [Text(context.l18n!.locationNoPlace.capitalize())],
       );

@@ -8,18 +8,17 @@ import 'package:http/http.dart' as http;
 class LocationsDataSourceImpl extends LocationsDataSource {
   @override
   Future<List<Place>> getPlaceClose(User user) => http.get(
-        //TODO(dev): replace with right coorinates
         Uri.parse(
-            'http://52.166.128.133/places/nearby?coordinates={x: 50.63904, y: 3.05867}'),
+            'http://52.166.128.133/places/nearby?coordinates${user.posToJson()}'),
         headers: {
           'Accept': '*/*',
           'Content-type': 'application/json',
         },
-      )
-          // body: jsonEncode({'position': user.posToJson()}))
-          .then((value) {
-        if (value.statusCode == 200) {
-          return (jsonDecode(value.body) as List<dynamic>)
+      ).then((response) {
+        return [];
+        if (response.statusCode == 200) {
+          print(response.body.length);
+          return (jsonDecode(response.body) as List<dynamic>)
               .map(
                 (e) => Place.fromJson(
                   Map<String, Object?>.from(
@@ -40,9 +39,9 @@ class LocationsDataSourceImpl extends LocationsDataSource {
           'Accept': '*/*',
           'Content-type': 'application/json',
         },
-      ).then((value) {
-        if (value.statusCode == 200) {
-          return (jsonDecode(value.body) as List<dynamic>)
+      ).then((response) {
+        if (response.statusCode == 200) {
+          return (jsonDecode(response.body) as List<dynamic>)
               .map(
                 (e) => Place.fromJson(
                   Map<String, Object?>.from(

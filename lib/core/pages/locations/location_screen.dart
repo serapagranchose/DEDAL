@@ -34,13 +34,17 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
       updateUser:
           UpdateUser(localStorageDataSource: getIt<LocalStorageDataSource>()))
     ..load();
+
   @override
-  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
+  Widget parent(BuildContext context, Widget child) => RegisterLayout(
       appBar: true,
       navBar: true,
       title: context.l18n!.navBarLocation.capitalize(),
       index: 2,
-      child: switch (state) {
+      child: child);
+
+  @override
+  Widget onBuild(BuildContext context, CrudState state) => switch (state) {
         CrudLoading() => const MainLoader(),
         CrudLoaded(data: final list) => LocationContent(
             list: list,
@@ -63,5 +67,5 @@ class LocationScreen extends CubitScreen<LocationCubit, CrudState> {
             ],
           ),
         _ => Text(context.l18n!.globalError.capitalize()),
-      });
+      };
 }

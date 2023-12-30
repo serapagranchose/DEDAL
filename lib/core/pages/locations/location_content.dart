@@ -43,7 +43,15 @@ class LocationContentState extends State<LocationContent> {
                           })),
                   IconButton(
                       icon: Icon(
-                        Icons.new_label_outlined,
+                        Icons.location_on_rounded,
+                        color: SharedColorPalette().secondary,
+                      ),
+                      onPressed: () => setState(() {
+                            page = LocationPageEnum.close;
+                          })),
+                  IconButton(
+                      icon: Icon(
+                        Icons.favorite,
                         color: SharedColorPalette().secondary,
                       ),
                       onPressed: () => setState(() {
