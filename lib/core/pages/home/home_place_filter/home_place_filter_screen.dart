@@ -42,8 +42,7 @@ class HomePlaceFilterScreen
                         (e) => FilterIcon(
                             icon: Icon(e.getIcon(),
                                 color: selected == e.id
-                                    ? SharedColorPalette()
-                                        .mainDisable(Theme.of(context))
+                                    ? SharedColorPalette().secondary
                                     : SharedColorPalette().primary),
                             title: context.l18n!.filterNameEnum(
                                 (e.name ?? '').split(' ')[0].split('-')[0]),
