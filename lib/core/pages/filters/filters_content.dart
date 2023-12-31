@@ -32,6 +32,7 @@ class FilterContentState extends State<FilterContent> {
   late List<String>? currentSelected;
   late double cost;
   late double time;
+  bool _isAccessible = false;
 
   void putInside(Filter filter) {
     if (currentSelected.isNull || filter.id.isNull) {
@@ -84,6 +85,24 @@ class FilterContentState extends State<FilterContent> {
               }),
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'PMR',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Checkbox(
+                  value: _isAccessible,
+                  onChanged: (value) => setState(() {
+                        _isAccessible = !_isAccessible;
+                      })),
+            ],
+          ),
           Expanded(
             flex: 10,
             child: FiltersDisplay(
@@ -106,10 +125,13 @@ class FilterContentState extends State<FilterContent> {
               ),
               context: context,
               text: context.l18n!.globalValidate.capitalize(),
-              onTap: (controller) async => widget.submit.call(Info(
-                  filter: currentSelected,
-                  budget: cost.round(),
-                  time: time.round())),
+              onTap: (controller) async => widget.submit.call(
+                Info(
+                    filter: currentSelected,
+                    budget: cost.round(),
+                    time: time.round(),
+                    accecibility: _isAccessible),
+              ),
             ),
           ),
         ],

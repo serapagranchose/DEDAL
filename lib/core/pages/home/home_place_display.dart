@@ -34,7 +34,7 @@ class HomePlaceDisplay extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: CachedNetworkImageProvider(place.pict!),
+                      image: CachedNetworkImageProvider(place.pict ?? ''),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: const BorderRadius.all(

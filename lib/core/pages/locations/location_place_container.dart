@@ -1,10 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dedal/constants/colors.dart';
-import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
-import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/location_detail/location_place_detail_screen.dart';
-import 'package:dedal/core/pages/locations/location_place_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,9 +11,11 @@ class LocationPlaceContainer extends StatelessWidget {
     required this.place,
     required this.onTap,
     required this.action,
+    this.supr = false,
   });
 
   final Place place;
+  final bool supr;
   final bool action;
   final void Function(Place place) onTap;
 
@@ -34,10 +33,18 @@ class LocationPlaceContainer extends StatelessWidget {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(place.pict!),
-                        fit: BoxFit.cover,
-                      ),
+                      image: place.pict != null
+                          ? DecorationImage(
+                              image: CachedNetworkImageProvider(
+                                place.pict!,
+                              ),
+                              fit: BoxFit.fill,
+                            )
+                          : const DecorationImage(
+                              image: AssetImage(
+                                  'assets/images/filters/divertissement.jpg'),
+                              fit: BoxFit.cover,
+                            ),
                       borderRadius: const BorderRadius.all(
                         Radius.circular(5),
                       ),
@@ -86,7 +93,7 @@ class LocationPlaceContainer extends StatelessWidget {
                             InkWell(
                                 onTap: () => onTap.call(place),
                                 child: Text(
-                                  'supprimer',
+                                  supr ? 'supprimer' : 'ajouter',
                                   style: TextStyle(
                                     color: SharedColorPalette().secondary,
                                     fontSize: 12,

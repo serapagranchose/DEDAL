@@ -36,7 +36,9 @@ class LocationContentState extends State<LocationContent> {
                   IconButton(
                       icon: Icon(
                         Icons.list,
-                        color: SharedColorPalette().secondary,
+                        color: page == LocationPageEnum.parcours
+                            ? SharedColorPalette().secondary
+                            : SharedColorPalette().lightSecondary,
                       ),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.parcours;
@@ -44,15 +46,20 @@ class LocationContentState extends State<LocationContent> {
                   IconButton(
                       icon: Icon(
                         Icons.location_on_rounded,
-                        color: SharedColorPalette().secondary,
+                        color: page == LocationPageEnum.close
+                            ? SharedColorPalette().secondary
+                            : SharedColorPalette().lightSecondary,
                       ),
                       onPressed: () => setState(() {
+                            print(page);
                             page = LocationPageEnum.close;
                           })),
                   IconButton(
                       icon: Icon(
                         Icons.favorite,
-                        color: SharedColorPalette().secondary,
+                        color: page == LocationPageEnum.liked
+                            ? SharedColorPalette().secondary
+                            : SharedColorPalette().lightSecondary,
                       ),
                       onPressed: () => setState(() {
                             page = LocationPageEnum.liked;
@@ -72,6 +79,7 @@ class LocationContentState extends State<LocationContent> {
                 LocationPageEnum.close => false,
                 LocationPageEnum.liked => false
               },
+              supr: page == LocationPageEnum.parcours,
               onTap: (place) {
                 if (page == LocationPageEnum.parcours) {
                   setState(() {
@@ -89,7 +97,6 @@ class LocationContentState extends State<LocationContent> {
                     if (target == -1) {
                       widget.list?.$1?.add(place);
                     }
-                    page = LocationPageEnum.parcours;
                   });
                 }
                 context.pop();

@@ -31,6 +31,7 @@ class FilterDataSourceImpl extends FilterDataSource {
         'budget': user.info?.budget,
         'filter': user.info?.filter,
         'map': 'map-${user.id}',
+        'pmr': user.info?.accecibility,
       }),
     );
     return await http.post(
@@ -40,6 +41,7 @@ class FilterDataSourceImpl extends FilterDataSource {
         'budget': user.info?.budget,
         'filter': user.info?.filter,
         'map': 'map-${user.id}',
+        'pmr': user.info?.accecibility,
       }),
       headers: {
         'x-access-token': user.token!,
