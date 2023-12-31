@@ -31,8 +31,7 @@ class User {
         id: json['id'].isNotNull ? json['id'].toString() : null,
         name: json['username'].isNotNull ? json['username'].toString() : null,
         email: json['email'].isNotNull ? json['email'].toString() : null,
-        info: null,
-        //  json['lastInfo'].isNotNull
+        // info: json['lastInfo'].isNotNull
         //     ? Info.toJson(
         //         Map<String, Object?>.from(
         //           json['lastInfo'] as Map<Object, Object?>,

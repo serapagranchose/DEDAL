@@ -24,7 +24,16 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<bool> setinfoUser(User user) async {
-    return await http.patch(
+    print('start => http://52.166.128.133/user/?id=${user.id}');
+    print(
+      jsonEncode({
+        'time': user.info?.time,
+        'budget': user.info?.budget,
+        'filter': user.info?.filter,
+        'map': 'map-${user.id}',
+      }),
+    );
+    return await http.post(
       Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
       body: jsonEncode({
         'time': user.info?.time,
@@ -38,6 +47,7 @@ class FilterDataSourceImpl extends FilterDataSource {
         'Content-type': 'application/json',
       },
     ).then((result) {
+      print('result >= $result');
       return result.statusCode == 200;
     });
   }

@@ -24,7 +24,7 @@ class FiltersCostDisplay extends StatelessWidget {
                     border: Border.all(
                       color: cost == 50
                           ? SharedColorPalette().secondary
-                          : SharedColorPalette().mainDisable(Theme.of(context)).withOpacity(0.5),
+                          : SharedColorPalette().lightSecondary,
                       width: 2,
                     ),
                     borderRadius: const BorderRadius.all(
@@ -46,7 +46,7 @@ class FiltersCostDisplay extends StatelessWidget {
                     border: Border.all(
                       color: cost == 100
                           ? SharedColorPalette().secondary
-                          : SharedColorPalette().mainDisable(Theme.of(context)).withOpacity(0.5),
+                          : SharedColorPalette().lightSecondary,
                       width: 2,
                     ),
                     borderRadius: const BorderRadius.all(
@@ -68,7 +68,7 @@ class FiltersCostDisplay extends StatelessWidget {
                     border: Border.all(
                       color: cost == 200
                           ? SharedColorPalette().secondary
-                          : SharedColorPalette().mainDisable(Theme.of(context)).withOpacity(0.5),
+                          : SharedColorPalette().lightSecondary,
                       width: 2,
                     ),
                     borderRadius: const BorderRadius.all(

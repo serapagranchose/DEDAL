@@ -6,28 +6,35 @@ class Info {
     this.time,
     this.budget,
     this.map,
+    this.accecibility,
     this.mapName,
   });
 
   int? time;
   int? budget;
+  bool? accecibility;
   List<String>? filter;
   String? mapName;
   Map<String, Object>? map;
 
   factory Info.toJson(Map<String, Object?> json) {
+    print('info => $json');
     final info = Info(
-      time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
-      budget:
-          json['budget'].isNotNull ? int.parse(json['budget'].toString()) : 0,
-      filter: json['filter'].isNotNull
-          ? (json['filter'] as List<Object?>).map((e) => e.toString()).toList()
-          : [],
-      mapName: json['map']?.toString(),
-      // map: json['mapData'] != null
-      //     ? Map<String, Object>.from(json['mapData'] as Map<Object, Object>)
-      //     : null,
-    );
+        time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
+        budget:
+            json['budget'].isNotNull ? int.parse(json['budget'].toString()) : 0,
+        filter: json['filter'].isNotNull
+            ? (json['filter'] as List<Object?>)
+                .map((e) => e.toString())
+                .toList()
+            : [],
+        mapName: json['map']?.toString(),
+        accecibility:
+            json['mpr'] != null ? bool.parse(json['mpr'].toString()) : null
+        // map: json['mapData'] != null
+        //     ? Map<String, Object>.from(json['mapData'] as Map<Object, Object>)
+        //     : null,
+        );
     return info;
   }
 
@@ -42,5 +49,6 @@ class Info {
         "map": 'mapName',
         "mapData": map,
         'token': token,
+        'mpr': accecibility
       };
 }

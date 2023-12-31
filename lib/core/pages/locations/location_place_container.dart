@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
 import 'package:dedal/core/extensions/string_extention.dart';
@@ -21,8 +22,8 @@ class LocationPlaceContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
-    onTap: () => onTap,
-    child: Container(
+        onTap: () => onTap,
+        child: Container(
           decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -34,25 +35,7 @@ class LocationPlaceContainer extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(
-                          switch (place.type) {
-                            'Art et culture' => 'assets/images/filters/art.jpg',
-                            'bar' => 'assets/images/filters/bar.png',
-                            'Divertissement' =>
-                              'assets/images/filters/divertissement.jpg',
-                            'Shopping' => 'assets/images/filters/shopping.jpg',
-                            'Café' => 'assets/images/filters/cafe.png',
-                            'Parc et espace vert' =>
-                              'assets/images/filters/parc.jpg',
-                            'Histoire' =>
-                              'assets/images/filters/histoire_lille.jpg',
-                            'Restaurant' =>
-                              'assets/images/filters/restaurant.png',
-                            'Bien-être' => 'assets/images/filters/bien-etre.jpg',
-                            'Enfant' => 'assets/images/filters/enfant.png',
-                            _ => 'assets/images/filters/divertissement.jpg',
-                          },
-                        ),
+                        image: CachedNetworkImageProvider(place.pict!),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: const BorderRadius.all(
@@ -82,13 +65,51 @@ class LocationPlaceContainer extends StatelessWidget {
                           child: Expanded(
                             child: Text(
                               place.description ?? 'description',
-                              overflow: TextOverflow.clip,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,
                               ),
                             ),
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              place.accessible ?? false
+                                  ? Icons.accessible
+                                  : Icons.not_accessible,
+                              color: SharedColorPalette().secondary,
+                            ),
+                            InkWell(
+                                onTap: () => onTap.call(place),
+                                child: Text(
+                                  'supprimer',
+                                  style: TextStyle(
+                                    color: SharedColorPalette().secondary,
+                                    fontSize: 12,
+                                  ),
+                                )),
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(
+                                    LocationPlaceDetailScreen.name,
+                                    queryParameters: {
+                                      'id': place.id!,
+                                      'placeName': place.name
+                                    });
+                              },
+                              child: Text(
+                                "Plus d'info >",
+                                style: TextStyle(
+                                  color: SharedColorPalette().secondary,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -98,5 +119,5 @@ class LocationPlaceContainer extends StatelessWidget {
             ),
           ),
         ),
-  );
+      );
 }
