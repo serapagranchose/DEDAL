@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:dedal/components/button/filter_icon.dart';
 import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/tooltip.dart';

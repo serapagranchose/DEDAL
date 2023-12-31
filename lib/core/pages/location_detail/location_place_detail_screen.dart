@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
-import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/location_detail/location_place_detail_cubit.dart';
@@ -27,9 +26,9 @@ class LocationPlaceDetailScreen
 
   @override
   Widget parent(BuildContext context, Widget child) => RegisterLayout(
-        child: child,
         appBar: true,
         title: placeName,
+        child: child,
       );
 
   @override
@@ -43,14 +42,16 @@ class LocationPlaceDetailScreen
             ? RegisterLayout(
                 child: Column(children: [
                 Container(
-                  height: 100,
+                  height: 150,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    image: place!.pict == null
+                    image: place!.pict != null
                         ? DecorationImage(
                             image: CachedNetworkImageProvider(
-                            place.pict!,
-                          ))
+                              place.pict!,
+                            ),
+                            fit: BoxFit.fill,
+                          )
                         : DecorationImage(
                             image: AssetImage(
                               switch (place.type) {
@@ -74,12 +75,15 @@ class LocationPlaceDetailScreen
                                 _ => 'assets/images/filters/divertissement.jpg',
                               },
                             ),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                   ),
                 ),
                 const Gap(20),
-                Text(place.description ?? ''),
+                Text(
+                  place.description ?? '',
+                  style: const TextStyle(fontSize: 16),
+                ),
                 const Gap(20),
                 Row(
                   children: [
@@ -88,6 +92,7 @@ class LocationPlaceDetailScreen
                       child: Text(
                         place.address ?? '',
                         overflow: TextOverflow.fade,
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
@@ -100,7 +105,8 @@ class LocationPlaceDetailScreen
                       child: InkWell(
                           child: Text(
                             place.link ?? '',
-                            style: const TextStyle(color: Colors.blue),
+                            style: const TextStyle(
+                                color: Colors.blue, fontSize: 16),
                           ),
                           onTap: () => launchUrl(Uri.parse(place.link ?? ''))),
                     ),
@@ -113,7 +119,10 @@ class LocationPlaceDetailScreen
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Row(
                         children: [
-                          Text('${place.price?.round()}'),
+                          Text(
+                            '${place.price?.round()}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
                           const Icon(Icons.euro),
                         ],
                       ),
@@ -122,7 +131,10 @@ class LocationPlaceDetailScreen
                       Row(
                         children: [
                           const Icon(Icons.hourglass_bottom),
-                          Text('${place.duration?.round()} min'),
+                          Text(
+                            '${place.duration?.round()} min',
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ],
                       ),
                     ]),
