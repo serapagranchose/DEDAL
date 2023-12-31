@@ -50,7 +50,7 @@ class LocationPlaceDetailScreen
                             image: CachedNetworkImageProvider(
                               place.pict!,
                             ),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           )
                         : DecorationImage(
                             image: AssetImage(
@@ -75,7 +75,7 @@ class LocationPlaceDetailScreen
                                 _ => 'assets/images/filters/divertissement.jpg',
                               },
                             ),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                   ),
                 ),

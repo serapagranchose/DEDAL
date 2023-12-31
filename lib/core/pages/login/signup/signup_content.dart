@@ -77,10 +77,7 @@ class SignUpContentyState extends State<SignUpContent> {
                   context.l18n!.loginError.capitalize(),
                   style: TextStyle(color: Colors.red.shade900),
                 ),
-              Text('Votre mot de passe doit contenir, au moins : '),
-              Text('- Une majuscule'),
-              Text('- Un charactère spécial'),
-              Text('- Un chiffre'),
+              Text(context.l18n!.loginHint.capitalize()),
             ],
           ),
           Row(
@@ -90,7 +87,7 @@ class SignUpContentyState extends State<SignUpContent> {
                   onChanged: (value) => setState(() {
                         _saveCreadential = !_saveCreadential;
                       })),
-              const Text('Sauvegarder mes informations')
+              Text(context.l18n!.loginSave)
             ],
           ),
           Padding(

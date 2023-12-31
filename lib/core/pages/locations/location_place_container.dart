@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/location_detail/location_place_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +95,9 @@ class LocationPlaceContainer extends StatelessWidget {
                             InkWell(
                                 onTap: () => onTap.call(place),
                                 child: Text(
-                                  supr ? 'supprimer' : 'ajouter',
+                                  supr
+                                      ? context.l18n!.globalRemove.capitalize()
+                                      : context.l18n!.globalAdd.capitalize(),
                                   style: TextStyle(
                                     color: SharedColorPalette().secondary,
                                     fontSize: 12,
@@ -109,7 +113,7 @@ class LocationPlaceContainer extends StatelessWidget {
                                     });
                               },
                               child: Text(
-                                "Plus d'info >",
+                                context.l18n!.more.capitalize(),
                                 style: TextStyle(
                                   color: SharedColorPalette().secondary,
                                   fontSize: 12,

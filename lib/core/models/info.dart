@@ -18,7 +18,6 @@ class Info {
   Map<String, Object>? map;
 
   factory Info.toJson(Map<String, Object?> json) {
-    print('info => $json');
     final info = Info(
         time: json['time'].isNotNull ? int.parse(json['time'].toString()) : 0,
         budget:

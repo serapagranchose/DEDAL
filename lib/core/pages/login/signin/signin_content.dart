@@ -75,7 +75,7 @@ class SigninContentyState extends State<SigninContent> {
                   onChanged: (value) => setState(() {
                         _saveCreadential = !_saveCreadential;
                       })),
-              const Text('Sauvegardere mes info')
+              Text(context.l18n!.loginSave.capitalize())
             ],
           ),
           Padding(

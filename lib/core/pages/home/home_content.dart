@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/constants/colors.dart';
+import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
+import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/extensions/tooltip.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/home/home_place_display.dart';
@@ -124,9 +126,9 @@ class HomeContentState extends State<HomeContent> {
                         selected: widget.places?.first?.foundFilter?.first)
                     .allowShowTooltip(context,
                         index: 0,
-                        title: 'bienvenue !',
+                        title: context.l18n!.firstTile.capitalize(),
                         display: true,
-                        description: 'Bienvenue sur DEDAL les boys')
+                        description: context.l18n!.firstDesc.capitalize())
               else
                 const SizedBox.shrink()
             ],

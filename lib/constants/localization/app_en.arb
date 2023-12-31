@@ -40,6 +40,8 @@
   "loginConnect": "connection",
   "loginCode" : "code",
   "loginCodeBis": "enter the code you received by e-mail",
+  "loginSave" :"save my information",
+"loginHint": "Your password must contain at least : \nA capital letter \nA special character \nA number",
 
 "@_PROFIL" : {},
   "profilDeco" : "log off",
@@ -48,6 +50,12 @@
 
 "@_LOCATIONS" : {},
   "locationNoPlace" : "No location found...",
+  "more" : "more",
+
+
+"@_WELCOME" : {},
+  "firstTile": "welcome",
+  "firstDesc": "welcome to DEDAL",
 
 "last" : "last"
 }

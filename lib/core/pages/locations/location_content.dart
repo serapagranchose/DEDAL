@@ -51,7 +51,6 @@ class LocationContentState extends State<LocationContent> {
                             : SharedColorPalette().lightSecondary,
                       ),
                       onPressed: () => setState(() {
-                            print(page);
                             page = LocationPageEnum.close;
                           })),
                   IconButton(

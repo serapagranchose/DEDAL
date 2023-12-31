@@ -23,36 +23,21 @@ class FilterDataSourceImpl extends FilterDataSource {
       });
 
   @override
-  Future<bool> setinfoUser(User user) async {
-    print('start => http://52.166.128.133/user/?id=${user.id}');
-    print(
-      jsonEncode({
-        'time': user.info?.time,
-        'budget': user.info?.budget,
-        'filter': user.info?.filter,
-        'map': 'map-${user.id}',
-        'pmr': user.info?.accecibility,
-      }),
-    );
-    return await http.post(
-      Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
-      body: jsonEncode({
-        'time': user.info?.time,
-        'budget': user.info?.budget,
-        'filter': user.info?.filter,
-        'map': 'map-${user.id}',
-        'pmr': user.info?.accecibility,
-      }),
-      headers: {
-        'x-access-token': user.token!,
-        'Accept': '*/*',
-        'Content-type': 'application/json',
-      },
-    ).then((result) {
-      print('result >= $result');
-      return result.statusCode == 200;
-    });
-  }
+  Future<bool> setinfoUser(User user) async => await http.post(
+        Uri.parse('http://52.166.128.133/user/?id=${user.id}'),
+        body: jsonEncode({
+          'time': user.info?.time,
+          'budget': user.info?.budget,
+          'filter': user.info?.filter,
+          'map': 'map-${user.id}',
+          'pmr': user.info?.accecibility,
+        }),
+        headers: {
+          'x-access-token': user.token!,
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      ).then((result) => result.statusCode == 200);
 
   @override
   Future<List<Place>?> getPlaces(User user) async => http.post(

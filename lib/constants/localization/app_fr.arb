@@ -41,6 +41,8 @@
   "loginConnect" : "connexion",
   "loginCode" : "code",
   "loginCodeBis" : "entrez le code que vous avez reçu par mail",
+  "loginSave" :"sauvegarder mes informations",
+  "loginHint" : "Votre mot de passe doit contenir, au moins : \n- Une majuscule\n- Un charactère spécial\n- Un chiffre",
 
 "@_PROFIL" : {},
   "profilDeco" : "déconnexion",
@@ -49,7 +51,10 @@
 
 "@_LOCATIONS" : {},
   "locationNoPlace" : "Aucun lieu trouvé...",
+  "more" : "plus d'info",
 
-
+"@_WELCOME" : {},
+  "firstTile" : "bienvenue",
+  "firstDesc" : "bienvenue sur DEDAL",
 "last" : "last"
 }
