@@ -32,7 +32,7 @@ class HomePlaceFilterScreen
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
+                  color: SharedColorPalette().accent(Theme.of(context)),
                 ),
                 height: 57,
                 child: ListView(

@@ -22,12 +22,6 @@ class SharedColorPalette {
         : const Color(0xFFFFFFFF);
   }
 
-  Color navBar(ThemeData theme) {
-    return theme.brightness == Brightness.light
-        ? const Color(0xFFFFFFFF)
-        : const Color(0xFF294F87);
-  }
-
   Color disableSecondary(ThemeData theme) {
     return theme.brightness == Brightness.light
         ? Color.fromARGB(255, 254, 211, 82)

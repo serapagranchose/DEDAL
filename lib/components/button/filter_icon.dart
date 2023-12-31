@@ -31,9 +31,9 @@ class FilterIcon extends StatelessWidget {
                   icon,
                   Text(
                     title,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                     maxLines: 1,
-                    overflow: TextOverflow.fade,
+                    overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                   )
                 ],
