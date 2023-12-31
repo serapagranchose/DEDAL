@@ -47,7 +47,7 @@ class SignUpScreen extends CubitScreen<SignUpCubit, CrudState> {
             builder: (context, scrollController) => DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(20)),
+                        const BorderRadius.vertical(top: Radius.circular(20)),
                     color: SharedColorPalette().accent(Theme.of(context)),
                   ),
                   child: child,

@@ -6,6 +6,8 @@ class SharedColorPalette {
   Color lightPrimary = const Color(0xFF70819c);
   // Orange DEDAL:
   Color secondary = const Color(0xFFff9715);
+  Color lightSecondary = const Color(0xFFffba3f);
+
   // Usually used for buttons or popups
   // Lightmode: white, Darkmode: lightgrey:
   Color accent(ThemeData theme) {
@@ -24,6 +26,12 @@ class SharedColorPalette {
     return theme.brightness == Brightness.light
         ? const Color(0xFFFFFFFF)
         : const Color(0xFF294F87);
+  }
+
+  Color disableSecondary(ThemeData theme) {
+    return theme.brightness == Brightness.light
+        ? Color.fromARGB(255, 254, 211, 82)
+        : const Color.fromARGB(255, 170, 123, 41);
   }
 
   // Button contour:

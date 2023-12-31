@@ -53,6 +53,7 @@ class Main extends StatelessWidget {
               const Gap(15),
               CustomStringButton(
                 backgroundColor: SharedColorPalette().accent(Theme.of(context)),
+                textColor: SharedColorPalette().text(Theme.of(context)),
                 context: context,
                 text: context.l18n!.mainSignIn.capitalize(),
                 onTap: (controller) async => showModalBottomSheet<void>(

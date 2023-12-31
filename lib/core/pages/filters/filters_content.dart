@@ -95,6 +95,10 @@ class FilterContentState extends State<FilterContent> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 128),
             child: CustomStringButton(
+              disabled: (cost == 0 ||
+                  time == 0 ||
+                  currentSelected.isNull ||
+                  currentSelected!.isEmpty),
               backgroundColor: SharedColorPalette().secondary,
               border: Border.all(
                 width: 2,

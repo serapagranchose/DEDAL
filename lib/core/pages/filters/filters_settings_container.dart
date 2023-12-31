@@ -25,7 +25,7 @@ class FiltersSettingsContainer extends StatelessWidget {
                 border: Border.all(
                   color: active
                       ? SharedColorPalette().secondary
-                      : SharedColorPalette().mainDisable(Theme.of(context)).withOpacity(0.5),
+                      : SharedColorPalette().lightSecondary,
                   width: 2,
                 ),
                 borderRadius: const BorderRadius.all(
