@@ -23,9 +23,7 @@ class FiltersSettingsContainer extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: active
-                      ? SharedColorPalette().secondary
-                      : SharedColorPalette().lightSecondary,
+                  color: active ? SharedColorPalette().secondary : Colors.grey,
                   width: 2,
                 ),
                 borderRadius: const BorderRadius.all(

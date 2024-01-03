@@ -88,15 +88,18 @@ class FilterContentState extends State<FilterContent> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'PMR',
+                  context.l18n!.filterPmr.capitalize(),
                   textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.bold),
                 ),
               ),
               Checkbox(
+                  checkColor: SharedColorPalette().primary,
+                  activeColor: SharedColorPalette().secondary,
                   value: _isAccessible,
                   onChanged: (value) => setState(() {
                         _isAccessible = !_isAccessible;
@@ -142,6 +145,7 @@ class FilterContentState extends State<FilterContent> {
     currentSelected = widget.info?.filter ?? [];
     cost = (widget.info?.budget ?? 0).toDouble();
     time = (widget.info?.time ?? 0).toDouble();
+    _isAccessible = widget.info?.accecibility ?? false;
     super.initState();
   }
 }

@@ -55,7 +55,7 @@ class _NavBarState extends State<NavBar> {
               }
             },
             elevation: 0,
-            selectedItemColor: Colors.black,
+            selectedItemColor: SharedColorPalette().text(Theme.of(context)),
             unselectedItemColor: const Color.fromRGBO(100, 116, 139, 1),
             showUnselectedLabels: true,
             showSelectedLabels: true,

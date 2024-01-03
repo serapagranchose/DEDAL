@@ -17,6 +17,7 @@ class HomeContent extends StatefulWidget {
   const HomeContent({
     Key? key,
     required this.userPosition,
+    required this.init,
     this.map,
     this.places,
   }) : super(key: key);
@@ -24,6 +25,7 @@ class HomeContent extends StatefulWidget {
   final LatLng userPosition;
   final Map<String, Object>? map;
   final List<Place?>? places;
+  final VoidCallback init;
 
   @override
   HomeContentState createState() => HomeContentState();
@@ -67,7 +69,12 @@ class HomeContentState extends State<HomeContent> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: HomePlaceDisplay(place: selected!),
+                  child: HomePlaceDisplay(
+                    place: selected!,
+                    close: () => setState(() {
+                      selected = null;
+                    }),
+                  ),
                 ),
                 const Gap(60),
               ],
@@ -83,22 +90,16 @@ class HomeContentState extends State<HomeContent> {
                     children: [
                       CustomIconButton(
                           icon: const Icon(
-                            Icons.my_location,
-                            // color: Colors.black,
+                            Icons.route,
                           ),
-                          action: () async {
-                            if (widget.map.isNotNull) {
-                              final lines = widget.map!['LongLat'] as List;
-                              moveCamera(LatLng(lines[1]['latitude'],
-                                  lines.first['longitude']));
-                            }
-                            if (widget.places.isNotNull &&
-                                widget.places?.first?.coordinates != null) {
-                              moveCamera(widget.places!.first!.coordinates!);
-                            } else {
-                              moveCamera(widget.userPosition);
-                            }
-                          }),
+                          action: widget.init),
+                      CustomIconButton(
+                        icon: const Icon(
+                          Icons.my_location,
+                          // color: Colors.black,
+                        ),
+                        action: () => moveCamera(widget.userPosition),
+                      ),
                       CustomIconButton(
                         icon: Icon(
                           mapType == MapType.normal
@@ -121,16 +122,15 @@ class HomeContentState extends State<HomeContent> {
                   ),
                 ],
               ),
-              if (widget.map == null)
-                HomePlaceFilterScreen(
-                        selected: widget.places?.first?.foundFilter?.first)
-                    .allowShowTooltip(context,
-                        index: 0,
-                        title: context.l18n!.firstTile.capitalize(),
-                        display: true,
-                        description: context.l18n!.firstDesc.capitalize())
-              else
-                const SizedBox.shrink()
+              HomePlaceFilterScreen(
+                      selected: widget.map.isNull
+                          ? widget.places?.first?.foundFilter?.first
+                          : null)
+                  .allowShowTooltip(context,
+                      index: 0,
+                      title: context.l18n!.firstTile.capitalize(),
+                      display: true,
+                      description: context.l18n!.firstDesc.capitalize())
             ],
           ),
         ],
@@ -140,6 +140,7 @@ class HomeContentState extends State<HomeContent> {
   void didUpdateWidget(covariant HomeContent oldWidget) {
     markers.clear();
     if (widget.places.isNotNull && widget.places!.isNotEmpty) {
+      polyline = polyline.copyWith(visibleParam: false);
       for (var place in widget.places!) {
         markers.add(Marker(
             markerId: MarkerId(place!.id!),
@@ -158,7 +159,6 @@ class HomeContentState extends State<HomeContent> {
   @override
   void initState() {
     super.initState();
-
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
       final building = widget.map!['Buildings'] as List;
@@ -192,6 +192,8 @@ class HomeContentState extends State<HomeContent> {
               }));
         }
       }
+
+      moveCamera(LatLng(lines.last['latitude'], lines.last['longitude']));
     } else if (widget.places.isNotNull) {
       for (var place in widget.places!) {
         markers.add(Marker(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
@@ -12,9 +13,11 @@ class HomePlaceDisplay extends StatelessWidget {
   const HomePlaceDisplay({
     super.key,
     required this.place,
+    required this.close,
   });
 
   final Place place;
+  final VoidCallback close;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -32,6 +35,7 @@ class HomePlaceDisplay extends StatelessWidget {
           aspectRatio: 2,
           child: Row(
             children: [
+              Text(place.pict ?? 'PICT'),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
@@ -52,15 +56,32 @@ class HomePlaceDisplay extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: Column(
                     children: [
-                      Text(
-                        place.name ?? 'name',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: SharedColorPalette().text(Theme.of(context)),
-                          fontSize: 20,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              place.name ?? 'name',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: SharedColorPalette()
+                                    .text(Theme.of(context)),
+                                fontSize: 18,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: close,
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.grey,
+                            ),
+                          )
+                        ],
                       ),
                       Expanded(
+                        flex: 7,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Text(
@@ -71,36 +92,39 @@ class HomePlaceDisplay extends StatelessWidget {
                               fontSize: 15,
                             ),
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 4,
+                            maxLines: 3,
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
-                            place.accessible ?? false
-                                ? Icons.accessible
-                                : Icons.not_accessible,
-                            color: SharedColorPalette().secondary,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              context.pushNamed(LocationPlaceDetailScreen.name,
-                                  queryParameters: {
-                                    'id': place.id!,
-                                    'placeName': place.name
-                                  });
-                            },
-                            child: Text(
-                              context.l18n!.more.capitalize(),
-                              style: TextStyle(
-                                color: SharedColorPalette().secondary,
-                                fontSize: 12,
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              place.accessible ?? false
+                                  ? Icons.accessible
+                                  : Icons.not_accessible,
+                              color: SharedColorPalette().secondary,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(
+                                    LocationPlaceDetailScreen.name,
+                                    queryParameters: {
+                                      'id': place.id!,
+                                      'placeName': place.name
+                                    });
+                              },
+                              child: Text(
+                                context.l18n!.more.capitalize(),
+                                style: TextStyle(
+                                  color: SharedColorPalette().secondary,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       const Gap(10),
                     ],

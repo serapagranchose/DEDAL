@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
+import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/core/extensions/get_it.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/pages/location_detail/location_place_detail_cubit.dart';
@@ -142,6 +143,6 @@ class LocationPlaceDetailScreen
                 ),
               ]))
             : const SizedBox.shrink(),
-        _ => Text(state.toString()),
+        _ => const MainLoader(),
       };
 }

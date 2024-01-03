@@ -55,6 +55,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
                 userPosition: data.pos ?? const LatLng(0, 0),
                 places: data.places,
                 map: data.info?.map,
+                init: bloc(context).load,
               )
             : const MainLoader(),
         CrudError(message: final message) => Column(
@@ -71,6 +72,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
             userPosition: data!.$1.pos ?? const LatLng(0, 0),
             places: data.$2.isEmpty ? null : data.$2,
             map: null,
+            init: bloc(context).load,
           ),
         _ => Text(context.l18n!.globalError.capitalize()),
       });

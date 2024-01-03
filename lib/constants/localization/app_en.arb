@@ -32,6 +32,8 @@
   "filterBuget": "select your budget",
   "filterTime": "select the time of your visit",
   "filterNameEnum" : "{filter, select, Art{Art and culture} Bar{Bar and brasserie} Divertissement{Entertainment} Shopping{Shopping} Restaurant{Restaurant}  Bien{Wellness} Cafe{Café} Parc{Park and green space} Histoire{History} Enfant{Child} other{nop}}",
+  "filterPmr": "RMP acceptability",
+
 
 "@_LOGIN" : {},
   "loginEmail": "your email",
