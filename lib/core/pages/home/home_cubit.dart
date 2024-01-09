@@ -45,6 +45,7 @@ class HomeCubit extends Cubit<CrudState> {
 
   FutureOr<void> load() async {
     bool change = false;
+    print('------------------------here------------------------');
     emit(const CrudLoading());
     final res =
         await _getFirstStep.call(null).fold((value) => value, (error) => null);

@@ -9,15 +9,13 @@ class LocationsDataSourceImpl extends LocationsDataSource {
   @override
   Future<List<Place>> getPlaceClose(User user) => http.get(
         Uri.parse(
-            'http://52.166.128.133/places/nearby?coordinates${user.posToJson()}'),
+            'http://52.166.128.133/places/nearby?coordinates=${user.posToJson()}'),
         headers: {
           'Accept': '*/*',
           'Content-type': 'application/json',
         },
       ).then((response) {
-        return [];
         if (response.statusCode == 200) {
-          print(response.body.length);
           return (jsonDecode(response.body) as List<dynamic>)
               .map(
                 (e) => Place.fromJson(

@@ -80,7 +80,9 @@ class Place {
         'coordinates': {
           'x': coordinates?.latitude,
           'y': coordinates?.longitude,
-        }
+        },
+        'accessible': accessible,
+        'photoLink': pict
       };
 
   @override

@@ -74,10 +74,7 @@ class FilterDataSourceImpl extends FilterDataSource {
               'Content-type': 'application/json',
             },
             body: jsonEncode({
-              'position': {
-                'x': 50.63129792192402,
-                'y': 3.0594292312975506,
-              },
+              'position': user.posToJson(),
               'places': user.places?.map((e) => e.toJson()).toList(),
             }))
         .then((result) {

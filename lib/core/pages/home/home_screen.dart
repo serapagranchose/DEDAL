@@ -53,7 +53,7 @@ class HomeScreen extends CubitScreen<HomeCubit, CrudState> {
         CrudLoaded<User?>(data: final data) => data != null
             ? HomeContent(
                 userPosition: data.pos ?? const LatLng(0, 0),
-                places: data.places,
+                places: null,
                 map: data.info?.map,
                 init: bloc(context).load,
               )

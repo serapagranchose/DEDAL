@@ -136,35 +136,16 @@ class HomeContentState extends State<HomeContent> {
         ],
       );
 
-  @override
-  void didUpdateWidget(covariant HomeContent oldWidget) {
+  void customInit() {
     markers.clear();
-    if (widget.places.isNotNull && widget.places!.isNotEmpty) {
-      polyline = polyline.copyWith(visibleParam: false);
-      for (var place in widget.places!) {
-        markers.add(Marker(
-            markerId: MarkerId(place!.id!),
-            icon: MyApp.markerIcon,
-            position: place.coordinates!,
-            onTap: () {
-              setState(() {
-                selected = place;
-              });
-            }));
-      }
-    }
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void initState() {
-    super.initState();
+    polyline = polyline.copyWith(pointsParam: []);
     if (widget.map.isNotNull) {
       final lines = widget.map!['LongLat'] as List;
       final building = widget.map!['Buildings'] as List;
       for (var element in lines) {
         final value = Map.from(element);
         polyline = polyline.copyWith(
+          visibleParam: true,
           pointsParam: [
             ...polyline.points,
             LatLng(
@@ -195,6 +176,8 @@ class HomeContentState extends State<HomeContent> {
 
       moveCamera(LatLng(lines.last['latitude'], lines.last['longitude']));
     } else if (widget.places.isNotNull) {
+      markers.clear();
+      polyline = polyline.copyWith(visibleParam: false);
       for (var place in widget.places!) {
         markers.add(Marker(
             markerId: MarkerId(place!.id!),
@@ -206,15 +189,32 @@ class HomeContentState extends State<HomeContent> {
               });
             }));
       }
+      moveCamera(widget.places?.last?.coordinates);
     }
   }
 
-  Future<void> moveCamera(LatLng pos) async {
+  @override
+  void didUpdateWidget(covariant HomeContent oldWidget) {
+    customInit();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void initState() {
+    customInit();
+
+    super.initState();
+  }
+
+  Future<void> moveCamera(LatLng? pos) async {
+    if (pos.isNull) {
+      return;
+    }
     GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(
         // on below line we have given positions of Location 5
         CameraPosition(
-      target: pos,
+      target: pos!,
       zoom: 14,
     )));
     setState(() {});
