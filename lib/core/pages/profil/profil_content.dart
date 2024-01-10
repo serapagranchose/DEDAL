@@ -37,11 +37,11 @@ Future<void> editField(String field) async {
   await showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text('Edit $field'),
+      title: Text(context.l18n!.profileEdit.capitalize() + ' $field'),
       content: Container(
         height: 100,
         child: MainTextFields(
-          placeholder: 'Enter new $field',
+          placeholder: context.l18n!.profileEnterNew.capitalize() + ' $field',
           onChanged: (String value) => setState(() {
             newValue = value;
           }),
@@ -56,7 +56,7 @@ Future<void> editField(String field) async {
             color: SharedColorPalette().mainDisable(Theme.of(context)),
           ),
           context: context,
-          text: context.l18n!.profilModify.capitalize(),
+          text: context.l18n!.globalValidate.capitalize(),
           onTap: (_) async {
             ChangeUsernameDto changeUsernameDto = ChangeUsernameDto(
               user: _user,
@@ -111,20 +111,20 @@ Future<void> editField(String field) async {
         Column(
           children: [
             const Gap(30),
-            Text(
+            /* Text(
               '${Theme.of(context).brightness == Brightness.light ? 'light' : 'dark'}',
               textAlign: TextAlign.start,
               style: const TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+            ),*/
             Text(
-              '${_user?.name}',
+              _user?.name ?? '',
               textAlign: TextAlign.start,
               style: const TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const Gap(15),
-            Text('${_user?.email}'),
+            Text(_user?.email ?? ''),
             const Gap(30),
             // Modify Profile
             Padding(
@@ -140,7 +140,7 @@ Future<void> editField(String field) async {
                           ),
                           context: context,
                           text: context.l18n!.profilModify.capitalize(),
-                          onTap: (_) async => editField('username'),
+                          onTap: (_) async => editField(context.l18n!.profileUsername.capitalize()),
                         ),
                       ])),
                   const Gap(15),
