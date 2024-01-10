@@ -48,7 +48,10 @@
 "@_PROFIL" : {},
   "profilDeco" : "log off",
   "profilDeletAccount" : "delete account",
-    "profilModify": "modify profile",
+  "profilModify": "modify profile",
+  "profileEnterNew": "enter new",
+  "profileEdit": "edit",
+  "profileUsername": "username",
 
 "@_LOCATIONS" : {},
   "locationNoPlace" : "No location found...",

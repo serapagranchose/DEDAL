@@ -49,6 +49,9 @@
   "profilDeco" : "déconnexion",
   "profilDeletAccount" : "supprimer le compte",
   "profilModify": "modifier le compte",
+  "profileEnterNew": "Entre nouveau",
+  "profileEdit": "modifie",
+  "profileUsername": "nom d'utilisateur",
 
 "@_LOCATIONS" : {},
   "locationNoPlace" : "Aucun lieu trouvé...",
