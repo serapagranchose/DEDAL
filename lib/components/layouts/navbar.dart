@@ -50,7 +50,7 @@ class _NavBarState extends State<NavBar> {
                   context.goNamed(LocationScreen.name);
                   break;
                 case _:
-                  context.goNamed(ProfilScreen.name);
+                  context.goNamed(ProfileScreen.name);
                   break;
               }
             },

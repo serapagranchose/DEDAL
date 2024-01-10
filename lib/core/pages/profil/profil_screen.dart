@@ -1,6 +1,7 @@
 import 'package:dedal/components/button/custom_button.dart';
 import 'package:dedal/components/layouts/register_layout.dart';
 import 'package:dedal/components/text_fields/main_text_field.dart';
+import 'package:dedal/components/loaders/main_loader.dart';
 import 'package:dedal/constants/colors.dart';
 import 'package:dedal/components/button/icon_button.dart';
 import 'package:dedal/core/extensions/build_context_applocalisation_extention.dart';
@@ -9,6 +10,8 @@ import 'package:dedal/core/extensions/string_extention.dart';
 import 'package:dedal/core/models/user.dart';
 import 'package:dedal/core/pages/login/main.dart';
 import 'package:dedal/core/pages/profil/profil_cubit.dart';
+import 'package:dedal/core/pages/profil/profil_content.dart';
+import 'package:dedal/core/use_cases/user_set_name.dart';
 import 'package:dedal/core/use_cases/clear_user.dart';
 import 'package:dedal/core/use_cases/get_user.dart';
 import 'package:dedal/core/use_cases/set_first_step.dart';
@@ -20,10 +23,10 @@ import 'package:gap/gap.dart';
 import 'package:wyatt_bloc_helper/wyatt_bloc_helper.dart';
 import 'package:wyatt_crud_bloc/wyatt_crud_bloc.dart';
 
-class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
-  const ProfilScreen({Key? key}) : super(key: key);
+class ProfileScreen extends CubitScreen<ProfilCubit, CrudState> {
+  const ProfileScreen({Key? key}) : super(key: key);
 
-  static const name = 'profil';
+  static const name = 'profile';
 
   @override
   ProfilCubit create(BuildContext context) => ProfilCubit(
@@ -33,65 +36,31 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
       getUser: GetUser(localStorageDataSource: getIt()),
       clearUser: ClearUser(localStorageDataSource: getIt()),
       userUnsubscribe: UserUnsubscribe(loginDataSource: getIt()),
+      setUserName: UserSetName(filterDataSource: getIt()),
       setFirstStep: SetFirstStep(localStorageDataSource: getIt()))
     ..load();
 
   @override
+  Widget parent(BuildContext context, Widget child) => RegisterLayout(
+    appBar: true,
+    navBar: true,
+    title: context.l18n!.navBarProfil.capitalize(),
+    index: 3,
+    child: child
+  );
+// state.data.email
+  @override
   //RegisterLayout is the global Layout for all the app
   // he can display appbar/nav bar and make the naviation working correctly
-  Widget onBuild(BuildContext context, CrudState state) => RegisterLayout(
-        index: 3,
-        navBar: true,
-        appBar: true,
-        title: context.l18n!.navBarProfil.capitalize(),
-        // To change what you want you can xhange the 'child' params
-        // if you need a statefullWidget (you need one) juste create one named 'ProfilContent' (check HomeContent is you need exemple)
-        child: Column(
-          children: [
-            if (state is CrudLoaded<User?>)
-              Column(
-                children: [
-                  const Gap(30),
-                  Text(
-                    '${Theme.of(context).brightness == Brightness.light ? 'light' : 'dark'}',
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '${state.data?.name}',
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Gap(15),
-                  Text('${state.data?.email}'),
-                  const Gap(30),
-                  // Modify Profile
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 90),
-                      child: Column(children: [
-                        CustomStringButton(
-                          backgroundColor:
-                              SharedColorPalette().accent(Theme.of(context)),
-                          border: Border.all(
-                            width: 2,
-                            color: SharedColorPalette()
-                                .mainDisable(Theme.of(context)),
-                          ),
-                          context: context,
-                          text: context.l18n!.profilModify.capitalize(),
-                          onTap: (_) async => (),
-                        ),
-                      ])),
-                  const Gap(15),
-                ],
-              ),
-            // To get User info just look in state.data.whateveryouwant
-            const Expanded(
-              child: Gap(15),
-            ),
-            Padding(
+  Widget onBuild(BuildContext context, CrudState state) => switch (state) {
+    CrudLoading() => const MainLoader(),
+    CrudLoaded() => Column(
+      children: [
+        ProfileContent(user: state.data, edit: (username) async => context.read<ProfilCubit>().setUserName(username)),
+        const Expanded(
+          child: Gap(15),
+        ),
+        Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(children: [
                   // Delete account button
@@ -130,7 +99,18 @@ class ProfilScreen extends CubitScreen<ProfilCubit, CrudState> {
                     ),
                   )
                 ])),
-          ],
-        ),
-      );
+      ]
+    ),
+    CrudError(message: final message) => Column(
+      children: [
+        Text(message ?? context.l18n!.globalError.capitalize()),
+        CustomStringButton(
+          context: context,
+          text: context.l18n!.globalRestart.capitalize(),
+          onTap: (c) async => context.read<ProfilCubit>().load(),
+        )
+      ],
+    ),
+    _ => Text(context.l18n!.globalError.capitalize()),
+  };
 }

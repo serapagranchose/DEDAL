@@ -6,6 +6,7 @@ import 'package:dedal/core/datasources/filters/filters_datasource.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
+import 'package:dedal/core/dtos/change_username_dto.dart';
 
 class FilterDataSourceImpl extends FilterDataSource {
   @override
@@ -108,7 +109,7 @@ class FilterDataSourceImpl extends FilterDataSource {
 
   @override
   Future<Place?> getPlace(String placeId) async {
-    return await http.get(
+    return await http.post(
       Uri.parse('http://52.166.128.133/places/$placeId'),
       headers: {
         'Accept': '*/*',
@@ -121,4 +122,17 @@ class FilterDataSourceImpl extends FilterDataSource {
       return null;
     });
   }
+
+  @override
+  Future<bool> setUserName(ChangeUsernameDto info) async => await http.post(
+      Uri.parse('http://52.166.128.133/user/username?id=${info.user?.id}'),
+        body: jsonEncode({
+          'username': info?.username,
+        }),
+        headers: {
+          'x-access-token': info?.user?.token ?? '',
+          'Accept': '*/*',
+          'Content-type': 'application/json',
+        },
+      ).then((result) => result.statusCode == 200);
 }
