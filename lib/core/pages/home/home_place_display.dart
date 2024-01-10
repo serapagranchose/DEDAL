@@ -35,7 +35,6 @@ class HomePlaceDisplay extends StatelessWidget {
           aspectRatio: 2,
           child: Row(
             children: [
-              Text(place.pict ?? 'PICT'),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
