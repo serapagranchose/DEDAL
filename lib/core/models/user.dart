@@ -27,7 +27,6 @@ class User {
   List<Place>? places;
 
   factory User.fromJson(Map<String, Object?> json) {
-    print(json['lastInfo']);
     User user;
     user = User(
         id: json['id'].isNotNull ? json['id'].toString() : null,
@@ -51,8 +50,6 @@ class User {
                     0,
               )
             : null);
-    print('here');
-    print(user);
 
     return user;
   }

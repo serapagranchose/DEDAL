@@ -1,4 +1,5 @@
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';
+import 'package:dedal/core/dtos/change_username_dto.dart';
 import 'package:dedal/core/models/filter.dart';
 import 'package:dedal/core/models/place.dart';
 import 'package:dedal/core/models/user.dart';
@@ -27,4 +28,8 @@ class FilterDataSourceImplTest extends FilterDataSource {
   @override
   Future<Place?> getPlace(String placeId) async =>
       placeId == 'test_id' ? Place(name: 'test_name') : null;
+
+  @override
+  Future<bool> setUserName(ChangeUsernameDto info) async =>
+      info.username == 'test_name' ? true : false;
 }

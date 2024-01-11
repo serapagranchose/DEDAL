@@ -64,7 +64,6 @@ class Place {
         type: json['type']?.toString(),
       );
     } catch (e) {
-      print('e ==> $e');
       return Place();
     }
   }

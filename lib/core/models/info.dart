@@ -21,10 +21,8 @@ class Info {
 
   factory Info.toJson(dynamic json) {
     Info info;
-    print('here');
     try {
-      json =
-          Map<String, Object?>.from(jsonDecode(json) as Map<Object, Object?>);
+      json = Map<String, Object?>.from(json as Map<Object, Object?>);
       info = Info(
         time: json['time'] != null ? int.parse(json['time'].toString()) : 0,
         budget:
@@ -45,7 +43,6 @@ class Info {
       print('errro => $e');
       info = Info.empty();
     }
-    print(info);
     return info;
   }
 
