@@ -88,11 +88,11 @@ class HomeContentState extends State<HomeContent> {
                 children: [
                   Column(
                     children: [
-                      CustomIconButton(
-                          icon: const Icon(
-                            Icons.route,
-                          ),
-                          action: widget.init),
+                        CustomIconButton(
+                            icon: const Icon(
+                              Icons.route,
+                            ),
+                            action: widget.init),
                       CustomIconButton(
                         icon: const Icon(
                           Icons.my_location,

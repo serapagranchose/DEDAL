@@ -27,18 +27,17 @@ class User {
   List<Place>? places;
 
   factory User.fromJson(Map<String, Object?> json) {
-    final user = User(
+    print(json['lastInfo']);
+    User user;
+    user = User(
         id: json['id'].isNotNull ? json['id'].toString() : null,
         name: json['username'].isNotNull ? json['username'].toString() : null,
         email: json['email'].isNotNull ? json['email'].toString() : null,
-        /* info: json['lastInfo'].isNotNull
+        info: json['lastInfo'].isNotNull
             ? Info.toJson(
-                Map<String, Object?>.from(
-                  json['lastInfo'] as Map<Object, Object?>,
-                ),
+                json['lastInfo'],
               )
             : null,
-        */
         token: json['token'].isNotNull ? json['token'].toString() : 'token',
         pos: json['pos'].isNotNull
             ? LatLng(
@@ -52,6 +51,9 @@ class User {
                     0,
               )
             : null);
+    print('here');
+    print(user);
+
     return user;
   }
 
