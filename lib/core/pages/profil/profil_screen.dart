@@ -42,25 +42,26 @@ class ProfileScreen extends CubitScreen<ProfilCubit, CrudState> {
 
   @override
   Widget parent(BuildContext context, Widget child) => RegisterLayout(
-    appBar: true,
-    navBar: true,
-    title: context.l18n!.navBarProfil.capitalize(),
-    index: 3,
-    child: child
-  );
+      appBar: true,
+      navBar: true,
+      title: context.l18n!.navBarProfil.capitalize(),
+      index: 3,
+      child: child);
 // state.data.email
   @override
   //RegisterLayout is the global Layout for all the app
   // he can display appbar/nav bar and make the naviation working correctly
   Widget onBuild(BuildContext context, CrudState state) => switch (state) {
-    CrudLoading() => const MainLoader(),
-    CrudLoaded() => Column(
-      children: [
-        ProfileContent(user: state.data, edit: (username) async => context.read<ProfilCubit>().setUserName(username)),
-        const Expanded(
-          child: Gap(15),
-        ),
-        Padding(
+        CrudLoading() => const MainLoader(),
+        CrudLoaded() => Column(children: [
+            ProfileContent(
+                user: state.data,
+                edit: (username) async =>
+                    context.read<ProfilCubit>().setUserName(username)),
+            const Expanded(
+              child: Gap(15),
+            ),
+            Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(children: [
                   // Delete account button
@@ -99,18 +100,17 @@ class ProfileScreen extends CubitScreen<ProfilCubit, CrudState> {
                     ),
                   )
                 ])),
-      ]
-    ),
-    CrudError(message: final message) => Column(
-      children: [
-        Text(message ?? context.l18n!.globalError.capitalize()),
-        CustomStringButton(
-          context: context,
-          text: context.l18n!.globalRestart.capitalize(),
-          onTap: (c) async => context.read<ProfilCubit>().load(),
-        )
-      ],
-    ),
-    _ => Text(context.l18n!.globalError.capitalize()),
-  };
+          ]),
+        CrudError(message: final message) => Column(
+            children: [
+              Text(message ?? context.l18n!.globalError.capitalize()),
+              CustomStringButton(
+                context: context,
+                text: context.l18n!.globalRestart.capitalize(),
+                onTap: (c) async => context.read<ProfilCubit>().load(),
+              )
+            ],
+          ),
+        _ => Text(context.l18n!.globalError.capitalize()),
+      };
 }
