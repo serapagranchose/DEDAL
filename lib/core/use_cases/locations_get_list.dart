@@ -28,8 +28,13 @@ class LocationGetLists
   FutureOrResult<(List<Place>?, List<Place>?, List<Place>?)> execute(
           User? params) async =>
       Result.tryCatchAsync(() async {
-        final userPlace =
-            params?.places ?? await filterDataSource.getPlaces(params!);
+        final userPlace = params?.places ??
+            await filterDataSource.getMap(params!).then((value) {
+              print(value!['Buildings']);
+              final result = (value['Buildings'] as List)
+                  .map((elem) => Place.fromJson(elem));
+              return result.toList();
+            });
         final placeNoFilter = await locationsDataSource.getPlaceFilter(params!);
         final placeNear = await locationsDataSource.getPlaceClose(params);
         return ((userPlace, placeNear, placeNoFilter));

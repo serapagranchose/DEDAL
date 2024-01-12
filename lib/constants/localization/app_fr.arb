@@ -32,7 +32,7 @@
   "filterBuget" : "sélectionner votre budget",
   "filterTime" : "sélectionnez l'heure de votre visite",
   "filterNameEnum" : "{filter, select, Art{Art et culture} Bar{Bar et brasserie} Divertissement{Divertissement} Shopping{Shopping} Restaurant{Restaurant}  Bien{Bien-être} Cafe{Café} Parc{Parc et espace vert} Histoire{Histoire} Enfant{Enfant} other{nop}}",
-  "filterPmr" : "Accecibilité PMR",
+  "filterPmr" : "Accessibilité PMR",
 
 
 "@_LOGIN" : {},
