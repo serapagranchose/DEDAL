@@ -32,4 +32,18 @@ void Function() placeTest = () {
       'coordinates': {'x': 10.0, 'y': 12.0}
     });
   });
+  test('Place to Json', () {
+    expect(
+        Place.fromJson({
+          'id': 'test_id',
+          'name': 'test_name',
+          'description': 'test_description',
+          'address': 'test_adresse',
+          'price': 10.0,
+          'duration': 12.0,
+          'type': 'test_type',
+          'coordinates': {'x': 10.0, 'y': 12.0}
+        }).id,
+        'test_id');
+  });
 };

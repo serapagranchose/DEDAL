@@ -7,6 +7,11 @@ void Function() filterTest = () {
     name: 'test_name',
     id: 'test_id',
   );
+  test('Filter from json', () {
+    expect(Filter.fromJson({'id': 'test_id', 'name': 'test_name'}).name,
+        'test_name');
+  });
+
   test('Filter created', () {
     expect(filter.isNotNull, true);
   });

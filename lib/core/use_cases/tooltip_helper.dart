@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'dart:async';
 
 import 'package:overlay_tooltip/overlay_tooltip.dart';

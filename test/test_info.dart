@@ -24,4 +24,17 @@ void Function() infoTest = () {
       'token': 'test_token'
     });
   });
+  test('Info from Json', () {
+    expect(
+        Info.fromJson({
+          'budget': 10,
+          'filter': [],
+          'nbPeople': 4,
+          'time': 10,
+          'map': 'mapName',
+          'mapData': {},
+          'token': 'test_token'
+        }).map,
+        'mapName');
+  });
 };

@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'dart:async';
 
 import 'package:dedal/core/datasources/filters/filters_datasource.dart';

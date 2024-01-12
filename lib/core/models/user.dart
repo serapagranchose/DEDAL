@@ -33,7 +33,7 @@ class User {
         name: json['username'].isNotNull ? json['username'].toString() : null,
         email: json['email'].isNotNull ? json['email'].toString() : null,
         info: json['lastInfo'].isNotNull
-            ? Info.toJson(
+            ? Info.fromJson(
                 json['lastInfo'],
               )
             : null,

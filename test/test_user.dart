@@ -28,6 +28,19 @@ void Function() userTest = () {
       'pos': {'x': 10.0, 'y': 10.0}
     });
   });
+  test('User from Json', () {
+    expect(
+        User.fromJson({
+          'username': 'test_name',
+          'email': 'test_email',
+          'lastInfo': null,
+          'token': 'test_token',
+          'place': [],
+          'id': 'test_id',
+          'pos': {'x': 10.0, 'y': 10.0}
+        }).name,
+        'test_name');
+  });
   test('User posToJson', () {
     expect(user.posToJson(), {
       'x': 10,

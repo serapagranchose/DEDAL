@@ -19,7 +19,7 @@ class Info {
   String? mapName;
   Map<String, Object>? map;
 
-  factory Info.toJson(dynamic json) {
+  factory Info.fromJson(dynamic json) {
     Info info;
     try {
       json = Map<String, Object?>.from(json as Map<Object, Object?>);

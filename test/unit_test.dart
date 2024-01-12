@@ -20,10 +20,10 @@ void main() async {
   await GetItInitializerTest.run();
 
   group('Test User Class', userTest);
-  group('Test User Class', filterTest);
-  group('Test User Class', infoTest);
-  group('Test User Class', placeTest);
-  group('Test User Class', extensionTest);
+  group('Test Filter Class', filterTest);
+  group('Test Info Class', infoTest);
+  group('Test Place Class', placeTest);
+  group('Test extensention Class', extensionTest);
   group('Test login useCases', loginUseCasesTest);
   group('Test filters useCases', filterUseCasesTest);
   group('Test locations useCases', locationUseCasesTest);
