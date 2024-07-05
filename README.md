@@ -1,7 +1,11 @@
-![plot](./assets/images/thumbnail.png)
-# dedal
+<div align="center">
+  <a href="https://github.com/serapagranchose/dedal">
+    <img src="assets/images/thumbnail.png" alt="thumbnail" width="750">
+  </a>
 
-A new Flutter project.
+  <h1>DEDAL</h1>
+  <p>A new Flutter project.</p>
+</div>
 
 ## Getting Started
 
