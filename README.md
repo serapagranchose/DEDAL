@@ -1,3 +1,4 @@
+![plot](./assets/images/thumbnail.png)
 # dedal
 
 A new Flutter project.
